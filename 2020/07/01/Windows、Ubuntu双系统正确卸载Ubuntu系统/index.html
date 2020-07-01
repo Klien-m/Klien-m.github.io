@@ -17,7 +17,7 @@
   <meta name="description" content="记往昔录今朝只待明时">
   <meta name="author" content="Klien">
   <meta name="keywords" content="安卓原生开发、python日常脚本、Developer">
-  <title>反射 - Klien-m&#39;s 博客</title>
+  <title>Windows、Ubuntu双系统正确卸载Ubuntu系统 - Klien-m&#39;s 博客</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -152,8 +152,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-06-28 15:39">
-      2020年6月28日 下午
+    <time datetime="2020-07-01 11:02">
+      2020年7月1日 上午
     </time>
   </div>
 
@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      427 字
+      376 字
     </span>
   
 
@@ -213,50 +213,28 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2 小时前
+                  本文最后更新于：14 分钟前
                 
               </p>
             
             <article class="markdown-body">
-              <h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><h3 id="Java-中的-Class-类"><a href="#Java-中的-Class-类" class="headerlink" title="Java 中的 Class 类"></a>Java 中的 Class 类</h3><p> <code>Class</code> 类的构造方法是私有的，无法在代码中显式的生命一个 <code>Class</code> 对象</p>
-<h4 id="获得-Class-类的对象"><a href="#获得-Class-类的对象" class="headerlink" title="获得 Class 类的对象"></a>获得 <code>Class</code> 类的对象</h4><ul>
-<li>通过类的静态成员表示，每个类都有一个隐含的静态成员 <code>class</code></li>
-<li>通过类的 <code>getClass()</code> 方法，和上类似</li>
-<li>通过 <code>Class</code> 类的静态方法 <code>forName()</code> 获取 <code>Class</code> 对象（可实现程序运行时类的动态加载）  </li>
+              <p>前几天突然想起了电脑上安装了很久的 Ubuntu 系统，细细一想好像也没什么用了，就在虚拟机上装了一个 Ubuntu 系统，顺便把电脑上的给卸载了。方法如下：  </p>
+<h3 id="判断启动方式"><a href="#判断启动方式" class="headerlink" title="判断启动方式"></a>判断启动方式</h3><ul>
+<li>以管理员身份打开cmd，输入 <code>bcdedit</code>，找到 path 行，如果是 winload.efi 就是 uefi 引导，如果是 winload.exe 就是 legacy 引导。</li>
+<li>win+r 然后输入 <code>msinfo32</code> 找到bios模式，如果显示为传统，就是 legacy 引导，否则就是 uefi 引导。</li>
 </ul>
-<a id="more"></a>
-<h4 id="由-Class-类的对象得到类的对象"><a href="#由-Class-类的对象得到类的对象" class="headerlink" title="由 Class 类的对象得到类的对象"></a>由 <code>Class</code> 类的对象得到类的对象</h4><p><code>newInstance()</code> 方法，此方法调用类的 <strong>无参构造函数</strong></p>
-<h3 id="Java反射机制"><a href="#Java反射机制" class="headerlink" title="Java反射机制"></a>Java反射机制</h3><p><a href="https://juejin.im/post/598ea9116fb9a03c335a99a4#heading-11" target="_blank" rel="noopener">参考自</a></p>
-<blockquote>
-<p>Java 反射机制在程序运行时，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性。这种 动态的获取信息 以及 动态调用对象的方法 的功能称为 java 的反射机制。</p>
-</blockquote>
-<h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><ul>
-<li><code>getFields()</code> 获取所有 public 访问权限的变量</li>
-<li><code>getDeclaredFields()</code> 获取所有本类声明的变量  </li>
-<li><code>getDeclaredField(参数名)</code> 获取私有变量  </li>
-</ul>
-<p>以下方法对变量对象调用</p>
-<ul>
-<li><code>getModifiers()</code> 获取变量的访问权限</li>
-<li><code>getType().getName()</code> 获取变量的类型</li>
-<li><code>getName()</code> 获取变量名</li>
-</ul>
-<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><ul>
-<li><code>getMethods()</code> 获取所有 public 访问权限的方法</li>
-<li><code>getDeclaredMethods()</code> 获取所有本类的方法  </li>
-</ul>
-<p>以下方法对方法对象调用  </p>
-<ul>
-<li><code>getModifiers()</code> 获取方法的访问权限</li>
-<li><code>getReturnType()</code> 获取方法的返回值类型</li>
-<li><code>getParameters()</code> 获取方法的所有参数<ul>
-<li><code>getType().getName()</code> 获取方法参数的类型</li>
-<li><code>getName()</code> 获取方法参数名</li>
-</ul>
-</li>
-<li><code>getExceptionTypes()</code> 获取方法抛出的异常</li>
-<li><code>getDeclaredMethod(方法名，[参数类型])</code> 获取私有方法  </li>
-<li><code>setAccessible(true)</code> 获取私有方法的访问权限</li>
+<h3 id="legacy-启动"><a href="#legacy-启动" class="headerlink" title="legacy 启动"></a>legacy 启动</h3><p>此启动模式卸载 Ubuntu 时需使用 mbrfix。  </p>
+<ol>
+<li>进入 windows，将 mbrfix 放在 C:\windows\system32 文件夹中</li>
+<li>以管理员身份启动命令提示符</li>
+<li>在命令提示符中输入 <code>MbrFix/drive 0 fixmbr/</code>，在提示输入后输入 yes。</li>
+<li>上一步无误则搜索“创建并格式化硬盘分区”，删除 Ubuntu 系统对应几个分区。</li>
+</ol>
+<h3 id="uefi-启动"><a href="#uefi-启动" class="headerlink" title="uefi 启动"></a>uefi 启动</h3><p>此启动模式需使用 <a href="https://www.easyuefi.com/index-us.html" target="_blank" rel="noopener">easyUEFI</a>，下载安装后运行，找到 Ubuntu 删除，重启电脑，执行上一模式第四步即可。  </p>
+<hr>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ul>
+<li>我安装设置引导时使用了 easyBCD 软件，卸载时在按照 legacy 启动卸载时，重启后，仍会进入系统选择页面，在使用 easyBCD 软件删除 Ubuntu 的引导文件后，重启后便直接进入 windows 系统，然后按照上述方法删除 Ubuntu 系统硬盘分区。</li>
+<li>uefi 启动模式的卸载，我没有试验过，方法是搜索而来，有效性未知。</li>
 </ul>
 
             </article>
@@ -264,20 +242,11 @@
             <div>
               <div class="post-metas mb-3">
                 
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/java/">java</a>
-                    
-                  </div>
-                
                 
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%AE%89%E5%8D%93/">安卓</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E8%BF%9B%E9%98%B6/">进阶</a>
+                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
                     
                   </div>
                 
@@ -290,15 +259,15 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/06/28/2020-06-28%2022-43/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">22:43</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
+                    
+                      <a href="/2020/07/01/%E5%8F%8D%E5%B0%84/">
+                        <span class="hidden-mobile">反射</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </div>
                 </div>
@@ -460,7 +429,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "反射&nbsp;",
+        "Windows、Ubuntu双系统正确卸载Ubuntu系统&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
