@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>三日记</title>
+    <link href="/2020/06/30/2020-06-30%20%E4%B8%89%E6%97%A5%E8%AE%B0/"/>
+    <url>/2020/06/30/2020-06-30%20%E4%B8%89%E6%97%A5%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<div id="hexo-blog-encrypt" data-wpm="抱歉，这个密码看着不太对，请再试试。" data-whm="抱歉，这个文章不能被校验，不过您还是能看看解密后的内容。">  <div class="hbe-input-container">  <input type="password" id="hbePass" placeholder="" />    <label for="hbePass">你应该不知道密码的吧！</label>    <div class="bottom-line"></div>  </div>  <script id="hbeData" type="hbeData" data-hmacdigest="8c5e30740dbd83f50251152a03839eddd8ac3bd93867f83208c332271dc73596">ae6afac3d160296fa0e154342e43c973e75d45594a846b385f3f0438a5e4faac812cabeeb01a13f8caf74b9d7a633f27d9955fa070deeed4d96ea2129460af463d1b9033275acec052b99ec7282f0d9ee9cc39232b83c51e8332ece1eb3f983e7830538b46bd815af9d934f09866a073ab1422f8c5e987421a5d3b7f0327b17a0d0bb4b1cde8c8b161617b96b546cd0a64c0dd2dc54da5aea5a4268dcac8045d32337cd90f2f60692e0c7229f63c111855fa5bc4cf0e3f9468855a41622f78c59f73a94c0b4d975c298f597f8f46f4e4912d1c175e79b37e0760a68d34e83f49aea7431f736b448f13bc111e761b7af5163cba2cacc809636b25fb925220e5db9eef408bb74b9f2c1b8ae6cfd29b60ba527f65fd17898293a47179564cbc24150590704c8e530d84312c99c37c6be61f159c7df9cdf7875160d3234ee25a2fb2fbc560e389e368230977eb7512328f451d30829fc8dcaa9bcf380e61c67713901d284a588caa6f8390d31380325927bbea5b5439420e63ac90bb648b5a02fe631667a9dbdeff646d016e64e821431c5fd3ea690d645c4fb4be61960f20639b9c856b28a12e62b7e2de712e622096ee389d4fba79f581b869cc11745b32ab0ce9423fa32e91c8621818e7646dca62b18a1b8a955f4bed4e9b9770c783d44cafc89f35a8ceca8d5bd6e981db87174507516176ac0085a57e637ec5d260ad8c916e98c329f977112e5f47654463e49b806de1a0668e3c9984f070202e52743091396b3def5a330378643a05abfe67bf3bcfe9d1e1389c080ef03ef2c4678460b768b5f5a252832712e5dd715058452ed52f1492b8a4b8a69becd0b17ce461b8d13b8ffc585b98764f2dac1d606ab8923657031cb78093faa4ee8d78f2132fb894846d71ed7af719977f920272295e3b40f8147d8fb9693f949019d91c44a8a109fe53ff76f1ba7dde4f96bbd78e66cbe5b4c8224a480002763fe9f50c359609da2e6aa2e6d5dc465e24811100de8c38f7979491e6b45a3f93edcef6d3ae823ac60cfb6b76c3382f7589e55f8b4c32f107c83030a22d1a1a1d42910d2458b2d90d980b4ff2b12180e1d14c993fcce739e2e8ccbba6aa12fdfe9285a447a77c6ae3d67302e6ad375ff574d352b4beee943b664665ea4b22e471da946882cde1ff7aba4b2adc194bc3ca3b1e9e5deb15075efc8604be6794360db412db6d51d775e624aa0d597b289461557ad738b6bf2eb7b7d0bd28c51d0a44b8ddedff93f2d6b84003acf263165573b5b1a938808ac664fb6cc1a9177778cc06c2d4ac1422ad7067568395aef3767b18cefc33c5f53a6945807ffdb5bb46e62c9c9bb13364c14bc79909f8c98976059e572733a15682ea514f8a42ca7949455b9402a7785d3451843be9eb08ab7556dd8924b8d857a3b23c309c59eabd05c0101b524dc37a91bc9e</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
+    
+    
+    <categories>
+      
+      <category>日记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>总结</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>fluid使用</title>
+    <link href="/2020/06/29/fluid%E4%BD%BF%E7%94%A8/"/>
+    <url>/2020/06/29/fluid%E4%BD%BF%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<h3 id="文章摘要"><a href="#文章摘要" class="headerlink" title="文章摘要"></a>文章摘要</h3><p>若要手动指定摘要，使用 <code>&lt;!--more--&gt;</code> MD文档里划分，或者在 Front-matter 里设置 <code>excerpt</code> 字段。</p><a id="more"></a><h3 id="文章在首页的略缩图"><a href="#文章在首页的略缩图" class="headerlink" title="文章在首页的略缩图"></a>文章在首页的略缩图</h3><p>在文章开头 Front-matter 中配置 <code>index_img</code> 属性。</p><h3 id="文章页顶部大图"><a href="#文章页顶部大图" class="headerlink" title="文章页顶部大图"></a>文章页顶部大图</h3><p>默认显示主题配置中的 <code>post.banner_img</code>，如需要设置单个文章的 Banner，在 Front-matter 中指定 banner_img 属性。</p><h3 id="文章内容图片"><a href="#文章内容图片" class="headerlink" title="文章内容图片"></a>文章内容图片</h3><pre><code class="hljs less">!<span class="hljs-selector-attr">[]</span>(/img/example.jpg)</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>Other</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>hexo</tag>
+      
+      <tag>fluid</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>hexo指令</title>
+    <link href="/2020/06/29/hexo%E6%8C%87%E4%BB%A4/"/>
+    <url>/2020/06/29/hexo%E6%8C%87%E4%BB%A4/</url>
+    
+    <content type="html"><![CDATA[<h3 id="init"><a href="#init" class="headerlink" title="init"></a>init</h3><p><code>hexo init [folder]</code> 新建一个网站。如果没有 <code>folder</code>，Hexo默认在当前文件夹建立网站。  </p><h3 id="new"><a href="#new" class="headerlink" title="new"></a>new</h3><p><code>hexo new [layout] &lt;title&gt;</code>  </p><a id="more"></a><p>新建一篇文章。如果没有设置 <code>layout</code> 的话，默认使用 _config.yml 中的 <code>default_layout</code> 参数代替。<strong>如果标题包含空格的话，请使用引号括起来。</strong></p><table><thead><tr><th>参数</th><th align="center">描述</th></tr></thead><tbody><tr><td><code>-p</code>,<code>--path</code></td><td align="center">自定义新文章的路径</td></tr><tr><td><code>-r</code>,<code>--replace</code></td><td align="center">如果存在同名文章，将其替换</td></tr><tr><td><code>-s</code>,<code>--slug</code></td><td align="center">文章的 Slug，作为新文章的文件名和发布后的 URL</td></tr></tbody></table><p>默认情况下，Hexo 会使用文章的标题来决定文章文件的路径。对于独立页面来说，Hexo 会创建一个以标题为名字的目录，并在目录中放置一个 <code>index.md</code> 文件。你可以使用 <code>--path</code> 参数来覆盖上述行为、自行决定文件的目录。</p><h3 id="generate"><a href="#generate" class="headerlink" title="generate"></a>generate</h3><p><code>hexo generate</code> 生成静态文件。</p><table><thead><tr><th align="center">选项</th><th align="center">描述</th></tr></thead><tbody><tr><td align="center"><code>-d</code>,<code>--deploy</code></td><td align="center">文件生成后立即部署网站</td></tr><tr><td align="center"><code>-w</code>,<code>--watch</code></td><td align="center">监视文件变动</td></tr><tr><td align="center"><code>-b</code>,<code>--bail</code></td><td align="center">生成过程中如果发生任何未处理的异常则抛出异常</td></tr><tr><td align="center"><code>-f</code>,<code>--force</code></td><td align="center">强制重新生成文件 Hexo 引入了差分机制，如果 public 目录存在，那么 hexo g 只会重新生成改动的文件。使用该参数的效果接近 hexo clean &amp;&amp; hexo generate</td></tr><tr><td align="center"><code>-c</code>,<code>--concurrency</code></td><td align="center">最大同时生成文件的数量，默认无限制</td></tr></tbody></table><h3 id="publish"><a href="#publish" class="headerlink" title="publish"></a>publish</h3><p><code>hexo publish [laytout] &lt;filename&gt;</code> 发表草稿。</p><h3 id="server"><a href="#server" class="headerlink" title="server"></a>server</h3><p><code>hexo server</code> 启动服务器。默认情况下，访问网址为：<code>http://localhost:4000/</code>。</p><table><thead><tr><th align="center">选项</th><th align="center">描述</th></tr></thead><tbody><tr><td align="center"><code>-p</code>,<code>--port</code></td><td align="center">重设端口</td></tr><tr><td align="center"><code>-s</code>,<code>--static</code></td><td align="center">只使用静态文件</td></tr><tr><td align="center"><code>-l</code>,<code>--log</code></td><td align="center">启动日记记录，使用覆盖记录格式</td></tr></tbody></table><h3 id="deploy"><a href="#deploy" class="headerlink" title="deploy"></a>deploy</h3><p><code>hexo deploy</code> 部署网站。</p><table><thead><tr><th align="center">参数</th><th align="center">描述</th></tr></thead><tbody><tr><td align="center"><code>-g</code>,<code>--generate</code></td><td align="center">部署之前预先生成静态文件</td></tr></tbody></table><h3 id="render"><a href="#render" class="headerlink" title="render"></a>render</h3><p><code>hexo render &lt;file1&gt; [file2] ...</code> 渲染文件。</p><table><thead><tr><th align="center">参数</th><th align="center">描述</th></tr></thead><tbody><tr><td align="center"><code>-o</code>,<code>--output</code></td><td align="center">设置输出路径</td></tr></tbody></table><h3 id="migrate"><a href="#migrate" class="headerlink" title="migrate"></a>migrate</h3><p><code>hexo migrate &lt;type&gt;</code> 从其他博客迁移内容。</p><h3 id="clean"><a href="#clean" class="headerlink" title="clean"></a>clean</h3><p><code>hexo clean</code> 清除缓存文件(<code>db.json</code>)和已生成的静态文件(<code>public</code>)。<br>在某些情况（尤其是更新主题后），如果对站点的更改无论如何也不生效，可能需要运行该命令。</p><h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><p><code>hexo list &lt;type&gt;</code> 列出网站资料。</p><h3 id="version"><a href="#version" class="headerlink" title="version"></a>version</h3><p><code>hexo version</code> 显示 Hexo 版本。</p><h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><h4 id="安全模式"><a href="#安全模式" class="headerlink" title="安全模式"></a>安全模式</h4><p><code>hexo --safe</code> 在安全模式下，不会载入插件和脚本。在新安装插件遭遇问题时，可以尝试以安全模式重新执行。</p><h4 id="调试模式"><a href="#调试模式" class="headerlink" title="调试模式"></a>调试模式</h4><p><code>hexo --debug</code> 在终端中显示调试信息并记录到 <code>debug.log</code>。当您碰到问题时，可以尝试用调试模式重新执行一次，并 <a href="https://github.com/hexojs/hexo/issues/new">提交调试信息到 GitHub</a>。</p><h4 id="简洁模式"><a href="#简洁模式" class="headerlink" title="简洁模式"></a>简洁模式</h4><p><code>hexo --silent</code> 隐藏终端信息。  </p><h4 id="自定义配置文件的路径"><a href="#自定义配置文件的路径" class="headerlink" title="自定义配置文件的路径"></a>自定义配置文件的路径</h4><pre><code class="hljs routeros"><span class="hljs-comment"># 使用 custom.yml 代替默认的 _config.yml</span>$ hexo<span class="hljs-built_in"> server </span>--config custom.yml<span class="hljs-comment"># 使用 custom.yml 和 custom2.json，其中 custom2.json 优先级更高</span>$ hexo generate --config custom.yml,custom2.json,custom3.yml</code></pre><p>当指定了多个配置文件以后，Hexo 会按顺序将这部分配置文件合并成一个 <code>_multiconfig.yml</code>。如果遇到重复的配置，排在后面的文件的配置会覆盖排在前面的文件的配置。这个原则适用于任意数量、任意深度的 YAML 和 JSON 文件。</p><h4 id="显示草稿"><a href="#显示草稿" class="headerlink" title="显示草稿"></a>显示草稿</h4><p><code>hexo --draft</code> 显示 <code>source/_drafts</code> 文件夹中的草稿文章。</p><h4 id="自定义CWD"><a href="#自定义CWD" class="headerlink" title="自定义CWD"></a>自定义CWD</h4><p><code>hexo -cwd/path/to/cwd</code> 自定义当前工作目录（Current working directory）的路径。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Other</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>hexo</tag>
+      
+      <tag>study_new</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>使用hexo搭建博客</title>
+    <link href="/2020/06/29/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
+    <url>/2020/06/29/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
+    
+    <content type="html"><![CDATA[<h4 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h4><p>在安装 Hexo 之前，需要安装以下两个工具：</p><ul><li><a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a></li><li><a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js</a></li></ul><p>安装好后，使用 npm 完成 Hexo 的安装<br><code>npm install -g hexo-cli</code></p><a id="more"></a><h4 id="建立网站"><a href="#建立网站" class="headerlink" title="建立网站"></a>建立网站</h4><p>首先建立一个文件夹。<br><code>mkdir &lt;folder</code><br>然后向此文件夹安装Hexo。<br><code>hexo init &lt;folder&gt;</code>  </p><h4 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h4><h5 id="部署到Github"><a href="#部署到Github" class="headerlink" title="部署到Github"></a>部署到Github</h5><ol><li>在 Github 新建一个名称为 <code>username.github.io</code> 的仓库。  </li><li>安装部署插件  <pre><code class="hljs sql">npm <span class="hljs-keyword">install</span> hexo-deployer-git <span class="hljs-comment">--save</span>npm <span class="hljs-keyword">install</span> hexo-<span class="hljs-keyword">server</span> <span class="hljs-comment">--save</span></code></pre></li><li>配置站点 <code>_config.yml</code> 文件<pre><code class="hljs dts"><span class="hljs-symbol">deploy:</span><span class="hljs-symbol">    type:</span> git<span class="hljs-symbol">    repo:</span> <span class="hljs-params">&lt;repository url&gt;</span><span class="hljs-symbol">    branch:</span> master<span class="hljs-symbol">    message:</span> <span class="hljs-meta">#提交信息，默认为提交时间</span></code></pre></li><li>发布到 Github<br>在 Hexo 站点根目录下执行以下命令：<br><code>hexo clean &amp;&amp; d -g</code>  </li></ol><ul><li>此教程，只是为了自己记录，略有缩减，<a href="https://easyhexo.com/1-Hexo-install-and-config/" target="_blank" rel="noopener">详见:</a>  </li><li>国内使用 npm 有时会很慢，可以转为淘宝镜像，命令除 npm 转为 cnpm 外，别无二样。<br><code>npm install -g cnpm --registry=https://registry.npm.taobao.org</code></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Other</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>hexo</tag>
+      
+      <tag>搭建博客</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>22:43</title>
+    <link href="/2020/06/28/2020-06-28%2022-43/"/>
+    <url>/2020/06/28/2020-06-28%2022-43/</url>
+    
+    <content type="html"><![CDATA[<div id="hexo-blog-encrypt" data-wpm="抱歉，这个密码看着不太对，请再试试。" data-whm="抱歉，这个文章不能被校验，不过您还是能看看解密后的内容。">  <div class="hbe-input-container">  <input type="password" id="hbePass" placeholder="" />    <label for="hbePass">你应该不知道密码的吧！</label>    <div class="bottom-line"></div>  </div>  <script id="hbeData" type="hbeData" data-hmacdigest="3b888e6d775864ce23ff9e358df5ecadc54edc7ac0bb906d41d37e22cd835870">e2a2bc5ef0b8aaf1ba637856e613f5a247271f576efb0cf94ceb607b19b59249c6e5f583e5f90a6d03eaedb029366a42e3a8f40b211aabdcd3ce94cedce3ee18f82ae0c784e0c39391bf9b5324a5f3dc334dfe7247565530581e7b2439f3ead398b9bc72f2e30c230355096e609dcee2ae407947ff525aa9dd253d32bea680259dcc8d82d496fab21e7fc3a7ed91242a58c92ccdb1997289f99432cffe8d8cd78523c5eb60406b4ce2fc1c92778a624484c2ffe71ea2c24354656e0dee253d392e222c01a8c62f6160eb3d0fb88b6eff979e980db80e09ac4cb4423eb8c0ee46</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
+    
+    
+    <categories>
+      
+      <category>日记</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>反射</title>
+    <link href="/2020/06/28/%E5%8F%8D%E5%B0%84/"/>
+    <url>/2020/06/28/%E5%8F%8D%E5%B0%84/</url>
+    
+    <content type="html"><![CDATA[<h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><h3 id="Java-中的-Class-类"><a href="#Java-中的-Class-类" class="headerlink" title="Java 中的 Class 类"></a>Java 中的 Class 类</h3><p> <code>Class</code> 类的构造方法是私有的，无法在代码中显式的生命一个 <code>Class</code> 对象</p><h4 id="获得-Class-类的对象"><a href="#获得-Class-类的对象" class="headerlink" title="获得 Class 类的对象"></a>获得 <code>Class</code> 类的对象</h4><ul><li>通过类的静态成员表示，每个类都有一个隐含的静态成员 <code>class</code></li><li>通过类的 <code>getClass()</code> 方法，和上类似</li><li>通过 <code>Class</code> 类的静态方法 <code>forName()</code> 获取 <code>Class</code> 对象（可实现程序运行时类的动态加载）  </li></ul><a id="more"></a><h4 id="由-Class-类的对象得到类的对象"><a href="#由-Class-类的对象得到类的对象" class="headerlink" title="由 Class 类的对象得到类的对象"></a>由 <code>Class</code> 类的对象得到类的对象</h4><p><code>newInstance()</code> 方法，此方法调用类的 <strong>无参构造函数</strong></p><h3 id="Java反射机制"><a href="#Java反射机制" class="headerlink" title="Java反射机制"></a>Java反射机制</h3><p><a href="https://juejin.im/post/598ea9116fb9a03c335a99a4#heading-11" target="_blank" rel="noopener">参考自</a></p><blockquote><p>Java 反射机制在程序运行时，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性。这种 动态的获取信息 以及 动态调用对象的方法 的功能称为 java 的反射机制。</p></blockquote><h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><ul><li><code>getFields()</code> 获取所有 public 访问权限的变量</li><li><code>getDeclaredFields()</code> 获取所有本类声明的变量  </li><li><code>getDeclaredField(参数名)</code> 获取私有变量  </li></ul><p>以下方法对变量对象调用</p><ul><li><code>getModifiers()</code> 获取变量的访问权限</li><li><code>getType().getName()</code> 获取变量的类型</li><li><code>getName()</code> 获取变量名</li></ul><h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><ul><li><code>getMethods()</code> 获取所有 public 访问权限的方法</li><li><code>getDeclaredMethods()</code> 获取所有本类的方法  </li></ul><p>以下方法对方法对象调用  </p><ul><li><code>getModifiers()</code> 获取方法的访问权限</li><li><code>getReturnType()</code> 获取方法的返回值类型</li><li><code>getParameters()</code> 获取方法的所有参数<ul><li><code>getType().getName()</code> 获取方法参数的类型</li><li><code>getName()</code> 获取方法参数名</li></ul></li><li><code>getExceptionTypes()</code> 获取方法抛出的异常</li><li><code>getDeclaredMethod(方法名，[参数类型])</code> 获取私有方法  </li><li><code>setAccessible(true)</code> 获取私有方法的访问权限</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>java</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>安卓</tag>
+      
+      <tag>进阶</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
