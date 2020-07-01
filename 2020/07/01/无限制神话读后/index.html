@@ -17,7 +17,7 @@
   <meta name="description" content="记往昔录今朝只待明时">
   <meta name="author" content="Klien">
   <meta name="keywords" content="安卓原生开发、python日常脚本、Developer">
-  <title>无限制神话读后 - Klien-m&#39;s 博客</title>
+  <title>《无限制神话》读后有感 - Klien-m&#39;s 博客</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -139,7 +139,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('/img/post.png') no-repeat center center;
+         style="background: url('/img/1920-1080/book2.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -213,7 +213,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：5 分钟前
+                  本文最后更新于：3 小时前
                 
               </p>
             
@@ -231,6 +231,13 @@
             <hr>
             <div>
               <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">阅读笔记</a>
+                    
+                  </div>
                 
                 
                   <div class="post-meta">
@@ -322,6 +329,29 @@
   </div>
 </div>
   
+
+  
+    <!-- APlayer 音乐播放器 -->
+    <div id="aplayer"></div>
+    <script defer src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js" ></script>
+<link  rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
+<script type="text/javascript">
+  var oldLoadAp = window.onload;
+  window.onload = function () {
+    oldLoadAp && oldLoadAp();
+
+    new APlayer({
+      container: document.getElementById('aplayer'),
+      fixed: true,
+      autoplay: 'true' === 'true',
+      loop: 'all',
+      order: 'random',
+      theme: '#b7daff',
+      preload: 'none',
+      audio: [{"name":"蔚蓝海","artist":"小时姑娘","url":"/songs/蔚蓝海.mp3","cover":"/img/蔚蓝海.png"}]
+    });
+  }
+</script>
 
   
 
@@ -425,7 +455,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "无限制神话读后&nbsp;",
+        "《无限制神话》读后有感&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

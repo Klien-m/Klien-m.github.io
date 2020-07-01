@@ -160,12 +160,18 @@
                 
 
 <div class="list-group">
-  <p class="h4">共计 1 篇文章</p>
+  <p class="h4">共计 2 篇文章</p>
   <hr>
   
     
       
       <p class="h5">2020</p>
+    
+    <a href="/2020/07/01/git%E6%8C%87%E4%BB%A4/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">git指令</span>
+      <span style="float: right;">07-01</span>
+    </a>
+  
     
     <a href="/2020/07/01/git-%E5%A6%82%E4%BD%95%E6%B8%85%E9%99%A4%E6%89%80%E6%9C%89commit%E8%AE%B0%E5%BD%95/" class="list-group-item list-group-item-action">
       <span class="archive-post-title">git 如何清除所有commit记录</span>
@@ -212,6 +218,29 @@
   </div>
 </div>
   
+
+  
+    <!-- APlayer 音乐播放器 -->
+    <div id="aplayer"></div>
+    <script defer src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js" ></script>
+<link  rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
+<script type="text/javascript">
+  var oldLoadAp = window.onload;
+  window.onload = function () {
+    oldLoadAp && oldLoadAp();
+
+    new APlayer({
+      container: document.getElementById('aplayer'),
+      fixed: true,
+      autoplay: 'true' === 'true',
+      loop: 'all',
+      order: 'random',
+      theme: '#b7daff',
+      preload: 'none',
+      audio: [{"name":"蔚蓝海","artist":"小时姑娘","url":"/songs/蔚蓝海.mp3","cover":"/img/蔚蓝海.png"}]
+    });
+  }
+</script>
 
   
 

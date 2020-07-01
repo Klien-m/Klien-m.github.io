@@ -173,8 +173,8 @@
     </a>
   
     
-    <a href="/2020/06/29/hexo%E6%8C%87%E4%BB%A4/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">hexo指令</span>
+    <a href="/2020/06/29/hexo%E5%91%BD%E4%BB%A4/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">hexo命令</span>
       <span style="float: right;">06-29</span>
     </a>
   
@@ -224,6 +224,29 @@
   </div>
 </div>
   
+
+  
+    <!-- APlayer 音乐播放器 -->
+    <div id="aplayer"></div>
+    <script defer src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js" ></script>
+<link  rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
+<script type="text/javascript">
+  var oldLoadAp = window.onload;
+  window.onload = function () {
+    oldLoadAp && oldLoadAp();
+
+    new APlayer({
+      container: document.getElementById('aplayer'),
+      fixed: true,
+      autoplay: 'true' === 'true',
+      loop: 'all',
+      order: 'random',
+      theme: '#b7daff',
+      preload: 'none',
+      audio: [{"name":"蔚蓝海","artist":"小时姑娘","url":"/songs/蔚蓝海.mp3","cover":"/img/蔚蓝海.png"}]
+    });
+  }
+</script>
 
   
 
