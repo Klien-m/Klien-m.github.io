@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/Klien.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="记往昔录今朝只待明时">
+  <meta name="author" content="Klien">
+  <meta name="keywords" content="安卓原生开发、python日常脚本、Developer">
+  <title>Activity-Fragment - Klien-m&#39;s 博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/androidstudio.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Klien-m's 博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/1920-1080/android6.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-07-02 10:07">
+      2020年7月2日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      29
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2 小时前
+                
+              </p>
+            
+            <article class="markdown-body">
+              <h2 id="了解-Activity-生命周期"><a href="#了解-Activity-生命周期" class="headerlink" title="了解 Activity 生命周期"></a>了解 Activity 生命周期</h2><p><img src="https://note.youdao.com/yws/public/resource/0531bcaeb2b2b8c198255b5ad928981c/xmlnote/B9347B8B85F64476B768B1D827E3D0E2/47?ynotemdtimestamp=1593655869498" srcset="/img/loading.gif" alt="Activity 生命周期的简化图示"></p>
+<h3 id="onCreate"><a href="#onCreate" class="headerlink" title="onCreate()"></a>onCreate()</h3><p>系统首次创建 Activity 时触发，在此方法中，需执行基本应用启动逻辑（声明界面、定义成员变量、配置某些界面），该逻辑在 Activity 的整个生命周期中只应发生一次。可以在此方法中<strong>将数据绑定到列表、将 Activity 与 <a href="https://developer.android.com/reference/androidx/lifecycle/ViewModel" target="_blank" rel="noopener">ViewModel</a> 相关联、实例化某些类范围变量</strong>。</p>
+<h3 id="onStart"><a href="#onStart" class="headerlink" title="onStart()"></a>onStart()</h3><p>调用此方法使 Activity 对用户可见，为 Activity 进入前台并支持交互做准备。例如，应用此方法来<strong>初始化维护界面的代码</strong>。Activity不会一直处于“已开始”状态，一旦此回调结束，Activity便会进入“已恢复”状态，系统将调用onResume()方法。</p>
+<h3 id="onResume"><a href="#onResume" class="headerlink" title="onResume()"></a>onResume()</h3><p>应用与用户交互的状态，用户会一直保持这种状态，直到某些事件发生，让焦点远离应用。当发生中断事件时，Activity进入“已暂停”状态，系统调用 onPause() 回调。如果Activity从“已暂停”状态返回“已恢复”状态，系统将再次调用 onResume() 方法。</p>
+<h3 id="onPause"><a href="#onPause" class="headerlink" title="onPause()"></a>onPause()</h3><p>系统将此方法视为用户正在离开 Activity 的第一个标志（尽管这并不总是意味着活动正在遭到销毁）；此方法表示 Activity 不再位于前台（尽管如果用户处于多窗口模式，Activity 仍然可见）。使用 onPause() 方法暂时或调整当 Activity 处于“已暂停”状态时不应继续（或应有节制地继续）的操作，以及希望很快恢复的操作。Activity 进入此状态有多个原因，例如：</p>
+<ul>
+<li>如 onResume() 部分所述，某个事件会中断应用执行。这是最常见的情况。</li>
+<li>在 Android7.0(API级别24)或更高版本中，有多个应用在多窗口模式下运行。无论何时，都只有一个应用（窗口）可以拥有焦点，因此系统会暂停所有其它应用。</li>
+<li>有新的半透明 Activity（例如对话框）处于开启状态。只要 Activity 仍然部分可见但并未处于焦点之中，它便会一直暂停  </li>
+</ul>
+<p>还可以在此方法中<strong>释放系统资源、传感器（如GPS）手柄，或当 Activity 暂停且用户不需要它们时仍然可能影响电池续航时间的任何资源</strong>。<br>如果处于多窗口模式，则“已暂停”的 Activity 仍完全可见。因此，应考虑使用 onStop() 而非 onPause() 来完全释放或调整与界面相关的资源和操作，以便更好地支持多窗模式。<br>onPause() 执行非常简单，而且不一定要有足够的时间来执行保存操作。因此，<strong>不应该使用 onPause() 来保存应用或用户数据、进行网络调用或执行数据库事务。因为在该方法完成之前，此类工作可能无法完成。相反，应在 onStop() 期间执行高负载的关闭操作。</strong></p>
+<h3 id="onStop"><a href="#onStop" class="headerlink" title="onStop()"></a>onStop()</h3><p>如果Activity对用户不可见，则说明其进入“已停止状态”，此时系统将会调用onStop()回调。在 onStop() 方法中，<strong>应用应释放或调整应用对用户不可见时的无用资源</strong>。例如，应用可以暂停动画效果，或从细粒度位置更新切换到粗粒度位置更新。<br>当 Activity 进入“已停止”状态时，Activity 对象会继续驻留在内存中：该对象将维护所有状态和成员信息，但不会附加到窗口管理器。状态恢复后，Activity 会重新调用这些信息。无需重新初始化在回调方法导致 Activity 进入“已恢复”状态期间创建的组件。<strong>系统还会追踪布局中每个View对象的当前状态</strong>，如果用户在 EditText 微件中输入文本，系统将保留文本内容，因此无需保存和恢复文本。  </p>
+<h3 id="onDestory"><a href="#onDestory" class="headerlink" title="onDestory()"></a>onDestory()</h3><p>销毁 Ativity 之前，系统会先调用 onDestroy()。系统调用此回调的原因如下：</p>
+<ul>
+<li>Activity 正在结束（由于用户彻底关闭 Activity 或由于系统为 Activity 调用 finish()）。</li>
+<li>由于配置变更（例如设备旋转或多窗口模式），系统暂时销毁 Activity。</li>
+</ul>
+<p>可以使用 <a href="https://developer.android.com/reference/android/app/Activity#isFinishing()" target="_blank" rel="noopener">isFinishing()</a> 方法区分这两种情况。<br>应使用 <a href="https://developer.android.com/reference/androidx/lifecycle/ViewModel" target="_blank" rel="noopener">ViewModel</a> 对象来容纳 Activity 的相关视图数据，如果由于配置变更而重新创建 Activity，则 ViewMode 不必执行任何操作，因为系统将保留 ViewModel 并将其提供给下一个 Activity 实例。如果不重新创建 Activity，ViewModel 将调用 <a href="https://developer.android.com/reference/androidx/lifecycle/ViewModel#onCleared()" target="_blank" rel="noopener">onCleared()</a> 方法，以便在 Activity 遭到销毁前清除所需的任何数据。<br>onDestory() 回调前应释放先前的回调（如onStop()）尚未释放的所有资源。</p>
+<h2 id="Activity-状态和从内存中弹出"><a href="#Activity-状态和从内存中弹出" class="headerlink" title="Activity 状态和从内存中弹出"></a>Activity 状态和从内存中弹出</h2><table>
+<thead>
+<tr>
+<th>系统终止进程的可能性</th>
+<th>进程状态</th>
+<th>Activity状态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>小</td>
+<td>前台（拥有或即将获得焦点）</td>
+<td>已创建 已开始 已恢复</td>
+</tr>
+<tr>
+<td>中</td>
+<td>后台（失去焦点）</td>
+<td>已暂停</td>
+</tr>
+<tr>
+<td>大</td>
+<td>后台（不可见）</td>
+<td>已停止</td>
+</tr>
+<tr>
+<td></td>
+<td>空</td>
+<td>已销毁</td>
+</tr>
+<tr>
+<td>表1.进程生命周期和Activity状态之间的关系</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="使用-onSaveInstanceState-保存简单轻量的界面状态"><a href="#使用-onSaveInstanceState-保存简单轻量的界面状态" class="headerlink" title="使用 onSaveInstanceState() 保存简单轻量的界面状态"></a>使用 onSaveInstanceState() 保存简单轻量的界面状态</h3><p>当 Activity 开始停止时，系统会调用 onSaveInstanceState() 方法，以便 Activity 可以将状态信息保存到实例状态 Bundle 中。此方法的默认实现保存有关 Activity 视图层次结构状态的瞬态信息，例如 EditText 微件中的文本或 ListView 微件的滚动位置。<br>如要保存持久化数据（例如用户首选项或数据库中的数据），应在 Activity 位于前台时抓住合适机会。如果没有这样的时机，应在执行 onStop() 方法期间保存此类数据。  </p>
+<h3 id="使用保存的实例状态恢复-Activity-界面状态"><a href="#使用保存的实例状态恢复-Activity-界面状态" class="headerlink" title="使用保存的实例状态恢复 Activity 界面状态"></a>使用保存的实例状态恢复 Activity 界面状态</h3><ul>
+<li>无论系统是新建 Activity 实例还是重新创建之前的实例，都会调用 onCreate() 方法，所以在尝试读取之前，必须检查状态 Bundle 是否为 null。如果为 null，系统将新建 Activity 实例，而不会恢复之前销毁的实例。</li>
+<li>选择实现系统在 onStart() 方法之后调用的 onRestoreInstanceState()，而不是在 onCreate() 期间恢复状态。仅当存在要恢复的已保存状态时，系统才会调用 onRestoreInstanceState()，因此无需检查 Bundle 是否为 null。</li>
+</ul>
+<h3 id="ActivityA-启动-ActivityB-时"><a href="#ActivityA-启动-ActivityB-时" class="headerlink" title="ActivityA 启动 ActivityB 时"></a>ActivityA 启动 ActivityB 时</h3><ol>
+<li>ActivityA 的 onPause() 方法执行。  </li>
+<li>ActivityB 的 onCreate()、onStart() 和 onResume() 方法依次执行。（ActivityB 现在具有用户焦点。）  </li>
+<li>然后，如果 ActivityA 在屏幕上不再可见，则其 onStop() 方法执行。<h2 id="启动模式"><a href="#启动模式" class="headerlink" title="启动模式"></a>启动模式</h2><h3 id="使用清单文件设置（launchMode-属性）"><a href="#使用清单文件设置（launchMode-属性）" class="headerlink" title="使用清单文件设置（launchMode 属性）"></a>使用清单文件设置（launchMode 属性）</h3><code>&quot;standard&quot;</code> <strong>（默认模式）</strong>  <blockquote>
+<p>默认值。系统在启动该 Activity 的任务中创建 Activty 的新实例，并将 intent 传送给该实例。Activity 可以多次实例化，每个实例可以属于不同的任务，一个任务可以拥有多个实例。 </p>
+</blockquote>
+</li>
+</ol>
+<p><code>&quot;singleTop&quot;</code>  </p>
+<blockquote>
+<p>如果当前任务的顶部已存在 Activity 的实例，则系统会通过其 onNewIntent() 方法来将 intent 传递给该实例，而不是创建 Activity 的新实例。Activity 可以多次实例化，每个实例可以属于不同的任务，一个任务可以拥有多个实例（前提是返回堆栈顶部的 Activity 不是该 Activity 的现有实例）。  </p>
+</blockquote>
+<p><code>&quot;singleTask&quot;</code>  </p>
+<blockquote>
+<p>系统会创建新任务，并实例化新任务的根 Activity。但是，如果另外的任务中已存在该 Activity 的实例，则系统会通过调用其 onNewIntent() 方法将 intent 转送到该现有实例，而不是创建新实例。<strong>Activity 一次只能有一个实例存在。</strong>   </p>
+</blockquote>
+<p><code>&quot;singleInstance&quot;</code>  </p>
+<blockquote>
+<p>与 <code>&quot;singleTask&quot;</code> 相似，唯一不同的是系统不会将任何其他 Activity 启动到包含该实例的任务中。<strong>该 Activity 始终是其任务唯一的成员；</strong>由该 Activity 启动的任何 Activity 都会在其他的任务中打开。</p>
+</blockquote>
+<h3 id="使用Intent标记"><a href="#使用Intent标记" class="headerlink" title="使用Intent标记"></a>使用Intent标记</h3><p><code>FLAG_ACTIVITY_NEW_TASK</code>  </p>
+<blockquote>
+<p>在新任务中启动 Activity。如果现在启动的 Activity 已经有任务在运行，则系统会将该任务转到前台并恢复其最后的状态，而 Activity 将在 <code>onNewIntent()</code> 中收到新的 intent。此与 <code>&quot;singleTask&quot;</code> 产生的行为相同。</p>
+</blockquote>
+<p><code>FLAG_ACTIVITY_SINGLE_TOP</code>  </p>
+<blockquote>
+<p>如果要启动的 Activity 是当前 Activity（即位于返回堆栈顶部的 Activity），则现有实例会收到对 <code>onNewIntent()</code> 的调用，而不会创建 Activity 的新实例。此与 <code>&quot;singleTop&quot;</code> 产生的行为相同。</p>
+</blockquote>
+<p><code>FLAG_ACTIVITY_CLEAR_TOP</code>  </p>
+<blockquote>
+<p>如果要启动的 Activity 已经在当前任务中运行，则不会启动该 Activity 的新实例，而是会销毁位于它之上的所有其他 Activity，并通过 <code>onNewIntent()</code> 将此 intent 传送给它的已恢复实例（现在位于堆栈顶部）。</p>
+</blockquote>
+<p><code>FLAG_ACTIVITY_CLEAR_TOP</code> 最常与 <code>FLAG_ACTIVITY_NEW_TASK</code> 结合使用。将这两个标记结合使用，可以查找其他任务中的现有 Activity，并将其置于能够相应 intent 的位置。</p>
+<h2 id="处理亲和性"><a href="#处理亲和性" class="headerlink" title="处理亲和性"></a>处理亲和性</h2><p><a href="https://developer.android.com/guide/components/activities/tasks-and-back-stack#Affinities" target="_blank" rel="noopener">处理亲和性</a> “亲和性”表示 Activity 倾向于属于哪个任务。默认情况下，同一应用中的所有 Activity 彼此具有亲和性。因此，在默认情况下，同一应用中的所有 Activity 都倾向于位于同一任务。不过，您可以修改 Activity 的默认亲和性。在不同应用中定义的 Activity 可以具有相同的亲和性，或者在同一应用中定义的 Activity 也可以被指定不同的任务亲和性。</p>
+<h2 id="清除返回堆栈"><a href="#清除返回堆栈" class="headerlink" title="清除返回堆栈"></a>清除返回堆栈</h2><p><a href="https://developer.android.com/guide/components/activities/tasks-and-back-stack#Clearing" target="_blank" rel="noopener">清除返回堆栈</a> 如果用户离开任务较长时间，系统会清除任务中除根 Activity 以外的所有 Activity。当用户再次返回到该任务时，只有根 Activity 会恢复。系统之所以采取这种行为方式是因为，经过一段时间后，用户可能已经放弃了之前执行的操作，现在返回任务是为了开始某项新的操作。</p>
+<h2 id="在进程之间发送数据"><a href="#在进程之间发送数据" class="headerlink" title="在进程之间发送数据"></a>在进程之间发送数据</h2><p>Binder 事务缓冲区的大小固定有限，目前为 1MB，由进程中正在处理的所有事务共享。由于此限制是进程级别而不是 Activity 级别的限制，因此这些事务包括应用中的所有 binder 事务，例如 onSaveInstanceState，startActivity 以及与系统的任何互动。超过大小限制时，将引发 TransactionTooLargeException。  </p>
+<p>对于 savedInstanceState 的具体情况，应将数据量保持在较小的规模，因为只要用户可以返回到该 Activity，系统进程就需要保留所提供的数据（即使 Activity 的进程已终止）。我们建议您将保存的状态保持在 50k 数据以下。  </p>
+<h1 id="Fragment"><a href="#Fragment" class="headerlink" title="Fragment"></a>Fragment</h1><pre><code class="hljs pf">FragmentManager <span class="hljs-keyword">fragment</span>Manager = getSupportFragmentManager();
+FragmentTransaction <span class="hljs-keyword">fragment</span>Transaction = <span class="hljs-keyword">fragment</span>Manager.beginTransaction();</code></pre>
+<h2 id="add"><a href="#add" class="headerlink" title="add()"></a>add()</h2><pre><code class="hljs pf">ExampleFragment <span class="hljs-keyword">fragment</span> = new ExampleFragment();
+<span class="hljs-keyword">fragment</span>Transaction.add(R.id.fragment_container, <span class="hljs-keyword">fragment</span>);
+<span class="hljs-keyword">fragment</span>Transaction.commit();</code></pre>
+<h2 id="replace"><a href="#replace" class="headerlink" title="replace()"></a>replace()</h2><pre><code class="hljs pgsql">// <span class="hljs-keyword">Create</span> <span class="hljs-built_in">new</span> fragment <span class="hljs-keyword">and</span> <span class="hljs-keyword">transaction</span>
+Fragment newFragment = <span class="hljs-built_in">new</span> ExampleFragment();
+FragmentTransaction <span class="hljs-keyword">transaction</span> = getSupportFragmentManager().beginTransaction();
+
+// Replace whatever <span class="hljs-keyword">is</span> <span class="hljs-keyword">in</span> the fragment_container <span class="hljs-keyword">view</span> <span class="hljs-keyword">with</span> this fragment,
+// <span class="hljs-keyword">and</span> <span class="hljs-keyword">add</span> the <span class="hljs-keyword">transaction</span> <span class="hljs-keyword">to</span> the back stack
+<span class="hljs-keyword">transaction</span>.replace(R.id.fragment_container, newFragment);
+<span class="hljs-keyword">transaction</span>.addToBackStack(<span class="hljs-keyword">null</span>);
+
+// <span class="hljs-keyword">Commit</span> the <span class="hljs-keyword">transaction</span>
+<span class="hljs-keyword">transaction</span>.<span class="hljs-keyword">commit</span>();</code></pre>
+
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E6%91%98%E5%BD%95/">官方文档摘录</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Activity/">Activity</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Fragment/">Fragment</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/02/Intent/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Intent</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/02/Android-Resource/">
+                        <span class="hidden-mobile">Android Resource</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;
+  目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div> -->
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Activity-Fragment&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
