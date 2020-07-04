@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/Klien.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="记往昔录今朝只待明时">
+  <meta name="author" content="Klien">
+  <meta name="keywords" content="安卓原生开发、python日常脚本、Developer">
+  <title>Kotlin的学习（五）——集合 - Klien-m&#39;s 博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/androidstudio.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Klien-m's 博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/post.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-07-03 22:21">
+      2020年7月3日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      69
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：1 小时前
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p>Keywords: list、set、map、构造集合、<code>iterator()</code>、<code>next()</code> List特有的 <code>previous()</code>、<code>MutableIterator()</code>、<code>rangeTo()</code>、<code>Sequence&lt;T&gt;</code>、<code>map()</code>、<code>zip()</code>、<code>associateWith()</code>、<code>flatten()</code>、<code>joinToString()</code>、<code>joinTo()</code>、<code>filter()</code>、<code>partition()</code>、plus、minus、<code>groupBy()</code>、取集合的一部分 <code>slice()</code> … 、取单个元素、排序、聚合操作、集合写操作、List相关操作、Set相关操作、Map相关操作</p>
+<a id="more"></a>
+
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Kotlin 标准库提供了基本集合类型的实现：set（MutableSet）、list（MutableList）以及map（MutableMap）。前者只读，括号内的集合类型可以进行写操作。</p>
+<h2 id="构造集合"><a href="#构造集合" class="headerlink" title="构造集合"></a>构造集合</h2><h3 id="由元素构造"><a href="#由元素构造" class="headerlink" title="由元素构造"></a>由元素构造</h3><p><code>listOf&lt;T&gt;()</code>、<code>setOf&lt;T&gt;()</code>、<code>mutableListOf&lt;T&gt;()</code>、<code>mutableSetOf&lt;T&gt;()</code>、<code>mapOf()</code>、<code>mutableMapOf()</code></p>
+<h3 id="空集合"><a href="#空集合" class="headerlink" title="空集合"></a>空集合</h3><p><code>emptyList()</code>、<code>emptySet()</code>、<code>emptyMap()</code></p>
+<h3 id="list-的初始化函数"><a href="#list-的初始化函数" class="headerlink" title="list 的初始化函数"></a>list 的初始化函数</h3><p>对于 List，有一个接受 List 的大小与初始化函数的构造函数，该初始化函数根据索引定义元素的值。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> doubled = List(<span class="hljs-number">3</span>, &#123; it * <span class="hljs-number">2</span> &#125;)
+println(doubled)</code></pre></div>
+
+<h3 id="具体类型构造函数"><a href="#具体类型构造函数" class="headerlink" title="具体类型构造函数"></a>具体类型构造函数</h3><p>要创建具体类型的集合，例如 <code>ArrayList</code> 或 <code>LinkedList</code>，可以使用这些类型的构造函数。 类似的构造函数对于 <code>Set</code> 与 <code>Map</code> 的各实现中均有提供。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> linkedList = LinkedList&lt;String&gt;(listOf(<span class="hljs-string">"one"</span>, <span class="hljs-string">"two"</span>, <span class="hljs-string">"three"</span>))
+<span class="hljs-keyword">val</span> presizedSet = HashSet&lt;<span class="hljs-built_in">Int</span>&gt;(<span class="hljs-number">32</span>)</code></pre></div>
+
+<h3 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h3><p>要创建与现有集合具有相同元素的集合，可以使用复制操作。标准库中的集合复制操作创建了具有相同元素引用的 <strong>浅</strong> 复制集合。 因此，对集合元素所做的更改会反映在其所有副本中。</p>
+<p>在特定时刻通过集合复制函数，例如<code>toList()</code>、<code>toMutableList()</code>、<code>toSet()</code> 等等。创建了集合的快照。 结果是创建了一个具有相同元素的新集合如果在源集合中添加或删除元素，则不会影响副本。副本也可以独立于源集合进行更改。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> sourceList = mutableListOf(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+<span class="hljs-keyword">val</span> copyList = sourceList.toMutableList()
+<span class="hljs-keyword">val</span> readOnlyCopyList = sourceList.toList()
+sourceList.add(<span class="hljs-number">4</span>)
+println(<span class="hljs-string">"Copy size: <span class="hljs-subst">$&#123;copyList.size&#125;</span>"</span>)
+
+<span class="hljs-comment">//readOnlyCopyList.add(4)             // 编译异常</span>
+println(<span class="hljs-string">"Read-only copy size: <span class="hljs-subst">$&#123;readOnlyCopyList.size&#125;</span>"</span>)</code></pre></div>
+
+<p>这些函数还可用于将集合转换为其他类型，例如根据 List 构建 Set，反之亦然。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> sourceList = mutableListOf(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+<span class="hljs-keyword">val</span> copySet = sourceList.toMutableSet()
+copySet.add(<span class="hljs-number">3</span>)
+copySet.add(<span class="hljs-number">4</span>)
+println(copySet)</code></pre></div>
+
+<p>或者，可以创建对同一集合实例的新引用。使用现有集合初始化集合变量时，将创建新引用。 因此，当通过引用更改集合实例时，更改将反映在其所有引用中。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> sourceList = mutableListOf(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+<span class="hljs-keyword">val</span> referenceList = sourceList
+referenceList.add(<span class="hljs-number">4</span>)
+println(<span class="hljs-string">"Source size: <span class="hljs-subst">$&#123;sourceList.size&#125;</span>"</span>)</code></pre></div>
+
+<p>集合的初始化可用于限制其可变性。例如，如果构建了一个 <code>MutableList</code> 的 <code>List</code> 引用，当你试图通过此引用修改集合的时候，编译器会抛出错误。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> sourceList = mutableListOf(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+<span class="hljs-keyword">val</span> referenceList: List&lt;<span class="hljs-built_in">Int</span>&gt; = sourceList
+<span class="hljs-comment">//referenceList.add(4)            // 编译错误</span>
+sourceList.add(<span class="hljs-number">4</span>)
+println(referenceList) <span class="hljs-comment">// 显示 sourceList 当前状态</span></code></pre></div>
+
+<h3 id="调用其他集合的函数"><a href="#调用其他集合的函数" class="headerlink" title="调用其他集合的函数"></a>调用其他集合的函数</h3><p>可以通过其他集合各种操作的结果来创建集合。例如，过滤列表会创建与过滤器匹配的新元素列表：</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> numbers = listOf(<span class="hljs-string">"one"</span>, <span class="hljs-string">"two"</span>, <span class="hljs-string">"three"</span>, <span class="hljs-string">"four"</span>)  
+<span class="hljs-keyword">val</span> longerThan3 = numbers.filter &#123; it.length &gt; <span class="hljs-number">3</span> &#125;
+println(longerThan3)</code></pre></div>
+
+<p>映射生成转换结果列表：</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> numbers = setOf(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+println(numbers.map &#123; it * <span class="hljs-number">3</span> &#125;)
+println(numbers.mapIndexed &#123; idx, value -&gt; value * idx &#125;)
+​
+<span class="hljs-keyword">val</span> numbers = setOf(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+println(numbers.map &#123; it * <span class="hljs-number">3</span> &#125;)
+println(numbers.mapIndexed &#123; idx, value -&gt; value * idx &#125;)</code></pre></div>
+
+<p>关联生成 Map:</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> numbers = listOf(<span class="hljs-string">"one"</span>, <span class="hljs-string">"two"</span>, <span class="hljs-string">"three"</span>, <span class="hljs-string">"four"</span>)
+println(numbers.associateWith &#123; it.length &#125;)</code></pre></div>
+
+<h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p>在集合中使用 <code>for</code> 循环时，将隐式获取迭代器。</p>
+<p><code>forEach()</code> 函数可自动迭代集合并为每个元素执行给定的代码。</p>
+<h3 id="List迭代器"><a href="#List迭代器" class="headerlink" title="List迭代器"></a>List迭代器</h3><p>对于列表，有一个特殊的迭代器实现：<code>ListIterator</code> 支持列表双向迭代。反向迭代由 <code>hasPrevious()</code> 和 <code>previous()</code> 函数实现。 此外，<code>ListIterator</code> 通过 <code>nextIndex()</code> 与 <code>previousIndex()</code> 函数提供有关元素索引的信息。</p>
+<p>具有双向迭代的能力意味着 <code>ListIterator</code> 在到达最后一个元素后仍可以使用。</p>
+<h3 id="可变迭代器"><a href="#可变迭代器" class="headerlink" title="可变迭代器"></a>可变迭代器</h3><p><code>MutableIterator</code> 扩展 <code>Iterator</code> 使其具有 <code>remove()</code>、<code>add()</code>、<code>next()</code>。</p>
+<h2 id="区间与数列"><a href="#区间与数列" class="headerlink" title="区间与数列"></a>区间与数列</h2><ul>
+<li><code>rangeTo()</code> 函数操作符 <code>..</code>。</li>
+<li>in !in</li>
+<li><code>downTo</code>、<code>step</code>、<code>until</code></li>
+<li>数列实现 <code>Iterable&lt;N&gt;</code>，因此可以在各种集合函数（如 <code>map</code>、<code>filter</code>与其他）中使用它们。</li>
+</ul>
+<h2 id="序列（Sequence-lt-T-gt-）"><a href="#序列（Sequence-lt-T-gt-）" class="headerlink" title="序列（Sequence&lt;T&gt;）"></a>序列（<code>Sequence&lt;T&gt;</code>）</h2><p>序列提供与 <code>Iterable</code> 相同的函数，但实现另一种方法来进行多步骤集合处理。</p>
+<p>当 <code>Iterable</code> 的处理包含多个步骤时，它们会优先执行：每个处理步骤完成并返回其结果——中间集合。 在此集合上执行以下步骤。反过来，序列的多步处理在可能的情况下会延迟执行：仅当请求整个处理链的结果时才进行实际计算。</p>
+<p>操作执行的顺序也不同：<code>Sequence</code> 对每个元素逐个执行所有处理步骤。 反过来，<code>Iterable</code> 完成整个集合的每个步骤，然后进行下一步。</p>
+<h3 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h3><ul>
+<li><code>sequenceOf()</code> 函数</li>
+<li>如果已经有一个 <code>Iterable</code> 对象（例如 <code>List</code> 或 <code>Set</code>），可以通过调用 <code>asSequence()</code> 从而创建一个序列</li>
+<li>创建序列的另一种方法是通过使用计算其元素的函数来构建序列。 要基于函数构建序列，请以该函数作为参数调用 <code>generateSequence()</code>。 （可选）可以将第一个元素指定为显式值或函数调用的结果。 当提供的函数返回 <code>null</code> 时，序列生成停止。</li>
+<li>有一个函数可以逐个或按任意大小的组块生成序列元素——<code>sequence()</code> 函数。 此函数采用一个 lambda 表达式，其中包含 <code>yield()</code> 与 <code>yieldAll()</code> 函数的调用。 它们将一个元素返回给序列使用者，并暂停 <code>sequence()</code> 的执行，直到使用者请求下一个元素。 <code>yield()</code> 使用单个元素作为参数；<code>yieldAll()</code> 中可以采用 <code>Iterable</code> 对象、<code>Iterable</code> 或其他 <code>Sequence</code>。<code>yieldAll()</code> 的 <code>Sequence</code> 参数可以是无限的。 当然，这样的调用必须是最后一个：之后的所有调用都永远不会执行。</li>
+</ul>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> oddNumbers = sequence &#123;
+    yield(<span class="hljs-number">1</span>)
+    yieldAll(listOf(<span class="hljs-number">3</span>, <span class="hljs-number">5</span>))
+    yieldAll(generateSequence(<span class="hljs-number">7</span>) &#123; it + <span class="hljs-number">2</span> &#125;)
+&#125;
+println(oddNumbers.take(<span class="hljs-number">5</span>).toList())
+<span class="hljs-comment">// 运行结果：[1, 3, 5, 7, 9]</span></code></pre></div>
+
+<h2 id="操作概述"><a href="#操作概述" class="headerlink" title="操作概述"></a>操作概述</h2><h3 id="公共操作"><a href="#公共操作" class="headerlink" title="公共操作"></a>公共操作</h3><p>集合转换、集合过滤、plus和minus操作符、分组、取集合一部分、取单个元素、集合排序、集合聚合操作，<strong>上述操作将返回操作结果，而不会影响原始集合。</strong></p>
+<p>对于某些集合操作，有一个选项可以指定目标对象。目标是一个可变集合，该函数将其结果项附加到该可变对象中。对于执行带有目标的操作，有单独的函数，其名称中带有 <code>To</code> 后缀，例如，用 <code>filterTo()</code> 代替 <code>filter()</code> 以及用 <code>associateTo()</code> 代替 <code>associate()</code>。</p>
+<div class="hljs"><pre><code class="hljs kotlin">numbers = listOf(<span class="hljs-string">"one"</span>, <span class="hljs-string">"two"</span>, <span class="hljs-string">"three"</span>, <span class="hljs-string">"four"</span>)
+<span class="hljs-keyword">val</span> filterResults = mutableListOf&lt;String&gt;()  <span class="hljs-comment">// 目标对象</span>
+numbers.filterTo(filterResults) &#123; it.length &gt; <span class="hljs-number">3</span> &#125;
+numbers.filterIndexedTo(filterResults) &#123; index, _ -&gt; index == <span class="hljs-number">0</span> &#125;
+println(filterResults) <span class="hljs-comment">// 包含两个操作的结果</span>
+<span class="hljs-comment">// 运行结果为：[three, four, one]</span></code></pre></div>
+
+<p>为了方便起见，这些函数将目标集合返回了，因此可以在函数调用的相关参数中直接创建它：</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-comment">// 将数字直接过滤到新的哈希集中，</span>
+<span class="hljs-comment">// 从而消除结果中的重复项</span>
+<span class="hljs-keyword">val</span> result = numbers.mapTo(HashSet()) &#123; it.length &#125;
+println(<span class="hljs-string">"distinct item lengths are <span class="hljs-variable">$result</span>"</span>)</code></pre></div>
+
+<h3 id="写操作"><a href="#写操作" class="headerlink" title="写操作"></a>写操作</h3><p>对于某些操作，有成对的函数可以执行相同的操作：一个函数就地应用该操作，另一个函数将结果作为单独的集合返回。 例如， <code>sort()</code> 就地对可变集合进行排序，因此其状态发生了变化； <code>sorted()</code> 创建一个新集合，该集合包含按排序顺序相同的元素。</p>
+<h2 id="转换"><a href="#转换" class="headerlink" title="转换"></a>转换</h2><h3 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h3><p>基本的映射函数是 <code>map()</code>。如果需要用到元素索引，可以使用 <code>mapIndexed()</code>。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> numbers = setOf(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+println(numbers.map &#123; it * <span class="hljs-number">3</span> &#125;)
+println(numbers.mapIndexed &#123; idx, value -&gt; value * idx &#125;)</code></pre></div>
+
+<p>如果转换在某些元素上产生 <code>null</code> 值，可以调用 <code>mapNotNull()</code> or <code>mapIndexedNotNull()</code> 来过滤掉 <code>null</code> 值。</p>
+<p>映射转换时，有两个选择：转换键，使值保持不变，反之亦然。要将指定转换应用于键，使用 <code>mapKeys()</code>；反过来，<code>mapValues()</code> 转换值。这两个函数都使用将映射条目作为参数的转换，因此可以操作其键与值。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> numbersMap = mapOf(<span class="hljs-string">"key1"</span> to <span class="hljs-number">1</span>, <span class="hljs-string">"key2"</span> to <span class="hljs-number">2</span>, <span class="hljs-string">"key3"</span> to <span class="hljs-number">3</span>, <span class="hljs-string">"key11"</span> to <span class="hljs-number">11</span>)
+println(numbersMap.mapKeys &#123; it.key.toUpperCase() &#125;)
+println(numbersMap.mapValues &#123; it.value + it.key.length &#125;)</code></pre></div>
+
+<h3 id="双路合并"><a href="#双路合并" class="headerlink" title="双路合并"></a>双路合并</h3><p>在一个集合（或数组）上以另一个集合（或数组）作为参数调用时，<code>zip()</code> 返回 <code>Pair</code> 对象的列表（<code>List</code>）。<code>zip()</code> 也可以使用中缀表达式。</p>
+<p>当拥有 <code>Pair</code> 的 <code>List</code> 时，可以进行反向转换 unzipping。<br>分割键值对列表，可以调用 <code>unzip()</code>。</p>
+<h3 id="关联"><a href="#关联" class="headerlink" title="关联"></a>关联</h3><p>关联转换允许从集合元素和与其关联的某些值构建 Map。</p>
+<p>基本的关联函数 <code>associateWith()</code> 创建一个 <code>Map</code>，其中原始集合的元素是键，并通过给定的转换函数从中产生值。 如果两个元素相等，则仅最后一个保留在 Map 中。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> numbers = listOf(<span class="hljs-string">"one"</span>, <span class="hljs-string">"two"</span>, <span class="hljs-string">"three"</span>, <span class="hljs-string">"four"</span>)
+println(numbers.associateWith &#123; it.length &#125;)
+<span class="hljs-comment">// 结果为：&#123;one=3, two=3, three=5, four=4&#125;</span></code></pre></div>
+
+<p>为了使用集合元素作为值来构建 Map，有一个函数 <code>associateBy()</code>。 它需要一个函数，该函数根据元素的值返回键。如果两个元素相等，则仅最后一个保留在 Map 中。 还可以使用值转换函数来调用 <code>associateBy()</code>。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> numbers = listOf(<span class="hljs-string">"one"</span>, <span class="hljs-string">"two"</span>, <span class="hljs-string">"three"</span>, <span class="hljs-string">"four"</span>)
+​
+println(numbers.associateBy &#123; it.first().toUpperCase() &#125;)
+println(numbers.associateBy(keySelector = &#123; it.first().toUpperCase() &#125;, valueTransform = &#123; it.length &#125;))
+<span class="hljs-comment">// 结果为：&#123;O=one, T=three, F=four&#125;  &#123;O=3, T=5, F=4&#125;</span></code></pre></div>
+
+<p>另一种构建 Map 的方法是使用函数 <code>associate()</code>，其中 Map 键和值都是通过集合元素生成的。 它需要一个 lambda 函数，该函数返回 <code>Pair</code>：键和相应 Map 条目的值。<code>associate()</code> 会生成临时的 <code>Pair</code> 对象，这可能会影响性能。 因此，当性能不是很关键或比其他选项更可取时，应使用 <code>associate()</code>。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> names = listOf(<span class="hljs-string">"Alice Adams"</span>, <span class="hljs-string">"Brian Brown"</span>, <span class="hljs-string">"Clara Campbell"</span>)
+println(names.associate &#123; name -&gt; parseFullName(name).let &#123; it.lastName to it.firstName &#125; &#125;)
+<span class="hljs-comment">// 结果为：&#123;Adams=Alice, Brown=Brian, Campbell=Clara&#125;</span></code></pre></div>
+
+<h3 id="打平"><a href="#打平" class="headerlink" title="打平"></a>打平</h3><p><code>flatten()</code> 可以在一个集合的集合（例如，一个 <code>Set</code> 组成的 <code>List</code>）上调用它。该函数返回嵌套集合中的所有元素的一个 <code>List</code>。</p>
+<h3 id="字符串表示"><a href="#字符串表示" class="headerlink" title="字符串表示"></a>字符串表示</h3><p><code>joinToString()</code> 根据提供的参数从集合元素构建单个 <code>String</code>。 <code>joinTo()</code> 执行相同的操作，但将结果附加到给定的 <code>Appendable</code> 对象。</p>
+<p>要构建自定义字符串表示形式，可以在函数参数 <code>separator</code>、<code>prefix</code> 与 <code>postfix</code>中指定其参数。 结果字符串将以 <code>prefix</code> 开头，以 <code>postfix</code> 结尾。除最后一个元素外，<code>separator</code> 将位于每个元素之后。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> numbers = listOf(<span class="hljs-string">"one"</span>, <span class="hljs-string">"two"</span>, <span class="hljs-string">"three"</span>, <span class="hljs-string">"four"</span>)
+println(numbers.joinToString(separator = <span class="hljs-string">" | "</span>, prefix = <span class="hljs-string">"start: "</span>, postfix = <span class="hljs-string">": end"</span>))
+<span class="hljs-comment">// 结果为：start: one | two | three | four: end</span></code></pre></div>
+
+<p>对于较大的集合，可能需要指定 <code>limit</code> ——将包含在结果中元素的数量。 如果集合大小超出 <code>limit</code>，所有其他元素将被 <code>truncated</code> 参数的单个值替换。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> numbers = (<span class="hljs-number">1</span>..<span class="hljs-number">100</span>).toList()
+println(numbers.joinToString(limit = <span class="hljs-number">10</span>, truncated = <span class="hljs-string">"&lt;...&gt;"</span>))
+<span class="hljs-comment">// 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, &lt;...&gt;</span></code></pre></div>
+
+<p>要自定义元素本身的表示形式，提供 <code>transform</code> 函数。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> numbers = listOf(<span class="hljs-string">"one"</span>, <span class="hljs-string">"two"</span>, <span class="hljs-string">"three"</span>, <span class="hljs-string">"four"</span>)
+println(numbers.joinToString &#123; <span class="hljs-string">"Element: <span class="hljs-subst">$&#123;it.toUpperCase()&#125;</span>"</span>&#125;)
+<span class="hljs-comment">// 结果为：Element: ONE, Element: TWO, Element: THREE, Element: FOUR</span></code></pre></div>
+
+<h2 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h2><h3 id="按谓词过滤"><a href="#按谓词过滤" class="headerlink" title="按谓词过滤"></a>按谓词过滤</h3><p>当使用一个谓词来调用时，<code>filter()</code> 返回与其匹配的集合元素。对于 <code>List</code> 和 <code>Set</code>，过滤结果都是一个 <code>List</code>，对 <code>Map</code> 来说结果还是一个 <code>Map</code>。</p>
+<p><code>filter()</code> 中的谓词只能检查元素的值。如果想在过滤中使用元素在集合中的位置，应该使用 <code>filterIndexed()</code>。它接受一个带有两个参数的谓词：元素的索引和元素的值。</p>
+<p>如果想使用否定条件来过滤集合，请使用 <code>filterNot()</code>。它返回一个让谓词产生 <code>false</code> 的元素列表。</p>
+<p><code>filterIsInstance()</code> 返回给定类型的集合元素。</p>
+<p><code>filterNotNull()</code> 返回所有的非空元素。</p>
+<h3 id="划分"><a href="#划分" class="headerlink" title="划分"></a>划分</h3><p><code>partition()</code> – 通过一个谓词过滤集合并且将不匹配的元素存放在一个单独的列表中。因此，你得到一个 <code>List</code> 的 <code>Pair</code> 作为返回值：第一个列表包含与谓词匹配的元素并且第二个列表包含原始集合中的所有其他元素。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> numbers = listOf(<span class="hljs-string">"one"</span>, <span class="hljs-string">"two"</span>, <span class="hljs-string">"three"</span>, <span class="hljs-string">"four"</span>)
+<span class="hljs-keyword">val</span> (match, rest) = numbers.partition &#123; it.length &gt; <span class="hljs-number">3</span> &#125;
+​
+println(match)
+println(rest)
+<span class="hljs-comment">// 结果为：[three, four]  [one, two]</span></code></pre></div>
+
+<h3 id="检验谓词"><a href="#检验谓词" class="headerlink" title="检验谓词"></a>检验谓词</h3><ul>
+<li>如果至少有一个元素匹配给定谓词，那么 <code>any()</code> 返回 <code>true</code>。</li>
+<li>如果没有元素与给定谓词匹配，那么 <code>none()</code> 返回 <code>true</code>。</li>
+<li>如果所有元素都匹配给定谓词，那么 <code>all()</code> 返回 <code>true</code>。</li>
+</ul>
+<p><code>any()</code> 和 <code>none()</code> 也可以不带谓词使用：在这种情况下它们只是用来检查集合是否为空。 如果集合中有元素，<code>any()</code> 返回 <code>true</code>，否则返回 <code>false</code>；<code>none()</code> 则相反。</p>
+<h2 id="plus-与-minus-操作符"><a href="#plus-与-minus-操作符" class="headerlink" title="plus 与 minus 操作符"></a>plus 与 minus 操作符</h2><p>plus 就是集合的并集， minus 就是集合的差集。</p>
+<h2 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h2><div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> numbers = listOf(<span class="hljs-string">"one"</span>, <span class="hljs-string">"two"</span>, <span class="hljs-string">"three"</span>, <span class="hljs-string">"four"</span>, <span class="hljs-string">"five"</span>)
+​
+println(numbers.groupBy &#123; it.first().toUpperCase() &#125;)
+println(numbers.groupBy(keySelector = &#123; it.first() &#125;, valueTransform = &#123; it.toUpperCase() &#125;))
+<span class="hljs-comment">// 结果为：&#123;O=[one], T=[two, three], F=[four, five]&#125;  &#123;o=[ONE], t=[TWO, THREE], f=[FOUR, FIVE]&#125;</span></code></pre></div>
+
+<p>如果要对元素进行分组，然后一次将操作应用于所有分组，可以使用 <code>groupingBy()</code> 函数。 它返回一个 <code>Grouping</code> 类型的实例。 通过 <code>Grouping</code> 实例，可以以一种惰性的方式将操作应用于所有组：这些分组实际上是刚好在执行操作前构建的。</p>
+<p><code>Grouping</code> 支持以下操作：</p>
+<ul>
+<li><code>eachCount()</code> 计算每个组中的元素。</li>
+<li><code>fold()</code> 与 <code>reduce()</code> 对每个组分别执行 <code>fold 与 reduce</code> 操作，作为一个单独的集合并返回结果。</li>
+<li><code>aggregate()</code> 随后将给定操作应用于每个组中的所有元素并返回结果。</li>
+</ul>
+<h2 id="取集合的一部分"><a href="#取集合的一部分" class="headerlink" title="取集合的一部分"></a>取集合的一部分</h2><p><a href="https://www.kotlincn.net/docs/reference/collection-parts.html#%E5%8F%96%E9%9B%86%E5%90%88%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86" target="_blank" rel="noopener">详见</a></p>
+<ul>
+<li><code>slice()</code> 返回具有给定索引的集合元素列表。</li>
+<li><code>take()</code> 从头开始获取指定数量的元素。<code>takeLast()</code> 从尾开始获取指定数量的元素。<code>takeWhile()</code> 将不停获取元素直到排除与谓词匹配的首个元素。 <code>takeLastWhile()</code></li>
+<li><code>drop()</code> 与 <code>dropLast()</code> 从头或尾去除给定数量的元素。<code>dropWhile()</code> <code>dropLastWhile()</code></li>
+<li><code>chunked()</code> 将集合分解为给定大小的“块”。还可以立即对返回的块应用转换（在调用 <code>chunked()</code> 时将转换作为 lambda 函数提供）。</li>
+<li><code>windowed()</code> 返回一个元素区间列表，与 <code>chunked()</code> 不同，<code>windowed()</code> 返回从每个集合元素开始的元素区间。可选参数：<code>step</code>、<code>partialWindows</code> 包含从集合末尾的元素开始的较小的窗口。函数可以立即对返回的区间应用转换，只需在调用 <code>windowed()</code> 时将转换作为 lambda 函数提供。</li>
+<li>构建两个元素的窗口有一个单独的函数—— <code>zipWithNext()</code>。</li>
+</ul>
+<h2 id="取单个元素"><a href="#取单个元素" class="headerlink" title="取单个元素"></a>取单个元素</h2><ul>
+<li><code>elementAt()</code>、<code>first()</code>、<code>last()</code>、<code>elementAtOrNull()</code>、<code>elementAtOrFalse()</code></li>
+<li><code>first()</code>、<code>last()</code>（<code>find()</code>、<code>findLast()</code>）按照给定谓词匹配。为了避免没有元素匹配的异常，可以使用 <code>firstOrNull()</code> 和 <code>lastOrNull()</code></li>
+<li><code>random()</code></li>
+<li><code>contains()</code>、<code>isEmpty()</code>、<code>isNotEmpty()</code></li>
+</ul>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><ul>
+<li>用于只读集合的排序函数将结果作为一个新集合返回。</li>
+<li><code>sorted</code> 与 <code>sortedDescending</code></li>
+<li><code>sortedBy</code> 与 <code>sortedByDescending()</code> 接受一个将集合元素映射为 <code>Comparable</code> 值得选择器，并以该值得自然顺序对集合排序。</li>
+<li><code>reversed()</code> 返回带有元素副本的新集合。<strong><code>asReversed()</code> 返回相同集合实例的一个反向视图</strong>。如果原始列表是可变的，那么其所有更改都会反映在反向视图中，反之亦然。</li>
+<li><code>shuffled()</code> 函数返回一个包含了以<strong>随机顺序排序</strong>的集合元素的新的 <code>List</code>。</li>
+</ul>
+<h2 id="聚合操作"><a href="#聚合操作" class="headerlink" title="聚合操作"></a>聚合操作</h2><div class="hljs"><pre><code class="hljs kotlin">min() max average() sum() count() maxBy() minBy() maxWith() minWith() sumBy() sumByDouble()</code></pre></div>
+
+<h3 id="Fold-与-reduce"><a href="#Fold-与-reduce" class="headerlink" title="Fold 与 reduce"></a>Fold 与 reduce</h3><p><code>reduce()</code> 和 <code>fold()</code>，它们依次将所提供的操作应用于集合元素并返回累积的结果。操作有两个参数：先前的累计值和集合元素。</p>
+<p>这两个函数的区别在于：<code>fold()</code> 接受一个初始值并将其用作第一步的累积值，而 <code>reduce()</code> 的第一步则将第一个和第二个元素作为第一步的操作参数。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> numbers = listOf(<span class="hljs-number">5</span>, <span class="hljs-number">2</span>, <span class="hljs-number">10</span>, <span class="hljs-number">4</span>)
+​
+<span class="hljs-keyword">val</span> sum = numbers.reduce &#123; sum, element -&gt; sum + element &#125;
+println(sum)
+<span class="hljs-keyword">val</span> sumDoubled = numbers.fold(<span class="hljs-number">0</span>) &#123; sum, element -&gt; sum + element * <span class="hljs-number">2</span> &#125;
+println(sumDoubled)
+​
+<span class="hljs-comment">//val sumDoubledReduce = numbers.reduce &#123; sum, element -&gt; sum + element * 2 &#125; //错误：第一个元素在结果中没有加倍</span>
+<span class="hljs-comment">//println(sumDoubledReduce)</span>
+<span class="hljs-comment">// 结果为：21  42</span></code></pre></div>
+
+<p>如需将函数以相反的顺序应用于元素，可以使用函数 <code>reduceRight()</code> 和 <code>foldRight()</code> 它们的工作方式类似于 <code>fold()</code> 和 <code>reduce()</code>，但从最后一个元素开始，然后再继续到前一个元素。</p>
+<p>还可以使用将元素索引作为参数的操作。 为此，使用函数 <code>reduceIndexed()</code> 和 <code>foldIndexed()</code> 传递元素索引作为操作的第一个参数。</p>
+<p>还有将这些操作从右到左应用于集合元素的函数——<code>reduceRightIndexed()</code>与 <code>foldRightIndexed()</code>。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> numbers = listOf(<span class="hljs-number">5</span>, <span class="hljs-number">2</span>, <span class="hljs-number">10</span>, <span class="hljs-number">4</span>)
+<span class="hljs-keyword">val</span> sumEven = numbers.foldIndexed(<span class="hljs-number">0</span>) &#123; idx, sum, element -&gt; <span class="hljs-keyword">if</span> (idx % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>) sum + element <span class="hljs-keyword">else</span> sum &#125;
+println(sumEven)
+​
+<span class="hljs-keyword">val</span> sumEvenRight = numbers.foldRightIndexed(<span class="hljs-number">0</span>) &#123; idx, element, sum -&gt; <span class="hljs-keyword">if</span> (idx % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>) sum + element <span class="hljs-keyword">else</span> sum &#125;
+println(sumEvenRight)
+<span class="hljs-comment">// 结果为：15  15</span></code></pre></div>
+
+<h2 id="集合写操作"><a href="#集合写操作" class="headerlink" title="集合写操作"></a>集合写操作</h2><div class="hljs"><pre><code class="hljs kotlin">add() addAll() plusAssign(+=) remove() removeAll() retainAll() clear() minusAssign(-=)</code></pre></div>
+
+<p>其中 <code>retainAll()</code> 是与 <code>removeAll()</code> 相反的一个函数：移除除参数集合中的元素之外的所有元素，结合谓词一起使用时，它只留下与之匹配的元素。</p>
+<h2 id="List-相关操作"><a href="#List-相关操作" class="headerlink" title="List 相关操作"></a>List 相关操作</h2><h3 id="按索引取元素"><a href="#按索引取元素" class="headerlink" title="按索引取元素"></a>按索引取元素</h3><p>支持按索引取元素的所有常用操作：<code>elementAt()</code>、 <code>first()</code>、 <code>last()</code>、 <code>get()</code> <code>[index]</code>、 <code>getOrElse()</code>、 <code>getOrNull()</code></p>
+<h3 id="取列表的一部分"><a href="#取列表的一部分" class="headerlink" title="取列表的一部分"></a>取列表的一部分</h3><p><code>subList()</code> 将指定元素范围的视图作为列表返回。如果原始集合的元素发生变化，通过此方法先前创建的子列表中也会发生变化，反之亦然。</p>
+<h3 id="查找元素位置"><a href="#查找元素位置" class="headerlink" title="查找元素位置"></a>查找元素位置</h3><h4 id="线性查找"><a href="#线性查找" class="headerlink" title="线性查找"></a>线性查找</h4><p><code>indexOf()</code> <code>lastIndexOf()</code> <code>indexOfFirst()</code> <code>indexOfLast()</code></p>
+<h4 id="在有序列表中二分查找"><a href="#在有序列表中二分查找" class="headerlink" title="在有序列表中二分查找"></a>在有序列表中二分查找</h4><p>有序列表二分查找：<code>binarySearch()</code></p>
+<h4 id="Comparator-二分搜索"><a href="#Comparator-二分搜索" class="headerlink" title="Comparator 二分搜索"></a>Comparator 二分搜索</h4><p>如果列表元素不是 <code>Comparator</code>，则提供一个用于二分搜索的 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparator.html" target="_blank" rel="noopener"><code>Comparator</code></a> 该列表必须根据此 <code>Comparator</code> 以升序排序：</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> productList = listOf(
+    Product(<span class="hljs-string">"WebStorm"</span>, <span class="hljs-number">49.0</span>),
+    Product(<span class="hljs-string">"AppCode"</span>, <span class="hljs-number">99.0</span>),
+    Product(<span class="hljs-string">"DotTrace"</span>, <span class="hljs-number">129.0</span>),
+    Product(<span class="hljs-string">"ReSharper"</span>, <span class="hljs-number">149.0</span>))
+​
+println(productList.binarySearch(Product(<span class="hljs-string">"AppCode"</span>, <span class="hljs-number">99.0</span>), compareBy&lt;Product&gt; &#123; it.price &#125;.thenBy &#123; it.name &#125;))
+<span class="hljs-comment">// 结果为 1</span></code></pre></div>
+
+<h4 id="比较函数二分搜索"><a href="#比较函数二分搜索" class="headerlink" title="比较函数二分搜索"></a>比较函数二分搜索</h4><p>使用比较函数的二分搜索无需提供明确的搜索值即可查找元素。 取而代之的是，它使用一个比较函数将元素映射到 <code>Int</code> 值，并搜索函数返回 0 的元素。 该列表必须根据提供的函数以升序排序；换句话说，比较的返回值必须从一个列表元素增长到下一个列表元素。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">data</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Product</span></span>(<span class="hljs-keyword">val</span> name: String, <span class="hljs-keyword">val</span> price: <span class="hljs-built_in">Double</span>)
+​
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">priceComparison</span><span class="hljs-params">(product: <span class="hljs-type">Product</span>, price: <span class="hljs-type">Double</span>)</span></span> = sign(product.price - price).toInt()
+​
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;
+    <span class="hljs-keyword">val</span> productList = listOf(
+        Product(<span class="hljs-string">"WebStorm"</span>, <span class="hljs-number">49.0</span>),
+        Product(<span class="hljs-string">"AppCode"</span>, <span class="hljs-number">99.0</span>),
+        Product(<span class="hljs-string">"DotTrace"</span>, <span class="hljs-number">129.0</span>),
+        Product(<span class="hljs-string">"ReSharper"</span>, <span class="hljs-number">149.0</span>))
+​
+    println(productList.binarySearch &#123; priceComparison(it, <span class="hljs-number">99.0</span>) &#125;)
+&#125;
+<span class="hljs-comment">// 结果为：1</span></code></pre></div>
+
+<p>Comparator 与比较函数二分搜索都可以针对列表区间执行。</p>
+<h3 id="List-写操作"><a href="#List-写操作" class="headerlink" title="List 写操作"></a>List 写操作</h3><p><code>add()</code> <code>addAll()</code> <code>set()</code> <code>[]</code> <code>removeAt()</code></p>
+<p><code>fill()</code> 将所有集合元素的值替换为指定值。</p>
+<h4 id="List-排序"><a href="#List-排序" class="headerlink" title="List 排序"></a>List 排序</h4><p>就地排序函数的名称与应用于只读列表的函数的名称相似，但没有 <code>ed/d</code> 后缀：</p>
+<ul>
+<li><code>sort*</code> 在所有排序函数的名称中代替 <code>sorted*</code>：<code>sort()</code>、<code>sortDescending()</code>、<code>sortBy()</code> 等等。</li>
+<li><code>shuffle()</code> 代替 <code>shuffled()</code>。</li>
+<li><code>reverse()</code> 代替 <code>reversed()</code>。</li>
+<li><code>asReversed()</code> 在可变列表上调用会返回另一个可变列表，该列表是原始列表的反向视图。在该视图中的更改将反映在原始列表中。</li>
+</ul>
+<h2 id="Set-相关操作"><a href="#Set-相关操作" class="headerlink" title="Set 相关操作"></a>Set 相关操作</h2><p>Kotlin 集合包中包含 set 常用操作的扩展函数：查找交集（<code>intersect()</code>）、并集（<code>union()</code>）或差集（<code>subtract()</code>）。</p>
+<p>上述方法都支持中缀形式调用。<code>List</code> 也支持 Set 操作，但是对 List 进行 Set 操作的结果仍然是 <code>Set</code>，因此将删除所有重复的元素。</p>
+<h2 id="Map-相关操作"><a href="#Map-相关操作" class="headerlink" title="Map 相关操作"></a>Map 相关操作</h2><h3 id="取键与值"><a href="#取键与值" class="headerlink" title="取键与值"></a>取键与值</h3><p>要从 Map 中检索值，必须提供其键作为 <code>get()</code> 函数的参数。 还支持简写 <code>[key]</code> 语法。 如果找不到给定的键，则返回 <code>null</code>。 还有一个函数 <code>getValue()</code>，它的行为略有不同：如果在 Map 中找不到键，则抛出异常。 此外，还有两个选项可以解决键缺失的问题：</p>
+<ul>
+<li><code>getOrElse()</code> 与 list 的工作方式相同：对于不存在的键，其值由给定的 lambda 表达式返回。</li>
+<li><code>getOrDefault()</code> 如果找不到键，则返回指定的默认值。</li>
+</ul>
+<p>要对 map 的所有键或所有值执行操作，可以从属性 <code>keys</code> 和 <code>values</code> 中相应地检索它们。 <code>keys</code> 是 <code>Map</code> 中所有键的集合， <code>values</code> 是 <code>Map</code> 中所有值的集合。</p>
+<h3 id="Map-过滤"><a href="#Map-过滤" class="headerlink" title="Map 过滤"></a>Map 过滤</h3><p>对 map 使用 <code>filter()</code> 函数时，<code>Pair</code> 将作为参数的谓词传递给它。 它将使用谓词同时过滤其中的键和值。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> numbersMap = mapOf(<span class="hljs-string">"key1"</span> to <span class="hljs-number">1</span>, <span class="hljs-string">"key2"</span> to <span class="hljs-number">2</span>, <span class="hljs-string">"key3"</span> to <span class="hljs-number">3</span>, <span class="hljs-string">"key11"</span> to <span class="hljs-number">11</span>)
+<span class="hljs-keyword">val</span> filteredMap = numbersMap.filter &#123; (key, value) -&gt; key.endsWith(<span class="hljs-string">"1"</span>) &amp;&amp; value &gt; <span class="hljs-number">10</span>&#125;
+println(filteredMap)
+<span class="hljs-comment">// 结果为：&#123;key11=11&#125;</span></code></pre></div>
+
+<p>还有两种用于过滤 map 的特定函数：按键或按值。 这两种方式，都有对应的函数：<code>filterKeys()</code> 和 <code>filterValues()</code>。 两者都将返回一个新 Map，其中包含与给定谓词相匹配的条目。<code>filterKeys()</code> 的谓词仅检查元素键，<code>filterValues()</code> 的谓词仅检查值。</p>
+<h3 id="plus-与-minus-操作"><a href="#plus-与-minus-操作" class="headerlink" title="plus 与 minus 操作"></a>plus 与 minus 操作</h3><div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> numbersMap = mapOf(<span class="hljs-string">"one"</span> to <span class="hljs-number">1</span>, <span class="hljs-string">"two"</span> to <span class="hljs-number">2</span>, <span class="hljs-string">"three"</span> to <span class="hljs-number">3</span>)
+println(numbersMap + Pair(<span class="hljs-string">"four"</span>, <span class="hljs-number">4</span>))
+println(numbersMap + Pair(<span class="hljs-string">"one"</span>, <span class="hljs-number">10</span>))
+println(numbersMap + mapOf(<span class="hljs-string">"five"</span> to <span class="hljs-number">5</span>, <span class="hljs-string">"one"</span> to <span class="hljs-number">11</span>))
+<span class="hljs-comment">// 结果为 &#123;one=1, two=2, three=3, four=4&#125;</span>
+<span class="hljs-comment">// 结果为 &#123;one=10, two=2, three=3&#125;</span>
+<span class="hljs-comment">// 结果为 &#123;one=11, two=2, three=3, five=5&#125;</span></code></pre></div>
+
+<p><code>minus</code> 将根据左侧 <code>Map</code> 条目创建一个新 <code>Map</code>，右侧操作数带有键的条目将被剔除。 因此，右侧操作数可以是单个键或键的集合： list 、 set 等。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> numbersMap = mapOf(<span class="hljs-string">"one"</span> to <span class="hljs-number">1</span>, <span class="hljs-string">"two"</span> to <span class="hljs-number">2</span>, <span class="hljs-string">"three"</span> to <span class="hljs-number">3</span>)
+println(numbersMap - <span class="hljs-string">"one"</span>)
+println(numbersMap - listOf(<span class="hljs-string">"two"</span>, <span class="hljs-string">"four"</span>))
+<span class="hljs-comment">// 结果为：&#123;two=2, three=3&#125;</span>
+<span class="hljs-comment">// 结果为：&#123;one=1, three=3&#125;</span></code></pre></div>
+
+<h3 id="Map-写操作"><a href="#Map-写操作" class="headerlink" title="Map 写操作"></a>Map 写操作</h3><h4 id="添加与更新条目"><a href="#添加与更新条目" class="headerlink" title="添加与更新条目"></a>添加与更新条目</h4><ul>
+<li><code>put()</code> 将新的键值对添加到可变 Map。</li>
+<li>要一次添加多个条目，可以使用 <code>putAll()</code>。</li>
+<li>plusAssign（<code>+=</code>）</li>
+<li><code>[]</code> 操作符为 <code>put()</code> 的别名。</li>
+</ul>
+<h4 id="删除条目"><a href="#删除条目" class="headerlink" title="删除条目"></a>删除条目</h4><ul>
+<li>从可变 Map 中删除条目，可以使用 <code>remove()</code> 函数。</li>
+<li>还可以通过键或值从可变 Map 中删除条目。 在 Map 的 <code>.keys</code> 或 <code>.values</code> 中调用 <code>remove()</code> 并提供键或值来删除条目。 在 <code>.values</code> 中调用时，<code>remove()</code> 仅删除给定值匹配到的的第一个条目。</li>
+<li>minusAssign（<code>-=</code>）操作符。</li>
+</ul>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/LANGUAGE/">LANGUAGE</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Kotlin/">Kotlin</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/04/Kotlin%EF%BC%88%E5%85%AD%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Kotlin的学习（六）——协程</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/03/Kotlin%EF%BC%88%E5%9B%9B%EF%BC%89/">
+                        <span class="hidden-mobile">Kotlin的学习（四）——函数与 Lambda 表达式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;
+  目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div> -->
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Kotlin的学习（五）——集合&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

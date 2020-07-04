@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      219 字
+      221 字
     </span>
   
 
@@ -218,27 +218,36 @@
               </p>
             
             <article class="markdown-body">
-              <h4 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h4><p>在安装 Hexo 之前，需要安装以下两个工具：</p>
+              <h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><p>在安装 Hexo 之前，需要安装以下两个工具：</p>
 <ul>
 <li><a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a></li>
 <li><a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js</a></li>
 </ul>
 <p>安装好后，使用 npm 完成 Hexo 的安装<br><code>npm install -g hexo-cli</code></p>
 <a id="more"></a>
-<h4 id="建立网站"><a href="#建立网站" class="headerlink" title="建立网站"></a>建立网站</h4><p>首先建立一个文件夹。<br><code>mkdir &lt;folder</code><br>然后向此文件夹安装Hexo。<br><code>hexo init &lt;folder&gt;</code>  </p>
-<h4 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h4><h5 id="部署到Github"><a href="#部署到Github" class="headerlink" title="部署到Github"></a>部署到Github</h5><ol>
+<h3 id="建立网站"><a href="#建立网站" class="headerlink" title="建立网站"></a>建立网站</h3><p>首先建立一个文件夹。<br><code>mkdir &lt;folder</code><br>然后向此文件夹安装Hexo。<br><code>hexo init &lt;folder&gt;</code></p>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><h4 id="部署到Github"><a href="#部署到Github" class="headerlink" title="部署到Github"></a>部署到Github</h4><ol>
 <li>在 Github 新建一个名称为 <code>username.github.io</code> 的仓库。  </li>
-<li>安装部署插件  <pre><code class="hljs sql">npm <span class="hljs-keyword">install</span> hexo-deployer-git <span class="hljs-comment">--save</span>
-npm <span class="hljs-keyword">install</span> hexo-<span class="hljs-keyword">server</span> <span class="hljs-comment">--save</span></code></pre></li>
-<li>配置站点 <code>_config.yml</code> 文件<pre><code class="hljs dts"><span class="hljs-symbol">deploy:</span>
-<span class="hljs-symbol">    type:</span> git
-<span class="hljs-symbol">    repo:</span> <span class="hljs-params">&lt;repository url&gt;</span>
-<span class="hljs-symbol">    branch:</span> master
-<span class="hljs-symbol">    message:</span> <span class="hljs-meta">#提交信息，默认为提交时间</span></code></pre></li>
+<li>安装部署插件</li>
+</ol>
+<div class="hljs"><pre><code class="hljs cmd">npm install hexo-deployer-git --save
+npm install hexo-server --save</code></pre></div>
+
+<ol>
+<li>配置站点 <code>_config.yml</code> 文件</li>
+</ol>
+<div class="hljs"><pre><code class="hljs ejs">deploy:
+    type: git
+    repo: &lt;repository url&gt;
+    branch: master
+    message: #提交信息，默认为提交时间</code></pre></div>
+
+<ol>
 <li>发布到 Github<br>在 Hexo 站点根目录下执行以下命令：<br><code>hexo clean &amp;&amp; d -g</code>  </li>
 </ol>
-<ul>
-<li>此教程，只是为了自己记录，略有缩减，<a href="https://easyhexo.com/1-Hexo-install-and-config/" target="_blank" rel="noopener">详见:</a>  </li>
+<hr>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ul>
+<li>此教程，只是为了自己记录，略有缩减，<a href="https://easyhexo.com/1-Hexo-install-and-config/" target="_blank" rel="noopener">详见:</a></li>
 <li>国内使用 npm 有时会很慢，可以转为淘宝镜像，命令除 npm 转为 cnpm 外，别无二样。<br><code>npm install -g cnpm --registry=https://registry.npm.taobao.org</code></li>
 </ul>
 
@@ -250,7 +259,7 @@ npm <span class="hljs-keyword">install</span> hexo-<span class="hljs-keyword">se
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Other/">Other</a>
+                      <a class="hover-with-bg" href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</a>
                     
                   </div>
                 
@@ -259,8 +268,6 @@ npm <span class="hljs-keyword">install</span> hexo-<span class="hljs-keyword">se
                     <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/hexo/">hexo</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">搭建博客</a>
                     
                   </div>
                 

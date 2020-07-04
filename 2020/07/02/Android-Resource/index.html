@@ -213,23 +213,25 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2 小时前
+                  本文最后更新于：1 天前
                 
               </p>
             
             <article class="markdown-body">
               <h2 id="创建别名资源"><a href="#创建别名资源" class="headerlink" title="创建别名资源"></a>创建别名资源</h2><h3 id="绘制对象"><a href="#绘制对象" class="headerlink" title="绘制对象"></a>绘制对象</h3><p>如要创建指向现有可绘制对象的别名，请使用 <code>&lt;drawable&gt;</code> 元素。例如：</p>
-<pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<div class="hljs"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">resources</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">drawable</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"icon"</span>&gt;</span>@drawable/icon_ca<span class="hljs-tag">&lt;/<span class="hljs-name">drawable</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">resources</span>&gt;</span></code></pre>
+<span class="hljs-tag">&lt;/<span class="hljs-name">resources</span>&gt;</span></code></pre></div>
+
 <h3 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h3><p>布局如要创建指向现有布局的别名，请使用包装在 <code>&lt;merge&gt;</code> 中的 <code>&lt;include&gt;</code> 元素。例如：</p>
-<pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<div class="hljs"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">merge</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">include</span> <span class="hljs-attr">layout</span>=<span class="hljs-string">"@layout/main_ltr"</span>/&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">merge</span>&gt;</span></code></pre>
+<span class="hljs-tag">&lt;/<span class="hljs-name">merge</span>&gt;</span></code></pre></div>
+
 <h3 id="字符串和其他简单值"><a href="#字符串和其他简单值" class="headerlink" title="字符串和其他简单值"></a>字符串和其他简单值</h3><p>如要创建指向现有字符串的别名，您只需将所需字符串的资源 ID 用作新字符串的值。例如：</p>
-<pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<div class="hljs"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">resources</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">string</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"hello"</span>&gt;</span>Hello<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">string</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"hi"</span>&gt;</span>@string/hello<span class="hljs-tag">&lt;/<span class="hljs-name">string</span>&gt;</span>
@@ -239,7 +241,7 @@
 <span class="hljs-tag">&lt;<span class="hljs-name">resources</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">color</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"red"</span>&gt;</span>#f00<span class="hljs-tag">&lt;/<span class="hljs-name">color</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">color</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"highlight"</span>&gt;</span>@color/red<span class="hljs-tag">&lt;/<span class="hljs-name">color</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">resources</span>&gt;</span></code></pre>
+<span class="hljs-tag">&lt;/<span class="hljs-name">resources</span>&gt;</span></code></pre></div>
 
 <h2 id="提供备用资源"><a href="#提供备用资源" class="headerlink" title="提供备用资源"></a>提供备用资源</h2><p><a href="https://developer.android.com/guide/topics/resources/providing-resources#AlternativeResources" target="_blank" rel="noopener">提供备用资源</a><br>几乎每个应用都应提供备用资源，以便支持特定的设备配置。例如，对于不同的屏幕密度和语言，您应分别加入备用可绘制对象资源和备用字符串资源。在运行时，Android 会检测当前设备配置并为应用加载合适的资源。</p>
 <h2 id="res-目录中支持的资源目录"><a href="#res-目录中支持的资源目录" class="headerlink" title="res/目录中支持的资源目录"></a>res/目录中支持的资源目录</h2><p><a href="https://developer.android.com/guide/topics/resources/providing-resources#ResourceTypes" target="_blank" rel="noopener">res/目录中支持的资源目录</a></p>
@@ -256,7 +258,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+                      <a class="hover-with-bg" href="/categories/%E5%AE%89%E5%8D%93%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E6%91%98%E5%BD%95/">安卓官方文档摘录</a>
                     
                   </div>
                 
@@ -264,9 +266,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E6%91%98%E5%BD%95/">官方文档摘录</a>
+                      <a class="hover-with-bg" href="/tags/%E5%AE%89%E5%8D%93/">安卓</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E8%B5%84%E6%BA%90/">资源</a>
+                      <a class="hover-with-bg" href="/tags/Resource/">Resource</a>
                     
                   </div>
                 
