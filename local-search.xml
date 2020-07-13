@@ -4,6 +4,104 @@
   
   
   <entry>
+    <title>蓝牙使用</title>
+    <link href="/2020/07/13/%E8%93%9D%E7%89%99%E4%BD%BF%E7%94%A8/"/>
+    <url>/2020/07/13/%E8%93%9D%E7%89%99%E4%BD%BF%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<h2 id="关于蓝牙的使用"><a href="#关于蓝牙的使用" class="headerlink" title="关于蓝牙的使用"></a>关于蓝牙的使用</h2><ul><li><a href="https://github.com/Klien-m/BluetoothChat" target="_blank" rel="noopener">Github</a></li><li><a href="https://gitee.com/Klien-m/BluetoothChat" target="_blank" rel="noopener">Gitee</a></li></ul><h3 id="蓝牙权限"><a href="#蓝牙权限" class="headerlink" title="蓝牙权限"></a>蓝牙权限</h3><div class="hljs"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">manifest</span> <span class="hljs-attr">...</span> &gt;</span>  <span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.BLUETOOTH"</span> /&gt;</span>  <span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.BLUETOOTH_ADMIN"</span> /&gt;</span>  <span class="hljs-comment">&lt;!-- If your app targets Android 9 or lower, you can declare</span><span class="hljs-comment">       ACCESS_COARSE_LOCATION instead. --&gt;</span>  <span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.ACCESS_FINE_LOCATION"</span> /&gt;</span>  ...<span class="hljs-tag">&lt;/<span class="hljs-name">manifest</span>&gt;</span></code></pre></div><h3 id="设置蓝牙"><a href="#设置蓝牙" class="headerlink" title="设置蓝牙"></a>设置蓝牙</h3><h4 id="1-获取-BluetoothAdapter"><a href="#1-获取-BluetoothAdapter" class="headerlink" title="1. 获取 BluetoothAdapter"></a>1. 获取 <code>BluetoothAdapter</code></h4><div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()<span class="hljs-keyword">if</span> (bluetoothAdapter == <span class="hljs-literal">null</span>) &#123;    <span class="hljs-comment">// Device doesn't support Bluetooth</span>&#125;</code></pre></div><h4 id="2-启用蓝牙"><a href="#2-启用蓝牙" class="headerlink" title="2. 启用蓝牙"></a>2. 启用蓝牙</h4><p>使用  <code>isEnabled()</code> 检查是否已启用蓝牙，若未启用，可使用以下方法启用蓝牙：</p><div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">if</span> (bluetoothAdapter?.isEnabled == <span class="hljs-literal">false</span>) &#123;    <span class="hljs-keyword">val</span> enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)    <span class="hljs-comment">// REQUEST_ENABLE_BT为自定义常量</span>    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)&#125;</code></pre></div><blockquote><p>启用可检测性即可自动启用蓝牙。如果计划在执行蓝牙 Activity 之前一直启用设备的可检测性，则可以跳过上述步骤 2。</p></blockquote><h4 id="侦听蓝牙状态更改广播"><a href="#侦听蓝牙状态更改广播" class="headerlink" title="侦听蓝牙状态更改广播"></a>侦听蓝牙状态更改广播</h4><p>每当蓝牙状态发生变化时，系统会发出 <code>ACTION_STATE_CHANGED</code> 广播Intent。此广播包含额外字段 <code>EXTRA_STATE</code> 和 <code>EXTRA_PREVIOUS_STATE</code>，二者分别包含新的和旧的蓝牙状态。这些额外字段可能为以下值：<code>STATE_TURNING_ON</code>、<code>STATE_ON</code>、<code>STATE_TURNING_OFF</code>和 <code>STATE_OFF</code>。</p><h3 id="查找设备"><a href="#查找设备" class="headerlink" title="查找设备"></a>查找设备</h3><h4 id="查找已配对设备"><a href="#查找已配对设备" class="headerlink" title="查找已配对设备"></a>查找已配对设备</h4><p><strong><code>getBondedDevices()</code></strong></p><div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> pairedDevices: Set&lt;BluetoothDevice&gt;? = bluetoothAdapter?.bondedDevicespairedDevices?.forEach &#123; device -&gt;    <span class="hljs-keyword">val</span> deviceName = device.name    <span class="hljs-keyword">val</span> deviceHardwareAddress = device.address <span class="hljs-comment">// MAC address</span>&#125;</code></pre></div><h4 id="发现设备"><a href="#发现设备" class="headerlink" title="发现设备"></a>发现设备</h4><p><strong><code>startDiscovery()</code></strong><br>为了发现设备，必须针对<code>ACTION_FOUND</code> Intent 注册一个 BroadcastReceiver，以便接收每台发现的设备的相关信息。系统会为每台设备广播此 Intent。Intent 包含额外字段 <code>EXTRA_DEVICE</code> 和 <code>EXTRA_CLASS</code>，二者又分别包含 <code>BluetoothDevice</code> 和 <code>BluetoothClass</code>。以下代码段展示如何在发现设备时通过注册来处理广播：</p><div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(savedInstanceState: <span class="hljs-type">Bundle</span>?)</span></span> &#123;    ...    <span class="hljs-comment">// Register for broadcasts when a device is discovered.</span>    <span class="hljs-keyword">val</span> filter = IntentFilter(BluetoothDevice.ACTION_FOUND)    registerReceiver(receiver, filter)&#125;<span class="hljs-comment">// Create a BroadcastReceiver for ACTION_FOUND.</span><span class="hljs-keyword">private</span> <span class="hljs-keyword">val</span> receiver = <span class="hljs-keyword">object</span> : BroadcastReceiver() &#123;    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onReceive</span><span class="hljs-params">(context: <span class="hljs-type">Context</span>, intent: <span class="hljs-type">Intent</span>)</span></span> &#123;        <span class="hljs-keyword">val</span> action: String = intent.action        <span class="hljs-keyword">when</span>(action) &#123;            BluetoothDevice.ACTION_FOUND -&gt; &#123;                <span class="hljs-comment">// Discovery has found a device. Get the BluetoothDevice</span>                <span class="hljs-comment">// object and its info from the Intent.</span>                <span class="hljs-keyword">val</span> device: BluetoothDevice =                        intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)                <span class="hljs-keyword">val</span> deviceName = device.name                <span class="hljs-keyword">val</span> deviceHardwareAddress = device.address <span class="hljs-comment">// MAC address</span>            &#125;        &#125;    &#125;&#125;<span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onDestroy</span><span class="hljs-params">()</span></span> &#123;    <span class="hljs-keyword">super</span>.onDestroy()    ...    <span class="hljs-comment">// Don't forget to unregister the ACTION_FOUND receiver.</span>    unregisterReceiver(receiver)&#125;</code></pre></div><h4 id="启用可检测性"><a href="#启用可检测性" class="headerlink" title="启用可检测性"></a>启用可检测性</h4><p>使用 <code>ACTION_REQUEST_DISCOVERABLE</code> Intent 调用 <code>startActivityForResult(Intent, int)</code>。</p><div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> discoverableIntent: Intent = Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE).apply &#123;    putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, <span class="hljs-number">300</span>)&#125;startActivity(discoverableIntent)</code></pre></div><p>此后设备将在分配的时间内以静默方式保持可检测到模式。可以为 <code>ACTION_SCAN_MODE_CHANGED</code> Intent 注册 BroadcastReceiver。此 Intent 将包含额外字段 <code>EXTRA_SCAN_MODE</code> 和 <code>EXTRA_PREVIOUS_SCAN_MODE</code>，二者分别提供新的和旧的扫描模式。每个 Extra 属性可能拥有以下值：</p><ul><li><code>SCAN_MODE_CONNECTABLE_DISCOVERABLE</code> 设备处于可检测到模式。</li><li><code>SCAN_MODE_CONNECTABLE</code> 设备未处于可检测到模式，但仍能收到连接。</li><li><code>SCAN_MODE_NONE</code> 设备未处于可检测到模式，且无法收到连接。</li></ul><blockquote><p>发起对远程设备的连接无需启用设备可检测性，只有当需要应用对接受传入连接的服务器套接字进行托管时，才有必要启用可检测性。</p></blockquote><h3 id="连接设备"><a href="#连接设备" class="headerlink" title="连接设备"></a>连接设备</h3><h4 id="作为服务器连接"><a href="#作为服务器连接" class="headerlink" title="作为服务器连接"></a>作为服务器连接</h4><ol><li>通过调用 <code>listenUsingRfcommWithServiceRecord()</code> 获取 <code>BluetoothServerSocket</code>。</li><li>通过调用 <code>accept()</code> 开始侦听连接请求。</li><li>使用完成后，调用 <code>close()</code>。</li></ol><h4 id="作为客户端连接"><a href="#作为客户端连接" class="headerlink" title="作为客户端连接"></a>作为客户端连接</h4><ol><li>使用 <code>BluetoothDevice</code>，通过调用 <code>createRfcommSocketToServiceRecord(UUID)</code> 获取 <code>BluetoothSocket</code>。</li><li>通过调用 <code>connect()</code> 发起连接。</li></ol><h4 id="管理连接"><a href="#管理连接" class="headerlink" title="管理连接"></a>管理连接</h4><ol><li>使用 <code>getInputStream()</code> 和 <code>getOutputStream()</code>，分别获取通过套接字处理数据传输的 <code>InputStream</code> 和 <code>OutputStream</code>。</li><li>使用 <code>read(byte[])</code> 和 <code>write(byte[])</code> 读取数据以及将其写入数据流。</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>安卓</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>基础知识</tag>
+      
+      <tag>开源项目学习</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Android Studio 快捷键</title>
+    <link href="/2020/07/08/Android-Studio-%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+    <url>/2020/07/08/Android-Studio-%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
+    
+    <content type="html"><![CDATA[<p>一些Android Stuido 快捷键，其中较为主要的为：2、7、11、12、13、14</p><a id="more"></a><ol><li><code>Ctrl+G</code><br>同时按下Ctrl+G快捷键弹出快速定位框，在框中输入行数点击OK即可快速切换到对应的行数。</li><li><code>Ctrl+E</code><br>同时按下Ctrl+E快捷键，弹出最近打开文件列表，可以快速选择最近曾经打开的文件。</li><li><code>Ctrl+/</code><br>选中某一行，同时按下Ctrl+/快捷键可以注释这一行。</li><li><code>Ctrl+F</code><br>同时按下Ctrl+F快捷键，将在编辑页的顶部弹出类内快速搜索栏，可以快速定位类内的某个单词，支持联想查找。输入prote，将会高亮显示protected，同时注意到搜索栏中有三个复选框，选中第一个Match Case复选框将会对大小写敏感。</li><li><code>Ctrl+R</code><br>Ctrl+F快捷键常和Ctrl+R快捷键使用，用来快速查找并全部替换。</li><li><code>Ctrl+J</code><br>同时按下Ctrl和J快捷键，弹出快捷代码框。</li><li><code>Ctrl+F12</code><br>在类中方法比较多的情况下，同时按下Ctrl和F12键可以快速查看类中所有的方法，弹出这个框的同时可以直接输入想要搜索的方法，进行快速匹配。</li><li><code>Ctrl+Alt+T</code><br>选中一块代码，同时按下Ctrl、Alt和T键，弹出“包裹”弹出框，选择需要包裹的类型即可包裹选中的代码。</li><li><code>Ctrl+Alt+L</code><br>对当前类的所有代码进行格式化。</li><li><code>Ctrl+Alt+V</code><br>此快捷键可以快速声明一个变量，本地变量赋值。</li><li><code>Ctrl+Alt+H</code><br>点中某一个方法按下这个快捷键，在左边栏上弹出此方法的调用关系，此快捷键在开发中十分常用。</li><li><code>Ctrl+Alt+O</code><br>这个快捷键可以自动导包或删除无用的包，这时候按下快捷键即可自动删除这些无用的包。</li><li><code>Alt+Insert</code><br>同时按下Alt和Insert键，弹出快速代码生成框，有构造方法、getter/setter方法、toString方法等。</li><li><code>Ctrl+鼠标左键</code><br>此快捷键可以查看鼠标选中的类或方法。</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>安卓</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Litepal的使用</title>
+    <link href="/2020/07/04/Litepal%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <url>/2020/07/04/Litepal%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<p><a href="https://blog.csdn.net/sinyu890807/category_9262963.html" target="_blank" rel="noopener">来源于</a></p><h3 id="1-Include-library"><a href="#1-Include-library" class="headerlink" title="1. Include library"></a>1. Include library</h3><div class="hljs"><pre><code class="hljs gradle"><span class="hljs-keyword">dependencies</span> &#123;    implementation <span class="hljs-string">'org.litepal.guolindev:core:3.1.1'</span>&#125;</code></pre></div><h3 id="2-配置litepal-xml"><a href="#2-配置litepal-xml" class="headerlink" title="2. 配置litepal.xml"></a>2. 配置litepal.xml</h3><p>在项目的 assets 目录下新建一个 litepal.xml 文件，把下面的代码 copy 过去：</p><div class="hljs"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">litepal</span>&gt;</span>    <span class="hljs-comment">&lt;!--</span><span class="hljs-comment">    Define the database name of your application. </span><span class="hljs-comment">    By default each database name should be end with .db. </span><span class="hljs-comment">    If you didn't name your database end with .db, </span><span class="hljs-comment">    LitePal would plus the suffix automatically for you.</span><span class="hljs-comment">    For example:    </span><span class="hljs-comment">    &lt;dbname value="demo" /&gt;</span><span class="hljs-comment">    --&gt;</span>    <span class="hljs-tag">&lt;<span class="hljs-name">dbname</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"demo"</span> /&gt;</span>    <span class="hljs-comment">&lt;!--</span><span class="hljs-comment">    Define the version of your database. Each time you want </span><span class="hljs-comment">    to upgrade your database, the version tag would helps.</span><span class="hljs-comment">    Modify the models you defined in the mapping tag, and just </span><span class="hljs-comment">    make the version value plus one, the upgrade of database</span><span class="hljs-comment">    will be processed automatically without concern.</span><span class="hljs-comment">For example:    </span><span class="hljs-comment">    &lt;version value="1" /&gt;</span><span class="hljs-comment">    --&gt;</span>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"1"</span> /&gt;</span>    <span class="hljs-comment">&lt;!--</span><span class="hljs-comment">    Define your models in the list with mapping tag, LitePal will</span><span class="hljs-comment">    create tables for each mapping class. The supported fields</span><span class="hljs-comment">    defined in models will be mapped into columns.</span><span class="hljs-comment">    For example:    </span><span class="hljs-comment">    &lt;list&gt;</span><span class="hljs-comment">    &lt;mapping class="com.test.model.Reader" /&gt;</span><span class="hljs-comment">    &lt;mapping class="com.test.model.Magazine" /&gt;</span><span class="hljs-comment">    &lt;/list&gt;</span><span class="hljs-comment">    --&gt;</span>    <span class="hljs-tag">&lt;<span class="hljs-name">list</span>&gt;</span>    <span class="hljs-tag">&lt;/<span class="hljs-name">list</span>&gt;</span>    <span class="hljs-comment">&lt;!--</span><span class="hljs-comment">        Define where the .db file should be. "internal" means the .db file</span><span class="hljs-comment">        will be stored in the database folder of internal storage which no</span><span class="hljs-comment">        one can access. "external" means the .db file will be stored in the</span><span class="hljs-comment">        path to the directory on the primary external storage device where</span><span class="hljs-comment">        the application can place persistent files it owns which everyone</span><span class="hljs-comment">        can access. "internal" will act as default.</span><span class="hljs-comment">        For example:</span><span class="hljs-comment">        &lt;storage value="external" /&gt;</span><span class="hljs-comment">    --&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">litepal</span>&gt;</span></code></pre></div><h3 id="3-配置-LitePalApplication"><a href="#3-配置-LitePalApplication" class="headerlink" title="3. 配置 LitePalApplication"></a>3. 配置 LitePalApplication</h3><p>由于操作数据库时需要用到 Context，而我们显然不希望在每个接口中都去传一遍这个参数，那样操作数据库就显得太繁琐了。因此，LitePal使用了一个方法来简化掉 Context 这个参数，只需要在 AndroidManifest.xml 中配置一下LitePalApplication，所有的数据库操作就都不用再传Context了，如下所示：</p><div class="hljs"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">manifest</span>&gt;</span>    <span class="hljs-tag">&lt;<span class="hljs-name">application</span></span><span class="hljs-tag">        <span class="hljs-attr">android:name</span>=<span class="hljs-string">"org.litepal.LitePalApplication"</span></span><span class="hljs-tag">        <span class="hljs-attr">...</span></span><span class="hljs-tag">    &gt;</span>    ...    <span class="hljs-tag">&lt;/<span class="hljs-name">application</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">manifest</span>&gt;</span></code></pre></div><p>当然，有些程序可能会有自己的Application，并在这里配置过了。比如说有一个MyApplication，如下所示：</p><div class="hljs"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">manifest</span>&gt;</span>    <span class="hljs-tag">&lt;<span class="hljs-name">application</span></span><span class="hljs-tag">        <span class="hljs-attr">android:name</span>=<span class="hljs-string">"com.example.MyApplication"</span></span><span class="hljs-tag">        <span class="hljs-attr">...</span></span><span class="hljs-tag">    &gt;</span>    ...    <span class="hljs-tag">&lt;/<span class="hljs-name">application</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">manifest</span>&gt;</span></code></pre></div><p>没有关系，这时只需要修改一下 MyApplication 的继承结构，让它不要直接继承 Application 类，而是继承 LitePalApplication 类，就可以使用一切都能正常工作了，代码如下所示：</p><div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyApplication</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">LitePalApplication</span> </span>&#123;    ...&#125;</code></pre></div><p>但是，有些程序可能会遇到一些更加极端的情况，比如说 MyApplication 需要继承另外一个 AnotherApplication ，并且这个 AnotherApplication 还是在 jar 包当中的，不能修改它的代码。这种情况应该算是比较少见了，但是如果遇到了的话也不用急，仍然是有解释方案的。可以把 LitePal 的源码下载下来，然后把 src 目录下的所有代码直接拷贝到项目的 src 目录下面，接着打开LitePalApplication 类，将它的继承结构改成继承自 AnotherApplication，再让 MyApplication 继承自 LitePalApplication，这样所有的 Application 就都可以在一起正常工作了。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>安卓</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>数据库</tag>
+      
+      <tag>开源库</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>我的 GifFun 之旅</title>
+    <link href="/2020/07/04/%E6%88%91%E7%9A%84-GifFun-%E4%B9%8B%E6%97%85/"/>
+    <url>/2020/07/04/%E6%88%91%E7%9A%84-GifFun-%E4%B9%8B%E6%97%85/</url>
+    
+    <content type="html"><![CDATA[<h2 id="关于在学习-GifFun-项目中的一些收获"><a href="#关于在学习-GifFun-项目中的一些收获" class="headerlink" title="关于在学习 GifFun 项目中的一些收获"></a>关于在学习 GifFun 项目中的一些收获</h2><ul><li><a href="https://github.com/Klien-m/giffun" target="_blank" rel="noopener">Github</a></li><li><a href="https://gitee.com/Klien-m/giffun" target="_blank" rel="noopener">Gitee</a></li></ul><ol><li><p>在自定义 Application 中进行全局的初始化操作。</p></li><li><p>封装 SharedPreferences 的操作。</p></li><li><p>定义常量标识符。</p></li><li><p>导入 module <code>api project(&#39;module name&#39;)</code></p></li><li><p><a href="https://databank.umeng.com/sdc/datasources/create?type=app" target="_blank" rel="noopener">umeng</a>（数据统计）、 Litepal、 gson、 <a href="https://github.com/greenrobot/EventBus" target="_blank" rel="noopener">eventbus</a>（事件发布订阅，观察者？）、 okhttp、Glide图片加载、<a href="https://github.com/wasabeef/glide-transformations" target="_blank" rel="noopener"><code>implementation &#39;jp.wasabeef:glide-transformations:4.1.0&#39;</code></a>、<a href="https://github.com/hdodenhof/CircleImageView" target="_blank" rel="noopener"><code>&#39;de.hdodenhof:circleimageview:2.1.0&#39;</code></a>、七牛云、<a href="https://github.com/ArthurHub/Android-Image-Cropper" target="_blank" rel="noopener">Android-Image-Cropper</a>、filebrowser、<a href="https://github.com/chrisbanes/PhotoView" target="_blank" rel="noopener">PhotoView</a></p></li><li><p>接口指定方法，继承接口则有此方法</p></li><li><p>设置 activity 的基类，就像《第二行代码》里讲的</p></li><li><p>日志操作的扩展工具类，就像《第二行代码》里讲的</p></li><li><p>AndroidVersion.kt</p></li><li><p>looper</p></li><li><p>集成 Toast 方法的 Context 使用 Application 的 Context，当前所在代码类有 Context 则使用当前的。</p></li><li><p>Nickname（昵称）</p></li><li><p>isNotEmpty(str) 等价于 str != null &amp;&amp; str.length &gt; 0<br>isNot Blank(str) 等价于 str != null &amp;&amp; str.length &gt; 0 &amp;&amp; str.trim().length() &gt; 0</p></li><li><p><code>@JvmStatic</code> 指定如果它是函数，则需要从此元素生成额外的静态方法。如果此元素是属性，则应生成额外的静态 getter / setter 方法。</p></li><li><p>api 和 implementation</p></li><li><p>implementation “androidx.palette:palette:1.0.0” 拾色器</p></li><li><p>actionStart()</p></li><li><p>setupViews() 初始化布局控件 UserInfo modify</p></li><li><p>CountDownTimer 计时器</p></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>安卓</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>开源项目学习</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Kotlin的学习（六）——协程</title>
     <link href="/2020/07/04/Kotlin%EF%BC%88%E5%85%AD%EF%BC%89/"/>
     <url>/2020/07/04/Kotlin%EF%BC%88%E5%85%AD%EF%BC%89/</url>
@@ -21,6 +119,8 @@
     <tags>
       
       <tag>Kotlin</tag>
+      
+      <tag>进阶</tag>
       
     </tags>
     
@@ -47,6 +147,8 @@
       
       <tag>Kotlin</tag>
       
+      <tag>基础</tag>
+      
     </tags>
     
   </entry>
@@ -71,6 +173,8 @@
     <tags>
       
       <tag>Kotlin</tag>
+      
+      <tag>基础</tag>
       
     </tags>
     
@@ -97,6 +201,8 @@
       
       <tag>Kotlin</tag>
       
+      <tag>基础</tag>
+      
     </tags>
     
   </entry>
@@ -121,6 +227,8 @@
     <tags>
       
       <tag>Kotlin</tag>
+      
+      <tag>基础</tag>
       
     </tags>
     
@@ -147,6 +255,8 @@
       
       <tag>Kotlin</tag>
       
+      <tag>基础</tag>
+      
     </tags>
     
   </entry>
@@ -154,7 +264,7 @@
   
   
   <entry>
-    <title>应用无响应（ANR）</title>
+    <title>进程和线程</title>
     <link href="/2020/07/02/%E5%BA%94%E7%94%A8%E6%97%A0%E5%93%8D%E5%BA%94/"/>
     <url>/2020/07/02/%E5%BA%94%E7%94%A8%E6%97%A0%E5%93%8D%E5%BA%94/</url>
     
@@ -163,14 +273,14 @@
     
     <categories>
       
-      <category>安卓官方文档摘录</category>
+      <category>安卓</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>安卓</tag>
+      <tag>基础知识</tag>
       
       <tag>进程和线程</tag>
       
@@ -192,14 +302,14 @@
     
     <categories>
       
-      <category>安卓官方文档摘录</category>
+      <category>安卓</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>安卓</tag>
+      <tag>基础知识</tag>
       
       <tag>Intent</tag>
       
@@ -219,14 +329,14 @@
     
     <categories>
       
-      <category>安卓官方文档摘录</category>
+      <category>安卓</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>安卓</tag>
+      <tag>基础知识</tag>
       
       <tag>Activity</tag>
       
@@ -248,16 +358,16 @@
     
     <categories>
       
-      <category>安卓官方文档摘录</category>
+      <category>安卓</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>安卓</tag>
+      <tag>resource</tag>
       
-      <tag>Resource</tag>
+      <tag>基础知识</tag>
       
     </tags>
     
@@ -275,16 +385,16 @@
     
     <categories>
       
-      <category>安卓官方文档摘录</category>
+      <category>安卓</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>安卓</tag>
+      <tag>基础知识</tag>
       
-      <tag>导航组件</tag>
+      <tag>Navigation</tag>
       
     </tags>
     
@@ -302,14 +412,16 @@
     
     <categories>
       
-      <category>安卓开源库</category>
+      <category>安卓</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>Retrofit</tag>
+      <tag>开源库</tag>
+      
+      <tag>网络</tag>
       
     </tags>
     
@@ -327,7 +439,7 @@
     
     <categories>
       
-      <category>Study-New</category>
+      <category>一些新东西</category>
       
     </categories>
     
@@ -352,7 +464,7 @@
     
     <categories>
       
-      <category>Study-New</category>
+      <category>版本控制</category>
       
     </categories>
     
@@ -384,7 +496,7 @@
     
     <tags>
       
-      <tag>双系统</tag>
+      <tag>卸载</tag>
       
     </tags>
     
@@ -408,6 +520,8 @@
     
     
     <tags>
+      
+      <tag>进阶</tag>
       
       <tag>java</tag>
       
@@ -449,6 +563,12 @@
     
     <content type="html"><![CDATA[<p>在错误的折腾了几天博客后，发现仓库里有了100多次commit记录，因此就找到了把记录清除的方法：</p><ol><li>建立孤立的分支 <code>git checkout --orphan latest_branch</code></li><li>添加所有文件 <code>git add -A</code></li><li>提交更改 <code>git commit -m &quot;commit message&quot;</code></li><li>删除分支 <code>git branch -D master</code></li><li>将分支重命名 <code>git branch -m master</code></li><li>强制更新 <code>git push -f origin master</code></li></ol>]]></content>
     
+    
+    <categories>
+      
+      <category>版本控制</category>
+      
+    </categories>
     
     
     <tags>

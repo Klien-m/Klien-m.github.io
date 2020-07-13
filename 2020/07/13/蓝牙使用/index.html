@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/Klien.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="记往昔录今朝只待明时">
+  <meta name="author" content="Klien">
+  <meta name="keywords" content="安卓原生开发、python日常脚本、Developer">
+  <title>蓝牙使用 - Klien-m&#39;s 博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/androidstudio.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Klien-m's 博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/1920-1080/android7.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-07-13 21:13">
+      2020年7月13日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      817 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：5 分钟前
+                
+              </p>
+            
+            <article class="markdown-body">
+              <h2 id="关于蓝牙的使用"><a href="#关于蓝牙的使用" class="headerlink" title="关于蓝牙的使用"></a>关于蓝牙的使用</h2><ul>
+<li><a href="https://github.com/Klien-m/BluetoothChat" target="_blank" rel="noopener">Github</a></li>
+<li><a href="https://gitee.com/Klien-m/BluetoothChat" target="_blank" rel="noopener">Gitee</a></li>
+</ul>
+<h3 id="蓝牙权限"><a href="#蓝牙权限" class="headerlink" title="蓝牙权限"></a>蓝牙权限</h3><div class="hljs"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">manifest</span> <span class="hljs-attr">...</span> &gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.BLUETOOTH"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.BLUETOOTH_ADMIN"</span> /&gt;</span>
+
+  <span class="hljs-comment">&lt;!-- If your app targets Android 9 or lower, you can declare</span>
+<span class="hljs-comment">       ACCESS_COARSE_LOCATION instead. --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.ACCESS_FINE_LOCATION"</span> /&gt;</span>
+  ...
+<span class="hljs-tag">&lt;/<span class="hljs-name">manifest</span>&gt;</span></code></pre></div>
+
+<h3 id="设置蓝牙"><a href="#设置蓝牙" class="headerlink" title="设置蓝牙"></a>设置蓝牙</h3><h4 id="1-获取-BluetoothAdapter"><a href="#1-获取-BluetoothAdapter" class="headerlink" title="1. 获取 BluetoothAdapter"></a>1. 获取 <code>BluetoothAdapter</code></h4><div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
+<span class="hljs-keyword">if</span> (bluetoothAdapter == <span class="hljs-literal">null</span>) &#123;
+    <span class="hljs-comment">// Device doesn't support Bluetooth</span>
+&#125;</code></pre></div>
+
+<h4 id="2-启用蓝牙"><a href="#2-启用蓝牙" class="headerlink" title="2. 启用蓝牙"></a>2. 启用蓝牙</h4><p>使用  <code>isEnabled()</code> 检查是否已启用蓝牙，若未启用，可使用以下方法启用蓝牙：</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">if</span> (bluetoothAdapter?.isEnabled == <span class="hljs-literal">false</span>) &#123;
+    <span class="hljs-keyword">val</span> enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+    <span class="hljs-comment">// REQUEST_ENABLE_BT为自定义常量</span>
+    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT)
+&#125;</code></pre></div>
+
+<blockquote>
+<p>启用可检测性即可自动启用蓝牙。如果计划在执行蓝牙 Activity 之前一直启用设备的可检测性，则可以跳过上述步骤 2。</p>
+</blockquote>
+<h4 id="侦听蓝牙状态更改广播"><a href="#侦听蓝牙状态更改广播" class="headerlink" title="侦听蓝牙状态更改广播"></a>侦听蓝牙状态更改广播</h4><p>每当蓝牙状态发生变化时，系统会发出 <code>ACTION_STATE_CHANGED</code> 广播Intent。此广播包含额外字段 <code>EXTRA_STATE</code> 和 <code>EXTRA_PREVIOUS_STATE</code>，二者分别包含新的和旧的蓝牙状态。这些额外字段可能为以下值：<code>STATE_TURNING_ON</code>、<code>STATE_ON</code>、<code>STATE_TURNING_OFF</code>和 <code>STATE_OFF</code>。</p>
+<h3 id="查找设备"><a href="#查找设备" class="headerlink" title="查找设备"></a>查找设备</h3><h4 id="查找已配对设备"><a href="#查找已配对设备" class="headerlink" title="查找已配对设备"></a>查找已配对设备</h4><p><strong><code>getBondedDevices()</code></strong></p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> pairedDevices: Set&lt;BluetoothDevice&gt;? = bluetoothAdapter?.bondedDevices
+pairedDevices?.forEach &#123; device -&gt;
+    <span class="hljs-keyword">val</span> deviceName = device.name
+    <span class="hljs-keyword">val</span> deviceHardwareAddress = device.address <span class="hljs-comment">// MAC address</span>
+&#125;</code></pre></div>
+
+<h4 id="发现设备"><a href="#发现设备" class="headerlink" title="发现设备"></a>发现设备</h4><p><strong><code>startDiscovery()</code></strong><br>为了发现设备，必须针对<code>ACTION_FOUND</code> Intent 注册一个 BroadcastReceiver，以便接收每台发现的设备的相关信息。系统会为每台设备广播此 Intent。Intent 包含额外字段 <code>EXTRA_DEVICE</code> 和 <code>EXTRA_CLASS</code>，二者又分别包含 <code>BluetoothDevice</code> 和 <code>BluetoothClass</code>。以下代码段展示如何在发现设备时通过注册来处理广播：</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(savedInstanceState: <span class="hljs-type">Bundle</span>?)</span></span> &#123;
+    ...
+
+    <span class="hljs-comment">// Register for broadcasts when a device is discovered.</span>
+    <span class="hljs-keyword">val</span> filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
+    registerReceiver(receiver, filter)
+&#125;
+
+<span class="hljs-comment">// Create a BroadcastReceiver for ACTION_FOUND.</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">val</span> receiver = <span class="hljs-keyword">object</span> : BroadcastReceiver() &#123;
+
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onReceive</span><span class="hljs-params">(context: <span class="hljs-type">Context</span>, intent: <span class="hljs-type">Intent</span>)</span></span> &#123;
+        <span class="hljs-keyword">val</span> action: String = intent.action
+        <span class="hljs-keyword">when</span>(action) &#123;
+            BluetoothDevice.ACTION_FOUND -&gt; &#123;
+                <span class="hljs-comment">// Discovery has found a device. Get the BluetoothDevice</span>
+                <span class="hljs-comment">// object and its info from the Intent.</span>
+                <span class="hljs-keyword">val</span> device: BluetoothDevice =
+                        intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
+                <span class="hljs-keyword">val</span> deviceName = device.name
+                <span class="hljs-keyword">val</span> deviceHardwareAddress = device.address <span class="hljs-comment">// MAC address</span>
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+<span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onDestroy</span><span class="hljs-params">()</span></span> &#123;
+    <span class="hljs-keyword">super</span>.onDestroy()
+    ...
+
+    <span class="hljs-comment">// Don't forget to unregister the ACTION_FOUND receiver.</span>
+    unregisterReceiver(receiver)
+&#125;</code></pre></div>
+
+<h4 id="启用可检测性"><a href="#启用可检测性" class="headerlink" title="启用可检测性"></a>启用可检测性</h4><p>使用 <code>ACTION_REQUEST_DISCOVERABLE</code> Intent 调用 <code>startActivityForResult(Intent, int)</code>。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> discoverableIntent: Intent = Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE).apply &#123;
+    putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, <span class="hljs-number">300</span>)
+&#125;
+startActivity(discoverableIntent)</code></pre></div>
+
+<p>此后设备将在分配的时间内以静默方式保持可检测到模式。可以为 <code>ACTION_SCAN_MODE_CHANGED</code> Intent 注册 BroadcastReceiver。此 Intent 将包含额外字段 <code>EXTRA_SCAN_MODE</code> 和 <code>EXTRA_PREVIOUS_SCAN_MODE</code>，二者分别提供新的和旧的扫描模式。每个 Extra 属性可能拥有以下值：</p>
+<ul>
+<li><code>SCAN_MODE_CONNECTABLE_DISCOVERABLE</code> 设备处于可检测到模式。</li>
+<li><code>SCAN_MODE_CONNECTABLE</code> 设备未处于可检测到模式，但仍能收到连接。</li>
+<li><code>SCAN_MODE_NONE</code> 设备未处于可检测到模式，且无法收到连接。</li>
+</ul>
+<blockquote>
+<p>发起对远程设备的连接无需启用设备可检测性，只有当需要应用对接受传入连接的服务器套接字进行托管时，才有必要启用可检测性。</p>
+</blockquote>
+<h3 id="连接设备"><a href="#连接设备" class="headerlink" title="连接设备"></a>连接设备</h3><h4 id="作为服务器连接"><a href="#作为服务器连接" class="headerlink" title="作为服务器连接"></a>作为服务器连接</h4><ol>
+<li>通过调用 <code>listenUsingRfcommWithServiceRecord()</code> 获取 <code>BluetoothServerSocket</code>。</li>
+<li>通过调用 <code>accept()</code> 开始侦听连接请求。</li>
+<li>使用完成后，调用 <code>close()</code>。</li>
+</ol>
+<h4 id="作为客户端连接"><a href="#作为客户端连接" class="headerlink" title="作为客户端连接"></a>作为客户端连接</h4><ol>
+<li>使用 <code>BluetoothDevice</code>，通过调用 <code>createRfcommSocketToServiceRecord(UUID)</code> 获取 <code>BluetoothSocket</code>。</li>
+<li>通过调用 <code>connect()</code> 发起连接。</li>
+</ol>
+<h4 id="管理连接"><a href="#管理连接" class="headerlink" title="管理连接"></a>管理连接</h4><ol>
+<li>使用 <code>getInputStream()</code> 和 <code>getOutputStream()</code>，分别获取通过套接字处理数据传输的 <code>InputStream</code> 和 <code>OutputStream</code>。</li>
+<li>使用 <code>read(byte[])</code> 和 <code>write(byte[])</code> 读取数据以及将其写入数据流。</li>
+</ol>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AD%A6%E4%B9%A0/">开源项目学习</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/08/Android-Studio-%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+                        <span class="hidden-mobile">Android Studio 快捷键</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;
+  目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div> -->
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "蓝牙使用&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
