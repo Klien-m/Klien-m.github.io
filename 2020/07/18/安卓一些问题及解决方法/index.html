@@ -17,7 +17,7 @@
   <meta name="description" content="记往昔录今朝只待明时">
   <meta name="author" content="Klien">
   <meta name="keywords" content="安卓原生开发、python日常脚本、Developer">
-  <title>进程和线程 - Klien-m&#39;s 博客</title>
+  <title>安卓一些问题及解决方法 - Klien-m&#39;s 博客</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -152,8 +152,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-07-02 10:29">
-      2020年7月2日 上午
+    <time datetime="2020-07-18 11:01">
+      2020年7月18日 上午
     </time>
   </div>
 
@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      234 字
+      428 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      5
        分钟
     </span>
   
@@ -213,38 +213,53 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：4 天前
+                  本文最后更新于：1 天前
                 
               </p>
             
             <article class="markdown-body">
-              <h3 id="如何避免-应用无响应-ANR"><a href="#如何避免-应用无响应-ANR" class="headerlink" title="如何避免 应用无响应(ANR)"></a>如何避免 应用无响应(ANR)</h3><p>为耗时较长的操作创建工作线程的最有效方法是使用 AsyncTask 类。只需扩展 AsyncTask 并实现 doInBackground() 方法即可执行相应操作。要向用户发布进度变化，您可以调用 publishProgress()，它会调用 onProgressUpdate() 回调方法。通过 onProgressUpdate()（在界面线程中运行）的实现，您可以向用户发送通知。例如：</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DownloadFilesTask</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AsyncTask</span>&lt;<span class="hljs-title">URL</span>, <span class="hljs-title">Integer</span>, <span class="hljs-title">Long</span>&gt; </span>&#123;
-    <span class="hljs-comment">// Do the long-running work in here</span>
-    <span class="hljs-function"><span class="hljs-keyword">protected</span> Long <span class="hljs-title">doInBackground</span><span class="hljs-params">(URL... urls)</span> </span>&#123;
-        <span class="hljs-keyword">int</span> count = urls.length;
-        <span class="hljs-keyword">long</span> totalSize = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; count; i++) &#123;
-            totalSize += Downloader.downloadFile(urls[i]);
-            publishProgress((<span class="hljs-keyword">int</span>) ((i / (<span class="hljs-keyword">float</span>) count) * <span class="hljs-number">100</span>));
-            <span class="hljs-comment">// Escape early if cancel() is called</span>
-            <span class="hljs-keyword">if</span> (isCancelled()) <span class="hljs-keyword">break</span>;
-        &#125;
-        <span class="hljs-keyword">return</span> totalSize;
-    &#125;
+              <p>Keywords: <code>Received close_notify during handshake</code>、文件真实存在但找不到、AS Build Output栏内汉字乱码、</p>
+<a id="more"></a>
 
-    <span class="hljs-comment">// This is called each time you call publishProgress()</span>
-    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onProgressUpdate</span><span class="hljs-params">(Integer... progress)</span> </span>&#123;
-        setProgressPercent(progress[<span class="hljs-number">0</span>]);
-    &#125;
-
-    <span class="hljs-comment">// This is called when doInBackground() is finished</span>
-    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onPostExecute</span><span class="hljs-params">(Long result)</span> </span>&#123;
-        showNotification(<span class="hljs-string">"Downloaded "</span> + result + <span class="hljs-string">" bytes"</span>);
+<h4 id="1-打包apk时遇到”Received-close-notify-during-handshake”"><a href="#1-打包apk时遇到”Received-close-notify-during-handshake”" class="headerlink" title="1.打包apk时遇到”Received close_notify during handshake”"></a>1.打包apk时遇到”Received close_notify during handshake”</h4><p>1.1（此方法仅解决我的一次问题，是否可靠仍待测试）可能是由build.grade文件下</p>
+<div class="hljs"><pre><code class="hljs gradle"><span class="hljs-keyword">buildscript</span> &#123;
+    <span class="hljs-keyword">repositories</span> &#123;
+        jcenter()
+        google()
     &#125;
 &#125;</code></pre></div>
 
-<p>要执行此工作线程，只需创建一个实例并调用 execute() 即可：<br><code>new DownloadFilesTask().execute(url1, url2, url3);</code></p>
+<p>jcenter()相关文件不能下载引起的，切换为阿里的源之后即可，代码如下</p>
+<div class="hljs"><pre><code class="hljs gradle"><span class="hljs-keyword">buildscript</span> &#123;
+    <span class="hljs-keyword">repositories</span> &#123;
+        maven &#123; url <span class="hljs-string">'http://maven.aliyun.com/nexus/content/groups/public/'</span> &#125;
+        maven &#123; url <span class="hljs-string">'http://maven.aliyun.com/nexus/content/repositories/jcenter'</span> &#125;
+        google()
+    &#125;
+&#125;</code></pre></div>
+
+<h4 id="2-AndroidStudio-3-6-中-R-layout-找不到对应的xml文件（学习Fragment时遇到的）"><a href="#2-AndroidStudio-3-6-中-R-layout-找不到对应的xml文件（学习Fragment时遇到的）" class="headerlink" title="2.AndroidStudio 3.6 中 R.layout 找不到对应的xml文件（学习Fragment时遇到的）"></a>2.AndroidStudio 3.6 中 R.layout 找不到对应的xml文件（学习Fragment时遇到的）</h4><p>原因：当前目录中的文件与实际文件系统中不同步，也就是创建完后需要刷新一下当前的项目目录。</p>
+<p>解决办法：File–&gt;Sync with File System</p>
+<h4 id="3-在生成apk文件后，准备再次在AVD运行程序时遇到-Entry-name-39-META-INF-androidx-legacy-legacy-support-core-utils-version-39-collided"><a href="#3-在生成apk文件后，准备再次在AVD运行程序时遇到-Entry-name-39-META-INF-androidx-legacy-legacy-support-core-utils-version-39-collided" class="headerlink" title="3.在生成apk文件后，准备再次在AVD运行程序时遇到 Entry name &#39;META-INF/androidx.legacy_legacy-support-core-utils.version&#39; collided"></a>3.在生成apk文件后，准备再次在AVD运行程序时遇到 <code>Entry name &#39;META-INF/androidx.legacy_legacy-support-core-utils.version&#39; collided</code></h4><p>原因暂时未知。</p>
+<p>解决方法如下：</p>
+<ul>
+<li>果断删除生成的apk/debug目录下文件（apk以及json文件），然后就OK了。</li>
+</ul>
+<h4 id="4-Android-Studio-Build-Output-栏内汉字出现乱码"><a href="#4-Android-Studio-Build-Output-栏内汉字出现乱码" class="headerlink" title="4.Android Studio Build Output 栏内汉字出现乱码"></a>4.Android Studio Build Output 栏内汉字出现乱码</h4><p>原因暂时未知。</p>
+<p>解决方法如下：</p>
+<ol>
+<li><p>点击右上角搜索符号</p>
+</li>
+<li><p>输入 Edit Custom VM Options，会出现两个选项，但似乎两者并无二样，任意点击一个即可。</p>
+</li>
+<li><p>在上一步后会打开一个文件，在其内输入 <code>-Dfile.encoding=UTF-8</code>，编译（据<a href="https://blog.csdn.net/zhang5690800/article/details/104502632" target="_blank" rel="noopener">博文</a>作者解释，修改后必须进行编译过程），然后重启。</p>
+</li>
+</ol>
+<h4 id="5-More-than-one-file-was-found-with-OS-independent-path-META-INF-androidx-core-core-version"><a href="#5-More-than-one-file-was-found-with-OS-independent-path-META-INF-androidx-core-core-version" class="headerlink" title="5.More than one file was found with OS independent path META-INF/androidx.core_core.version"></a>5.More than one file was found with OS independent path META-INF/androidx.core_core.version</h4><p>解决方案：在 Module 级别的 build.gradle 文件下 android 下 添加</p>
+<div class="hljs"><pre><code class="hljs java">packagingOptions &#123;
+    exclude <span class="hljs-string">'META-INF/androidx.core_core.version'</span>
+&#125;</code></pre></div>
+
 
             </article>
             <hr>
@@ -262,11 +277,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B/">进程和线程</a>
-                    
-                      <a class="hover-with-bg" href="/tags/ANR/">ANR</a>
+                      <a class="hover-with-bg" href="/tags/bug/">bug</a>
                     
                   </div>
                 
@@ -279,9 +290,9 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/02/Kotlin%EF%BC%88%E4%B8%80%EF%BC%89/">
+                      <a href="/2020/07/18/%E5%AE%89%E5%8D%93%E5%B8%B8%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Kotlin的学习（一）——开始</span>
+                        <span class="hidden-mobile">安卓常用知识点</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -289,8 +300,8 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/07/02/Intent/">
-                        <span class="hidden-mobile">Intent</span>
+                      <a href="/2020/07/13/%E8%93%9D%E7%89%99%E4%BD%BF%E7%94%A8/">
+                        <span class="hidden-mobile">蓝牙使用</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -456,7 +467,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "进程和线程&nbsp;",
+        "安卓一些问题及解决方法&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

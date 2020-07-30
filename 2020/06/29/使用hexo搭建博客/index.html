@@ -213,7 +213,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：15 天前
+                  本文最后更新于：12 天前
                 
               </p>
             
@@ -227,23 +227,22 @@
 <a id="more"></a>
 <h3 id="建立网站"><a href="#建立网站" class="headerlink" title="建立网站"></a>建立网站</h3><p>首先建立一个文件夹。<br><code>mkdir &lt;folder</code><br>然后向此文件夹安装Hexo。<br><code>hexo init &lt;folder&gt;</code></p>
 <h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><h4 id="部署到Github"><a href="#部署到Github" class="headerlink" title="部署到Github"></a>部署到Github</h4><ol>
-<li>在 Github 新建一个名称为 <code>username.github.io</code> 的仓库。  </li>
-<li>安装部署插件</li>
-</ol>
+<li><p>在 Github 新建一个名称为 <code>username.github.io</code> 的仓库。  </p>
+</li>
+<li><p>安装部署插件</p>
 <div class="hljs"><pre><code class="hljs cmd">npm install hexo-deployer-git --save
 npm install hexo-server --save</code></pre></div>
-
-<ol>
-<li>配置站点 <code>_config.yml</code> 文件</li>
-</ol>
+</li>
+<li><p>配置站点 <code>_config.yml</code> 文件</p>
 <div class="hljs"><pre><code class="hljs ejs">deploy:
     type: git
     repo: &lt;repository url&gt;
     branch: master
     message: #提交信息，默认为提交时间</code></pre></div>
-
-<ol>
-<li>发布到 Github<br>在 Hexo 站点根目录下执行以下命令：<br><code>hexo clean &amp;&amp; d -g</code>  </li>
+</li>
+<li><p>发布到 Github</p>
+<p>在 Hexo 站点根目录下执行以下命令：<code>hexo clean &amp;&amp; d -g</code></p>
+</li>
 </ol>
 <hr>
 <h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ul>

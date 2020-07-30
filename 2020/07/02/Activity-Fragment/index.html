@@ -213,12 +213,12 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：4 天前
+                  本文最后更新于：1 小时前
                 
               </p>
             
             <article class="markdown-body">
-              <h2 id="了解-Activity-生命周期"><a href="#了解-Activity-生命周期" class="headerlink" title="了解 Activity 生命周期"></a>了解 Activity 生命周期</h2><p><img src="https://note.youdao.com/yws/public/resource/0531bcaeb2b2b8c198255b5ad928981c/xmlnote/B9347B8B85F64476B768B1D827E3D0E2/47?ynotemdtimestamp=1593655869498" srcset="/img/loading.gif" alt="Activity 生命周期的简化图示"></p>
+              <h2 id="了解-Activity-生命周期"><a href="#了解-Activity-生命周期" class="headerlink" title="了解 Activity 生命周期"></a>了解 Activity 生命周期</h2><p><img src="/img/%E6%8F%92%E5%9B%BE/activity_lifecycle.png" srcset="/img/loading.gif" alt="Activity 生命周期的简化图示"></p>
 <h3 id="onCreate"><a href="#onCreate" class="headerlink" title="onCreate()"></a>onCreate()</h3><p>系统首次创建 Activity 时触发，在此方法中，需执行基本应用启动逻辑（声明界面、定义成员变量、配置某些界面），该逻辑在 Activity 的整个生命周期中只应发生一次。可以在此方法中<strong>将数据绑定到列表、将 Activity 与 <a href="https://developer.android.com/reference/androidx/lifecycle/ViewModel" target="_blank" rel="noopener">ViewModel</a> 相关联、实例化某些类范围变量</strong>。</p>
 <h3 id="onStart"><a href="#onStart" class="headerlink" title="onStart()"></a>onStart()</h3><p>调用此方法使 Activity 对用户可见，为 Activity 进入前台并支持交互做准备。例如，应用此方法来<strong>初始化维护界面的代码</strong>。Activity不会一直处于“已开始”状态，一旦此回调结束，Activity便会进入“已恢复”状态，系统将调用onResume()方法。</p>
 <h3 id="onResume"><a href="#onResume" class="headerlink" title="onResume()"></a>onResume()</h3><p>应用与用户交互的状态，用户会一直保持这种状态，直到某些事件发生，让焦点远离应用。当发生中断事件时，Activity进入“已暂停”状态，系统调用 onPause() 回调。如果Activity从“已暂停”状态返回“已恢复”状态，系统将再次调用 onResume() 方法。</p>

@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      294 字
+      2.6k 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      43
        分钟
     </span>
   
@@ -213,7 +213,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：4 天前
+                  本文最后更新于：6 小时前
                 
               </p>
             
@@ -262,6 +262,568 @@
 <li><p>CountDownTimer 计时器</p>
 </li>
 </ol>
+<h2 id="com-quxianggif-core"><a href="#com-quxianggif-core" class="headerlink" title="com.quxianggif.core"></a>com.quxianggif.core</h2><h3 id="单位转换工具类，会根据手机的分辨率来进行单位转换"><a href="#单位转换工具类，会根据手机的分辨率来进行单位转换" class="headerlink" title="单位转换工具类，会根据手机的分辨率来进行单位转换"></a>单位转换工具类，会根据手机的分辨率来进行单位转换</h3><div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 根据手机的分辨率将dp转成为px</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">dp2px</span><span class="hljs-params">(dp: <span class="hljs-type">Float</span>)</span></span>: <span class="hljs-built_in">Int</span> &#123;
+    <span class="hljs-keyword">val</span> scale = GifFun.getContext().resources.displayMetrics.density
+    <span class="hljs-keyword">return</span> (dp * scale + <span class="hljs-number">0.5f</span>).toInt()
+&#125;
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 根据手机的分辨率将px转成dp</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">px2dp</span><span class="hljs-params">(px: <span class="hljs-type">Float</span>)</span></span>: <span class="hljs-built_in">Int</span> &#123;
+    <span class="hljs-keyword">val</span> scale = GifFun.getContext().resources.displayMetrics.density
+    <span class="hljs-keyword">return</span> (px / scale + <span class="hljs-number">0.5f</span>).toInt()
+&#125;</code></pre></div>
+
+<h3 id="Toast"><a href="#Toast" class="headerlink" title="Toast"></a>Toast</h3><div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> toast: Toast? = <span class="hljs-literal">null</span>
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 弹出Toast信息。如果不是在主线程中调用此方法，Toast信息将会不显示。</span>
+<span class="hljs-comment">     *</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> content</span>
+<span class="hljs-comment">     * Toast中显示的内容</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-meta">@SuppressLint(<span class="hljs-meta-string">"ShowToast"</span>)</span>
+    <span class="hljs-meta">@JvmOverloads</span>
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">showToast</span><span class="hljs-params">(content: <span class="hljs-type">String</span>, duration: <span class="hljs-type">Int</span> = Toast.LENGTH_SHORT)</span></span> &#123;
+        <span class="hljs-keyword">if</span> (Looper.myLooper() == Looper.getMainLooper()) &#123;
+            <span class="hljs-keyword">if</span> (toast == <span class="hljs-literal">null</span>) &#123;
+                toast = Toast.makeText(GifFun.getContext(), content, duration)
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                toast?.setText(content)
+            &#125;
+            toast?.show()
+        &#125;
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 切换到主线程后弹出Toast信息。此方法不管是在子线程还是主线程中，都可以成功弹出Toast信息。</span>
+<span class="hljs-comment">     *</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> content</span>
+<span class="hljs-comment">     * Toast中显示的内容</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> duration</span>
+<span class="hljs-comment">     * Toast显示的时长</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-meta">@SuppressLint(<span class="hljs-meta-string">"ShowToast"</span>)</span>
+    <span class="hljs-meta">@JvmOverloads</span>
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">showToastOnUiThread</span><span class="hljs-params">(content: <span class="hljs-type">String</span>, duration: <span class="hljs-type">Int</span> = Toast.LENGTH_SHORT)</span></span> &#123;
+        GifFun.getHandler().post &#123;
+            <span class="hljs-keyword">if</span> (toast == <span class="hljs-literal">null</span>) &#123;
+                toast = Toast.makeText(GifFun.getContext(), content, duration)
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                toast?.setText(content)
+            &#125;
+            toast?.show()
+        &#125;
+    &#125;</code></pre></div>
+
+<h2 id="com-quxianggif-main"><a href="#com-quxianggif-main" class="headerlink" title="com.quxianggif.main"></a>com.quxianggif.main</h2><h3 id="comments"><a href="#comments" class="headerlink" title="comments"></a>comments</h3><ul>
+<li><p>取消数据改变时的动画，防止闪烁</p>
+<div class="hljs"><pre><code class="hljs kotlin">(recyclerView.itemAnimator <span class="hljs-keyword">as</span> SimpleItemAnimator).supportsChangeAnimations = <span class="hljs-literal">false</span></code></pre></div>
+</li>
+<li><p>当知道 Adapter 内 Item 的改变不会影响 RecyclerView 宽高的时候，可以设置为 true 让 RecyclerView 避免重新计算大小，并通过 Adapter 的增删改查方法刷新 RecyclerView。<strong>在需要改变宽高的时候就用 <code>notifyDataSetChanged()</code> 刷新。</strong></p>
+<div class="hljs"><pre><code class="hljs kotlin">recyclerView.setHasFixedSize(<span class="hljs-literal">true</span>)</code></pre></div>
+</li>
+<li><p>自定义 RecyclerView，根据 item 高度改变 RecyclerView 高度</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TopCommentsRecyclerView</span> : <span class="hljs-type">RecyclerView &#123;</span></span>
+
+    <span class="hljs-keyword">constructor</span>(context: Context) : <span class="hljs-keyword">super</span>(context)
+
+    <span class="hljs-keyword">constructor</span>(context: Context, attrs: AttributeSet) : <span class="hljs-keyword">super</span>(context, attrs)
+
+    <span class="hljs-keyword">constructor</span>(context: Context, attrs: AttributeSet, defStyleAttr: <span class="hljs-built_in">Int</span>) : <span class="hljs-keyword">super</span>(
+        context,
+        attrs,
+        defStyleAttr
+    )
+
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onMeasure</span><span class="hljs-params">(widthMeasureSpec: <span class="hljs-type">Int</span>, heightMeasureSpec: <span class="hljs-type">Int</span>)</span></span> &#123;
+        <span class="hljs-comment">//  AT_MOST参数表示控件可以自由调整大小，最大不超过Integer.MAX_VALUE/4</span>
+        <span class="hljs-keyword">val</span> height = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE shr <span class="hljs-number">2</span>, MeasureSpec.AT_MOST)
+        <span class="hljs-keyword">super</span>.onMeasure(widthMeasureSpec, height)
+    &#125;
+
+&#125;</code></pre></div>
+
+</li>
+</ul>
+<h3 id="common"><a href="#common" class="headerlink" title="common"></a>common</h3><ul>
+<li><p>将状态栏设置成透明</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 将状态栏设置成透明。只适配Android 5.0以上系统的手机。</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">protected</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">transparentStatusBar</span><span class="hljs-params">()</span></span> &#123;
+    <span class="hljs-keyword">if</span> (AndroidVersion.hasLollipop()) &#123;
+        <span class="hljs-keyword">val</span> decorView = window.decorView
+        decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        window.statusBarColor = Color.TRANSPARENT
+    &#125;
+&#125;</code></pre></div>
+</li>
+<li><p>隐藏软键盘</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 隐藏软键盘。</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">hideSoftKeyboard</span><span class="hljs-params">()</span></span> &#123;
+    <span class="hljs-keyword">try</span> &#123;
+        <span class="hljs-keyword">val</span> view = currentFocus
+        <span class="hljs-keyword">if</span> (view != <span class="hljs-literal">null</span>) &#123;
+            <span class="hljs-keyword">val</span> binder = view.windowToken
+            <span class="hljs-keyword">val</span> manager = getSystemService(Context.INPUT_METHOD_SERVICE) <span class="hljs-keyword">as</span> InputMethodManager
+            manager.hideSoftInputFromWindow(binder, InputMethodManager.HIDE_NOT_ALWAYS)
+        &#125;
+    &#125; <span class="hljs-keyword">catch</span> (e: Exception) &#123;
+        logWarn(TAG, e.message, e)
+    &#125;
+
+&#125;</code></pre></div>
+</li>
+<li><p>显示软键盘</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 显示软键盘。</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">showSoftKeyboard</span><span class="hljs-params">(editText: <span class="hljs-type">EditText</span>?)</span></span> &#123;
+    <span class="hljs-keyword">try</span> &#123;
+        <span class="hljs-keyword">if</span> (editText != <span class="hljs-literal">null</span>) &#123;
+            editText.requestFocus()
+            <span class="hljs-keyword">val</span> manager = getSystemService(Context.INPUT_METHOD_SERVICE) <span class="hljs-keyword">as</span> InputMethodManager
+            manager.showSoftInput(editText, <span class="hljs-number">0</span>)
+        &#125;
+    &#125; <span class="hljs-keyword">catch</span> (e: Exception) &#123;
+        logWarn(TAG, e.message, e)
+    &#125;
+
+&#125;</code></pre></div>
+</li>
+<li><p>跳转到应用设置界面</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+<span class="hljs-keyword">val</span> uri = Uri.fromParts(<span class="hljs-string">"package"</span>, GlobalUtil.appPackage, <span class="hljs-literal">null</span>)
+intent.<span class="hljs-keyword">data</span> = uri</code></pre></div>
+
+</li>
+</ul>
+<h3 id="feeds"><a href="#feeds" class="headerlink" title="feeds"></a>feeds</h3><ul>
+<li><p>ImageView、TextView 等控件具有 <code>android:layout_gravity</code> 属性</p>
+</li>
+<li><p>发布文章时间显示</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">getDraftTime</span><span class="hljs-params">(draftMillis: <span class="hljs-type">Long</span>)</span></span>: String &#123;
+    <span class="hljs-keyword">val</span> currentMillis = System.currentTimeMillis()
+    <span class="hljs-keyword">val</span> calendar = Calendar.getInstance()
+    calendar.timeInMillis = currentMillis
+    <span class="hljs-keyword">val</span> currentYear = calendar.<span class="hljs-keyword">get</span>(Calendar.YEAR)
+    <span class="hljs-keyword">val</span> currentMonth = calendar.<span class="hljs-keyword">get</span>(Calendar.MONTH)
+    <span class="hljs-keyword">val</span> currentDay = calendar.<span class="hljs-keyword">get</span>(Calendar.DAY_OF_MONTH)
+    calendar.timeInMillis = draftMillis
+    <span class="hljs-keyword">val</span> draftYear = calendar.<span class="hljs-keyword">get</span>(Calendar.YEAR)
+    <span class="hljs-keyword">val</span> draftMonth = calendar.<span class="hljs-keyword">get</span>(Calendar.MONTH)
+    <span class="hljs-keyword">val</span> draftDay = calendar.<span class="hljs-keyword">get</span>(Calendar.DAY_OF_MONTH)
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> (currentYear == draftYear &amp;&amp; currentMonth == draftMonth &amp;&amp; currentDay == draftDay) &#123;
+        <span class="hljs-comment">// 当天的草稿只显示时间</span>
+        SimpleDateFormat(<span class="hljs-string">"HH:mm"</span>, Locale.getDefault()).format(Date(draftMillis))
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-keyword">if</span> (currentYear == draftYear) &#123;
+            <span class="hljs-comment">// 当年的草稿只显示月日</span>
+            SimpleDateFormat(<span class="hljs-string">"MM-dd"</span>, Locale.getDefault()).format(Date(draftMillis))
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-comment">// 隔年的草稿显示完整年月日</span>
+            SimpleDateFormat(<span class="hljs-string">"yyyy-MM-dd"</span>, Locale.getDefault()).format(Date(draftMillis))
+        &#125;
+    &#125;
+&#125;</code></pre></div>
+</li>
+<li><p>ContextMenu</p>
+</li>
+<li><p>SparseArray</p>
+</li>
+</ul>
+<h3 id="init-ui"><a href="#init-ui" class="headerlink" title="init.ui"></a>init.ui</h3><div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 跳转到下一个Activity。如果在闪屏界面停留的时间还不足规定最短停留时间，则会在这里等待一会，保证闪屏界面不至于一闪而过。</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-meta">@Synchronized</span>
+<span class="hljs-keyword">open</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">forwardToNextActivity</span><span class="hljs-params">(hasNewVersion: <span class="hljs-type">Boolean</span>, version: <span class="hljs-type">Version</span>?)</span></span> &#123;
+    <span class="hljs-keyword">if</span> (!isForwarding) &#123; <span class="hljs-comment">// 如果正在跳转或已经跳转到下一个界面，则不再重复执行跳转</span>
+        isForwarding = <span class="hljs-literal">true</span>
+        <span class="hljs-keyword">val</span> currentTime = System.currentTimeMillis()
+        <span class="hljs-keyword">val</span> timeSpent = currentTime - enterTime
+        <span class="hljs-keyword">if</span> (timeSpent &lt; MIN_WAIT_TIME) &#123;
+            GlobalUtil.sleep(MIN_WAIT_TIME - timeSpent)
+        &#125;
+        runOnUiThread &#123;
+            <span class="hljs-keyword">if</span> (GifFun.isLogin()) &#123;
+                MainActivity.actionStart(<span class="hljs-keyword">this</span>)
+                finish()
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                <span class="hljs-keyword">if</span> (isActive) &#123;
+                    LoginActivity.actionStartWithTransition(<span class="hljs-keyword">this</span>, logoView, hasNewVersion, version)
+                &#125; <span class="hljs-keyword">else</span> &#123;
+                    LoginActivity.actionStart(<span class="hljs-keyword">this</span>, hasNewVersion, version)
+                    finish()
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre></div>
+
+<h3 id="util"><a href="#util" class="headerlink" title="util"></a>util</h3><ul>
+<li><p>ActivityCollector.kt</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 应用中所有Activity的管理器，可用于一键杀死所有Activity。</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">object</span> ActivityCollector &#123;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">val</span> TAG = <span class="hljs-string">"ActivityCollector"</span>
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">val</span> activityList = ArrayList&lt;WeakReference&lt;Activity&gt;?&gt;()
+
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">size</span><span class="hljs-params">()</span></span>: <span class="hljs-built_in">Int</span> &#123;
+        <span class="hljs-keyword">return</span> activityList.size
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">add</span><span class="hljs-params">(weakRefActivity: <span class="hljs-type">WeakReference</span>&lt;<span class="hljs-type">Activity</span>&gt;?)</span></span> &#123;
+        activityList.add(weakRefActivity)
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">remove</span><span class="hljs-params">(weakRefActivity: <span class="hljs-type">WeakReference</span>&lt;<span class="hljs-type">Activity</span>&gt;?)</span></span> &#123;
+        <span class="hljs-keyword">val</span> result = activityList.remove(weakRefActivity)
+        logDebug(TAG, <span class="hljs-string">"remove activity reference <span class="hljs-variable">$result</span>"</span>)
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">finishAll</span><span class="hljs-params">()</span></span> &#123;
+        <span class="hljs-keyword">if</span> (activityList.isNotEmpty()) &#123;
+            <span class="hljs-keyword">for</span> (activityWeakReference <span class="hljs-keyword">in</span> activityList) &#123;
+                <span class="hljs-keyword">val</span> activity = activityWeakReference?.<span class="hljs-keyword">get</span>()
+                <span class="hljs-keyword">if</span> (activity != <span class="hljs-literal">null</span> &amp;&amp; !activity.isFinishing) &#123;
+                    activity.finish()
+                &#125;
+            &#125;
+            activityList.clear()
+        &#125;
+    &#125;
+&#125;</code></pre></div>
+</li>
+<li><p>ColorUtils.kt</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * Utility methods for working with colors.</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">object</span> ColorUtils &#123;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">val</span> IS_LIGHT = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">val</span> IS_DARK = <span class="hljs-number">1</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">val</span> LIGHTNESS_UNKNOWN = <span class="hljs-number">2</span>
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">val</span> TAG = <span class="hljs-string">"ColorUtils"</span>
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * Set the alpha component of `color` to be `alpha`.</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-meta">@CheckResult</span>
+    <span class="hljs-meta">@ColorInt</span>
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">modifyAlpha</span><span class="hljs-params">(<span class="hljs-meta">@ColorInt</span> color: <span class="hljs-type">Int</span>,</span></span>
+<span class="hljs-function"><span class="hljs-params">                    <span class="hljs-meta">@IntRange(from = 0, to = 255)</span> alpha: <span class="hljs-type">Int</span>)</span></span>: <span class="hljs-built_in">Int</span> &#123;
+        <span class="hljs-keyword">return</span> color and <span class="hljs-number">0x00ffffff</span> or (alpha shl <span class="hljs-number">24</span>)
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * Set the alpha component of `color` to be `alpha`.</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-meta">@CheckResult</span>
+    <span class="hljs-meta">@ColorInt</span>
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">modifyAlpha</span><span class="hljs-params">(<span class="hljs-meta">@ColorInt</span> color: <span class="hljs-type">Int</span>,</span></span>
+<span class="hljs-function"><span class="hljs-params">                    <span class="hljs-meta">@FloatRange(from = 0.0, to = 1.0)</span> alpha: <span class="hljs-type">Float</span>)</span></span>: <span class="hljs-built_in">Int</span> &#123;
+        <span class="hljs-keyword">return</span> modifyAlpha(color, (<span class="hljs-number">255f</span> * alpha).toInt())
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 判断传入的图片的颜色属于深色还是浅色。</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> bitmap</span>
+<span class="hljs-comment">     * 图片的Bitmap对象。</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 返回true表示图片属于深色，返回false表示图片属于浅色。</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">isBitmapDark</span><span class="hljs-params">(palette: <span class="hljs-type">Palette</span>?, bitmap: <span class="hljs-type">Bitmap</span>)</span></span>: <span class="hljs-built_in">Boolean</span> &#123;
+        <span class="hljs-keyword">val</span> isDark: <span class="hljs-built_in">Boolean</span>
+        <span class="hljs-keyword">val</span> lightness = ColorUtils.isDark(palette)
+        <span class="hljs-keyword">if</span> (lightness == ColorUtils.LIGHTNESS_UNKNOWN) &#123;
+            isDark = ColorUtils.isDark(bitmap, bitmap.width / <span class="hljs-number">2</span>, <span class="hljs-number">0</span>)
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            isDark = lightness == ColorUtils.IS_DARK
+        &#125;
+        <span class="hljs-keyword">return</span> isDark
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * Checks if the most populous color in the given palette is dark</span>
+<span class="hljs-comment">     *</span>
+<span class="hljs-comment">     *</span>
+<span class="hljs-comment">     * Annoyingly we have to return this Lightness 'enum' rather than a boolean as palette isn't</span>
+<span class="hljs-comment">     * guaranteed to find the most populous color.</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">isDark</span><span class="hljs-params">(palette: <span class="hljs-type">Palette</span>?)</span></span>: <span class="hljs-built_in">Int</span> &#123;
+        <span class="hljs-keyword">val</span> mostPopulous = getMostPopulousSwatch(palette) ?: <span class="hljs-keyword">return</span> LIGHTNESS_UNKNOWN
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> (isDark(mostPopulous.hsl)) IS_DARK <span class="hljs-keyword">else</span> IS_LIGHT
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * Determines if a given bitmap is dark. This extracts a palette inline so should not be called</span>
+<span class="hljs-comment">     * with a large image!! If palette fails then check the color of the specified pixel</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">isDark</span><span class="hljs-params">(bitmap: <span class="hljs-type">Bitmap</span>, backupPixelX: <span class="hljs-type">Int</span>, backupPixelY: <span class="hljs-type">Int</span>)</span></span>: <span class="hljs-built_in">Boolean</span> &#123;
+        <span class="hljs-comment">// first try palette with a small color quant size</span>
+        <span class="hljs-keyword">val</span> palette = Palette.from(bitmap).maximumColorCount(<span class="hljs-number">3</span>).generate()
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">if</span> (palette.swatches.size &gt; <span class="hljs-number">0</span>) &#123;
+            isDark(palette) == IS_DARK
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-comment">// if palette failed, then check the color of the specified pixel</span>
+            isDark(bitmap.getPixel(backupPixelX, backupPixelY))
+        &#125;
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * Convert to HSL &amp; check that the lightness value</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">isDark</span><span class="hljs-params">(<span class="hljs-meta">@ColorInt</span> color: <span class="hljs-type">Int</span>)</span></span>: <span class="hljs-built_in">Boolean</span> &#123;
+        <span class="hljs-keyword">val</span> hsl = FloatArray(<span class="hljs-number">3</span>)
+        android.support.v4.graphics.ColorUtils.colorToHSL(color, hsl)
+        <span class="hljs-keyword">return</span> isDark(hsl)
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * Check that the lightness value (0–1)</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">isDark</span><span class="hljs-params">(hsl: <span class="hljs-type">FloatArray</span>)</span></span>: <span class="hljs-built_in">Boolean</span> &#123; <span class="hljs-comment">// @Size(3)</span>
+        logDebug(TAG, <span class="hljs-string">"hsl[2] is "</span> + hsl[<span class="hljs-number">2</span>])
+        <span class="hljs-keyword">return</span> hsl[<span class="hljs-number">2</span>] &lt; <span class="hljs-number">0.8f</span>
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">getMostPopulousSwatch</span><span class="hljs-params">(palette: <span class="hljs-type">Palette</span>?)</span></span>: Palette.Swatch? &#123;
+        <span class="hljs-keyword">var</span> mostPopulous: Palette.Swatch? = <span class="hljs-literal">null</span>
+        <span class="hljs-keyword">if</span> (palette != <span class="hljs-literal">null</span>) &#123;
+            <span class="hljs-keyword">for</span> (swatch <span class="hljs-keyword">in</span> palette.swatches) &#123;
+                <span class="hljs-keyword">if</span> (mostPopulous == <span class="hljs-literal">null</span> || swatch.population &gt; mostPopulous.population) &#123;
+                    mostPopulous = swatch
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> mostPopulous
+    &#125;
+
+&#125;</code></pre></div>
+</li>
+<li><p>DateUtil.kt</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 时间和日期工具类。</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">object</span> DateUtil &#123;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">val</span> MINUTE = (<span class="hljs-number">60</span> * <span class="hljs-number">1000</span>).toLong()
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">val</span> HOUR = <span class="hljs-number">60</span> * MINUTE
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">val</span> DAY = <span class="hljs-number">24</span> * HOUR
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">val</span> WEEK = <span class="hljs-number">7</span> * DAY
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">val</span> MONTH = <span class="hljs-number">4</span> * WEEK
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">val</span> YEAR = <span class="hljs-number">365</span> * DAY
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 根据传入的Unix时间戳，获取转换过后更加易读的时间格式。</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> dateMillis</span>
+<span class="hljs-comment">     * Unix时间戳</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 转换过后的时间格式，如2分钟前，1小时前。</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">getConvertedDate</span><span class="hljs-params">(dateMillis: <span class="hljs-type">Long</span>)</span></span>: String &#123;
+        <span class="hljs-keyword">val</span> currentMillis = System.currentTimeMillis()
+        <span class="hljs-keyword">val</span> timePast = currentMillis - dateMillis
+        <span class="hljs-keyword">if</span> (timePast &gt; -MINUTE) &#123; <span class="hljs-comment">// 采用误差一分钟以内的算法，防止客户端和服务器时间不同步导致的显示问题</span>
+            <span class="hljs-keyword">when</span> &#123;
+                timePast &lt; HOUR -&gt; &#123;
+                    <span class="hljs-keyword">var</span> pastMinutes = timePast / MINUTE
+                    <span class="hljs-keyword">if</span> (pastMinutes &lt;= <span class="hljs-number">0</span>) &#123;
+                        pastMinutes = <span class="hljs-number">1</span>
+                    &#125;
+                    <span class="hljs-keyword">return</span> pastMinutes.toString() + GlobalUtil.getString(R.string.minutes_ago)
+                &#125;
+                timePast &lt; DAY -&gt; &#123;
+                    <span class="hljs-keyword">var</span> pastHours = timePast / HOUR
+                    <span class="hljs-keyword">if</span> (pastHours &lt;= <span class="hljs-number">0</span>) &#123;
+                        pastHours = <span class="hljs-number">1</span>
+                    &#125;
+                    <span class="hljs-keyword">return</span> pastHours.toString() + GlobalUtil.getString(R.string.hours_ago)
+                &#125;
+                timePast &lt; WEEK -&gt; &#123;
+                    <span class="hljs-keyword">var</span> pastDays = timePast / DAY
+                    <span class="hljs-keyword">if</span> (pastDays &lt;= <span class="hljs-number">0</span>) &#123;
+                        pastDays = <span class="hljs-number">1</span>
+                    &#125;
+                    <span class="hljs-keyword">return</span> pastDays.toString() + GlobalUtil.getString(R.string.days_ago)
+                &#125;
+                timePast &lt; MONTH -&gt; &#123;
+                    <span class="hljs-keyword">var</span> pastDays = timePast / WEEK
+                    <span class="hljs-keyword">if</span> (pastDays &lt;= <span class="hljs-number">0</span>) &#123;
+                        pastDays = <span class="hljs-number">1</span>
+                    &#125;
+                    <span class="hljs-keyword">return</span> pastDays.toString() + GlobalUtil.getString(R.string.weeks_ago)
+                &#125;
+                <span class="hljs-keyword">else</span> -&gt; <span class="hljs-keyword">return</span> getDate(dateMillis)
+            &#125;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-keyword">return</span> getDateAndTime(dateMillis)
+        &#125;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">getTimeLeftTip</span><span class="hljs-params">(timeLeft: <span class="hljs-type">Long</span>)</span></span> = <span class="hljs-keyword">when</span> &#123;
+        timeLeft &gt; YEAR -&gt; &#123;
+            <span class="hljs-keyword">val</span> year = (timeLeft / YEAR) + <span class="hljs-number">1</span>
+            year.toString() + GlobalUtil.getString(R.string.year)
+        &#125;
+        timeLeft &gt; MONTH -&gt; &#123;
+            <span class="hljs-keyword">val</span> month = (timeLeft / MONTH) + <span class="hljs-number">1</span>
+            month.toString() + GlobalUtil.getString(R.string.month)
+        &#125;
+        timeLeft &gt; DAY -&gt; &#123;
+            <span class="hljs-keyword">val</span> day = (timeLeft / DAY) + <span class="hljs-number">1</span>
+            day.toString() + GlobalUtil.getString(R.string.day)
+        &#125;
+        timeLeft &gt; HOUR -&gt; &#123;
+            <span class="hljs-keyword">val</span> hour = (timeLeft / HOUR) + <span class="hljs-number">1</span>
+            hour.toString() + GlobalUtil.getString(R.string.hour)
+        &#125;
+        timeLeft &gt; MINUTE -&gt; &#123;
+            <span class="hljs-keyword">val</span> minute = (timeLeft / MINUTE) + <span class="hljs-number">1</span>
+            minute.toString() + GlobalUtil.getString(R.string.minute)
+        &#125;
+        <span class="hljs-keyword">else</span> -&gt; &#123;
+            <span class="hljs-string">"1"</span> + GlobalUtil.getString(R.string.minute)
+        &#125;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">isBlockedForever</span><span class="hljs-params">(timeLeft: <span class="hljs-type">Long</span>)</span></span> = timeLeft &gt; <span class="hljs-number">5</span> * YEAR
+
+    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">getDate</span><span class="hljs-params">(dateMillis: <span class="hljs-type">Long</span>)</span></span>: String &#123;
+        <span class="hljs-keyword">val</span> sdf = SimpleDateFormat(<span class="hljs-string">"yyyy-MM-dd"</span>, Locale.getDefault())
+        <span class="hljs-keyword">return</span> sdf.format(Date(dateMillis))
+    &#125;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">getDateAndTime</span><span class="hljs-params">(dateMillis: <span class="hljs-type">Long</span>)</span></span>: String &#123;
+        <span class="hljs-keyword">val</span> sdf = SimpleDateFormat(<span class="hljs-string">"yyyy-MM-dd HH:mm"</span>, Locale.getDefault())
+        <span class="hljs-keyword">return</span> sdf.format(Date(dateMillis))
+    &#125;
+
+&#125;</code></pre></div>
+</li>
+<li><p>DeviceInfo.kt</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 提供所有与设备相关的信息。</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">object</span> DeviceInfo &#123;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 获取当前设备屏幕的宽度，以像素为单位。</span>
+<span class="hljs-comment">     *</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 当前设备屏幕的宽度。</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">val</span> screenWidth: <span class="hljs-built_in">Int</span>
+        <span class="hljs-keyword">get</span>() &#123;
+            <span class="hljs-keyword">val</span> windowManager = GifFun.getContext().getSystemService(Context.WINDOW_SERVICE) <span class="hljs-keyword">as</span> WindowManager
+            <span class="hljs-keyword">val</span> metrics = DisplayMetrics()
+            <span class="hljs-keyword">if</span> (AndroidVersion.hasJellyBeanMR1()) &#123;
+                windowManager.defaultDisplay.getRealMetrics(metrics)
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                windowManager.defaultDisplay.getMetrics(metrics)
+            &#125;
+            <span class="hljs-keyword">return</span> metrics.widthPixels
+        &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 获取当前设备屏幕的高度，以像素为单位。</span>
+<span class="hljs-comment">     *</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 当前设备屏幕的高度。</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">val</span> screenHeight: <span class="hljs-built_in">Int</span>
+        <span class="hljs-keyword">get</span>() &#123;
+            <span class="hljs-keyword">val</span> windowManager = GifFun.getContext().getSystemService(Context.WINDOW_SERVICE) <span class="hljs-keyword">as</span> WindowManager
+            <span class="hljs-keyword">val</span> metrics = DisplayMetrics()
+            <span class="hljs-keyword">if</span> (AndroidVersion.hasJellyBeanMR1()) &#123;
+                windowManager.defaultDisplay.getRealMetrics(metrics)
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                windowManager.defaultDisplay.getMetrics(metrics)
+            &#125;
+            <span class="hljs-keyword">return</span> metrics.heightPixels
+        &#125;
+
+&#125;</code></pre></div>
+
+</li>
+</ul>
+<h2 id="com-quxianggif-network"><a href="#com-quxianggif-network" class="headerlink" title="com.quxianggif.network"></a>com.quxianggif.network</h2><ul>
+<li><p>MD5.kt</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * MD5加密辅助工具类。</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MD5</span> </span>&#123;
+
+    <span class="hljs-keyword">private</span> static <span class="hljs-keyword">final</span> char[] DIGITS_UPPER = &#123;<span class="hljs-string">'0'</span>, <span class="hljs-string">'1'</span>, <span class="hljs-string">'2'</span>, <span class="hljs-string">'3'</span>, <span class="hljs-string">'4'</span>, <span class="hljs-string">'5'</span>, <span class="hljs-string">'6'</span>, <span class="hljs-string">'7'</span>, <span class="hljs-string">'8'</span>, <span class="hljs-string">'9'</span>, <span class="hljs-string">'A'</span>, <span class="hljs-string">'B'</span>, <span class="hljs-string">'C'</span>, <span class="hljs-string">'D'</span>, <span class="hljs-string">'E'</span>, <span class="hljs-string">'F'</span>&#125;;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 对传入的字符串进行MD5加密。</span>
+<span class="hljs-comment">     *</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> origin 原始字符串。</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 经过MD5加密后的字符串。</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> static String encrypt(String origin) &#123;
+        <span class="hljs-keyword">try</span> &#123;
+            MessageDigest digest = MessageDigest.getInstance(<span class="hljs-string">"MD5"</span>);
+            digest.update(origin.getBytes(Charset.defaultCharset()));
+            <span class="hljs-keyword">return</span> new String(toHex(digest.digest()));
+        &#125; <span class="hljs-keyword">catch</span> (NoSuchAlgorithmException e) &#123;
+            e.printStackTrace();
+        &#125;
+        <span class="hljs-keyword">return</span> <span class="hljs-string">""</span>;
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 获取文件的MD5值。</span>
+<span class="hljs-comment">     *</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> path 文件的路径</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 文件的MD5值。</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> static String getFileMD5(String path) &#123;
+        <span class="hljs-keyword">try</span> &#123;
+            FileInputStream fis = new FileInputStream(path);
+            MessageDigest md = MessageDigest.getInstance(<span class="hljs-string">"MD5"</span>);
+            byte[] buffer = new byte[<span class="hljs-number">1024</span>];
+            int length;
+            <span class="hljs-keyword">while</span> ((length = fis.read(buffer, <span class="hljs-number">0</span>, <span class="hljs-number">1024</span>)) != -<span class="hljs-number">1</span>) &#123;
+                md.update(buffer, <span class="hljs-number">0</span>, length);
+            &#125;
+            BigInteger bigInt = new BigInteger(<span class="hljs-number">1</span>, md.digest());
+            <span class="hljs-keyword">return</span> bigInt.toString(<span class="hljs-number">16</span>).toUpperCase();
+        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;
+            e.printStackTrace();
+        &#125;
+        <span class="hljs-keyword">return</span> <span class="hljs-string">""</span>;
+    &#125;
+
+    <span class="hljs-keyword">private</span> static char[] toHex(byte[] <span class="hljs-keyword">data</span>) &#123;
+        char[] toDigits = DIGITS_UPPER;
+        int l = <span class="hljs-keyword">data</span>.length;
+        char[] <span class="hljs-keyword">out</span> = new char[l &lt;&lt; <span class="hljs-number">1</span>];
+        <span class="hljs-comment">// two characters form the hex value.</span>
+        <span class="hljs-keyword">for</span> (int i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>; i &lt; l; i++) &#123;
+            <span class="hljs-keyword">out</span>[j++] = toDigits[(<span class="hljs-number">0xF0</span> &amp; <span class="hljs-keyword">data</span>[i]) &gt;&gt;&gt; <span class="hljs-number">4</span>];
+            <span class="hljs-keyword">out</span>[j++] = toDigits[<span class="hljs-number">0x0F</span> &amp; <span class="hljs-keyword">data</span>[i]];
+        &#125;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">out</span>;
+    &#125;
+&#125;</code></pre></div>
+
+</li>
+</ul>
 
             </article>
             <hr>

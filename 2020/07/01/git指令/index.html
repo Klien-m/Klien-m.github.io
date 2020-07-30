@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      503 字
+      491 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      5
        分钟
     </span>
   
@@ -213,35 +213,44 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：4 天前
+                  本文最后更新于：12 天前
                 
               </p>
             
             <article class="markdown-body">
-              <h2 id="Git-基本操作"><a href="#Git-基本操作" class="headerlink" title="Git 基本操作"></a>Git 基本操作</h2><h3 id="1-设置Git使用时的姓名和邮箱地址"><a href="#1-设置Git使用时的姓名和邮箱地址" class="headerlink" title="1. 设置Git使用时的姓名和邮箱地址"></a>1. 设置Git使用时的姓名和邮箱地址</h3><div class="hljs"><pre><code>+ git config -- global user.name name
-+ git config -- global user.email email</code></pre></div><h3 id="2-查看Git姓名和邮箱地址"><a href="#2-查看Git姓名和邮箱地址" class="headerlink" title="2. 查看Git姓名和邮箱地址"></a>2. 查看Git姓名和邮箱地址</h3><div class="hljs"><pre><code>+ git config -- user.name
-+ git confit -- user.email</code></pre></div><h3 id="3-基本操作"><a href="#3-基本操作" class="headerlink" title="3. 基本操作"></a>3. 基本操作</h3><div class="hljs"><pre><code>+ git init 初始化仓库
-+ git status 查看仓库的状态
-+ git add 向缓存区添加文件
-+ git commit -m &apos;描述&apos; 保存仓库的历史记录
-+ git log 查看提交日志
-+ git log --pretty=short 只显示提交信息的第一行
-+ git log &apos;filename&apos; 只显示指定目录、文件的日志
-+ git log -p 显示文件的改动
-+ git diff 查看更改前后的区别 **不妨在执行git commit之前先执行git diff HEAD查看本次提交与上次提交有什么区别**
-+ git branch 显示分支一览表
-+ git checkout -b 创建切换分支 git branch name, git checkout name
-+ git checkout - 切换回上一个分支
-+ git merge 合成分支 为了在历史记录中明确记录下本次分支合并，需要在合并时加上参数no-ff
-+ git log --graph 以图表形式查看分支
-+ git reset --hard 回溯历史版本
-+ git reflog 查看当前仓库的操作日志，以便找到误操作的哈希值
-+ git commit --amend 修改提交信息 在合并特性分支之前，如果发现已提交的内容有些小错误，不妨提交一个修改，然后将这个修改包含到前一个提交之中，压缩成一个历史记录
-+ git rebase -i 压缩历史 git rebase -i HEAD~2 用此命令可以选定当前分支包含HEAD（最新提交）在内的两个最新历史记录为对象，并在编辑器中打开
-+ git remote add &apos;远程仓库的名字(origin)&apos; &apos;github链接&apos; 将本地仓库与远端仓库建立一个链接
-+ git push -u &apos;远程仓库的名字&apos; &apos;当前分支的名字&apos; 推送更新
-+ git clone &apos;项目链接&apos;
-+ git pull 获取最新的远程仓库分支</code></pre></div>
+              <h2 id="Git-基本操作"><a href="#Git-基本操作" class="headerlink" title="Git 基本操作"></a>Git 基本操作</h2><h3 id="1-设置Git使用时的姓名和邮箱地址"><a href="#1-设置Git使用时的姓名和邮箱地址" class="headerlink" title="1. 设置Git使用时的姓名和邮箱地址"></a>1. 设置Git使用时的姓名和邮箱地址</h3><ul>
+<li>git config – global user.name name</li>
+<li>git config – global user.email email</li>
+</ul>
+<h3 id="2-查看Git姓名和邮箱地址"><a href="#2-查看Git姓名和邮箱地址" class="headerlink" title="2. 查看Git姓名和邮箱地址"></a>2. 查看Git姓名和邮箱地址</h3><ul>
+<li>git config – user.name</li>
+<li>git confit – user.email</li>
+</ul>
+<h3 id="3-基本操作"><a href="#3-基本操作" class="headerlink" title="3. 基本操作"></a>3. 基本操作</h3><ul>
+<li>git init 初始化仓库</li>
+<li>git status 查看仓库的状态</li>
+<li>git add 向缓存区添加文件</li>
+<li>git commit -m ‘描述’ 保存仓库的历史记录</li>
+<li>git log 查看提交日志</li>
+<li>git log –pretty=short 只显示提交信息的第一行</li>
+<li>git log ‘filename’ 只显示指定目录、文件的日志</li>
+<li>git log -p 显示文件的改动</li>
+<li>git diff 查看更改前后的区别 <strong>不妨在执行git commit之前先执行git diff HEAD查看本次提交与上次提交有什么区别</strong></li>
+<li>git branch 显示分支一览表</li>
+<li>git checkout -b 创建切换分支 git branch name, git checkout name</li>
+<li>git checkout - 切换回上一个分支</li>
+<li>git merge 合成分支 为了在历史记录中明确记录下本次分支合并，需要在合并时加上参数no-ff</li>
+<li>git log –graph 以图表形式查看分支</li>
+<li>git reset –hard 回溯历史版本</li>
+<li>git reflog 查看当前仓库的操作日志，以便找到误操作的哈希值</li>
+<li>git commit –amend 修改提交信息 在合并特性分支之前，如果发现已提交的内容有些小错误，不妨提交一个修改，然后将这个修改包含到前一个提交之中，压缩成一个历史记录</li>
+<li>git rebase -i 压缩历史 git rebase -i HEAD~2 用此命令可以选定当前分支包含HEAD（最新提交）在内的两个最新历史记录为对象，并在编辑器中打开</li>
+<li>git remote add ‘远程仓库的名字(origin)’ ‘github链接’ 将本地仓库与远端仓库建立一个链接</li>
+<li>git push -u ‘远程仓库的名字’ ‘当前分支的名字’ 推送更新</li>
+<li>git clone ‘项目链接’</li>
+<li>git pull 获取最新的远程仓库分支</li>
+</ul>
+
             </article>
             <hr>
             <div>
