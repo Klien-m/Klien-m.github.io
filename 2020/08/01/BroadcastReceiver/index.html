@@ -17,7 +17,7 @@
   <meta name="description" content="记往昔录今朝只待明时">
   <meta name="author" content="Klien">
   <meta name="keywords" content="安卓原生开发、python日常脚本、Developer">
-  <title>hexo命令 - Klien-m&#39;s 博客</title>
+  <title>BroadcastReceiver - Klien-m&#39;s 博客</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -139,7 +139,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('/img/post.png') no-repeat center center;
+         style="background: url('/img/1920-1080/android6.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -152,8 +152,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-06-29 14:07">
-      2020年6月29日 下午
+    <time datetime="2020-08-01 19:10">
+      2020年8月1日 晚上
     </time>
   </div>
 
@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      835 字
+      985 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      11
        分钟
     </span>
   
@@ -213,129 +213,73 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 个月前
+                  本文最后更新于：1 小时前
                 
               </p>
             
             <article class="markdown-body">
-              <h3 id="init"><a href="#init" class="headerlink" title="init"></a>init</h3><p><code>hexo init [folder]</code> 新建一个网站。如果没有 <code>folder</code>，Hexo默认在当前文件夹建立网站。  </p>
-<h3 id="new"><a href="#new" class="headerlink" title="new"></a>new</h3><p><code>hexo new [layout] &lt;title&gt;</code>  </p>
+              <p>系统会在发生各种系统事件时自动发送广播，例如当系统进入和退出飞行模式时。系统广播会被发送给所有同意接收相关事件的应用。广播消息本身会被封装在一个 <code>Intent</code> 对象中，该对象的操作字符串会标识所发生的事件（例如 <code>android.intent.action.AIRPLANE_MODE</code>）。该 Intent 可能还包含绑定到其 extra 字段中的附加信息。例如，飞行模式 intent 包含布尔值 extra 来指示是否已开启飞行模式。</p>
 <a id="more"></a>
-<p>新建一篇文章。如果没有设置 <code>layout</code> 的话，默认使用 _config.yml 中的 <code>default_layout</code> 参数代替。<strong>如果标题包含空格的话，请使用引号括起来。</strong></p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>-p</code>,<code>--path</code></td>
-<td align="center">自定义新文章的路径</td>
-</tr>
-<tr>
-<td><code>-r</code>,<code>--replace</code></td>
-<td align="center">如果存在同名文章，将其替换</td>
-</tr>
-<tr>
-<td><code>-s</code>,<code>--slug</code></td>
-<td align="center">文章的 Slug，作为新文章的文件名和发布后的 URL</td>
-</tr>
-</tbody></table>
-<p>默认情况下，Hexo 会使用文章的标题来决定文章文件的路径。对于独立页面来说，Hexo 会创建一个以标题为名字的目录，并在目录中放置一个 <code>index.md</code> 文件。你可以使用 <code>--path</code> 参数来覆盖上述行为、自行决定文件的目录。</p>
-<h3 id="generate"><a href="#generate" class="headerlink" title="generate"></a>generate</h3><p><code>hexo generate</code> 生成静态文件。</p>
-<table>
-<thead>
-<tr>
-<th align="center">选项</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><code>-d</code>,<code>--deploy</code></td>
-<td align="center">文件生成后立即部署网站</td>
-</tr>
-<tr>
-<td align="center"><code>-w</code>,<code>--watch</code></td>
-<td align="center">监视文件变动</td>
-</tr>
-<tr>
-<td align="center"><code>-b</code>,<code>--bail</code></td>
-<td align="center">生成过程中如果发生任何未处理的异常则抛出异常</td>
-</tr>
-<tr>
-<td align="center"><code>-f</code>,<code>--force</code></td>
-<td align="center">强制重新生成文件 Hexo 引入了差分机制，如果 public 目录存在，那么 hexo g 只会重新生成改动的文件。使用该参数的效果接近 hexo clean &amp;&amp; hexo generate</td>
-</tr>
-<tr>
-<td align="center"><code>-c</code>,<code>--concurrency</code></td>
-<td align="center">最大同时生成文件的数量，默认无限制</td>
-</tr>
-</tbody></table>
-<h3 id="publish"><a href="#publish" class="headerlink" title="publish"></a>publish</h3><p><code>hexo publish [laytout] &lt;filename&gt;</code> 发表草稿。</p>
-<h3 id="server"><a href="#server" class="headerlink" title="server"></a>server</h3><p><code>hexo server</code> 启动服务器。默认情况下，访问网址为：<code>http://localhost:4000/</code>。</p>
-<table>
-<thead>
-<tr>
-<th align="center">选项</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><code>-p</code>,<code>--port</code></td>
-<td align="center">重设端口</td>
-</tr>
-<tr>
-<td align="center"><code>-s</code>,<code>--static</code></td>
-<td align="center">只使用静态文件</td>
-</tr>
-<tr>
-<td align="center"><code>-l</code>,<code>--log</code></td>
-<td align="center">启动日记记录，使用覆盖记录格式</td>
-</tr>
-</tbody></table>
-<h3 id="deploy"><a href="#deploy" class="headerlink" title="deploy"></a>deploy</h3><p><code>hexo deploy</code> 部署网站。</p>
-<table>
-<thead>
-<tr>
-<th align="center">参数</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><code>-g</code>,<code>--generate</code></td>
-<td align="center">部署之前预先生成静态文件</td>
-</tr>
-</tbody></table>
-<h3 id="render"><a href="#render" class="headerlink" title="render"></a>render</h3><p><code>hexo render &lt;file1&gt; [file2] ...</code> 渲染文件。</p>
-<table>
-<thead>
-<tr>
-<th align="center">参数</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><code>-o</code>,<code>--output</code></td>
-<td align="center">设置输出路径</td>
-</tr>
-</tbody></table>
-<h3 id="migrate"><a href="#migrate" class="headerlink" title="migrate"></a>migrate</h3><p><code>hexo migrate &lt;type&gt;</code> 从其他博客迁移内容。</p>
-<h3 id="clean"><a href="#clean" class="headerlink" title="clean"></a>clean</h3><p><code>hexo clean</code> 清除缓存文件(<code>db.json</code>)和已生成的静态文件(<code>public</code>)。<br>在某些情况（尤其是更新主题后），如果对站点的更改无论如何也不生效，可能需要运行该命令。</p>
-<h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><p><code>hexo list &lt;type&gt;</code> 列出网站资料。</p>
-<h3 id="version"><a href="#version" class="headerlink" title="version"></a>version</h3><p><code>hexo version</code> 显示 Hexo 版本。</p>
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><h4 id="安全模式"><a href="#安全模式" class="headerlink" title="安全模式"></a>安全模式</h4><p><code>hexo --safe</code> 在安全模式下，不会载入插件和脚本。在新安装插件遭遇问题时，可以尝试以安全模式重新执行。</p>
-<h4 id="调试模式"><a href="#调试模式" class="headerlink" title="调试模式"></a>调试模式</h4><p><code>hexo --debug</code> 在终端中显示调试信息并记录到 <code>debug.log</code>。当您碰到问题时，可以尝试用调试模式重新执行一次，并 <a href="https://github.com/hexojs/hexo/issues/new" target="_blank" rel="noopener">提交调试信息到 GitHub</a>。</p>
-<h4 id="简洁模式"><a href="#简洁模式" class="headerlink" title="简洁模式"></a>简洁模式</h4><p><code>hexo --silent</code> 隐藏终端信息。  </p>
-<h4 id="自定义配置文件的路径"><a href="#自定义配置文件的路径" class="headerlink" title="自定义配置文件的路径"></a>自定义配置文件的路径</h4><div class="hljs"><pre><code class="hljs cmd"># 使用 custom.yml 代替默认的 _config.yml
-$ hexo server --config custom.yml
 
-# 使用 custom.yml 和 custom2.json，其中 custom2.json 优先级更高
-$ hexo generate --config custom.yml,custom2.json,custom3.yml</code></pre></div>
+<h2 id="接收广播"><a href="#接收广播" class="headerlink" title="接收广播"></a>接收广播</h2><p>应用可以通过两种方式接收广播：清单声明的接收器和上下文注册的接收器。</p>
+<h3 id="清单声明的接收器"><a href="#清单声明的接收器" class="headerlink" title="清单声明的接收器"></a>清单声明的接收器</h3><p>如果应用以 API 级别 26 或更高级别的平台版本为目标，则不能使用清单为隐式广播声明接收器。大多数情况下，可以使用<a href="https://developer.android.google.cn/guide/background?hl=zh" target="_blank" rel="noopener">调度作业</a>来代替。</p>
+<ol>
+<li><p>在应用清单中指定 <code>&lt;receiver&gt;</code> 元素。</p>
+<div class="hljs"><pre><code class="hljs kotlin">&lt;receiver android:name=<span class="hljs-string">".MyBroadcastReceiver"</span>  android:exported=<span class="hljs-string">"true"</span>&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=<span class="hljs-string">"android.intent.action.BOOT_COMPLETED"</span>/&gt;
+        &lt;action android:name=<span class="hljs-string">"android.intent.action.INPUT_METHOD_CHANGED"</span> /&gt;
+    &lt;/intent-filter&gt;
+&lt;/receiver&gt;</code></pre></div>
 
-<p>当指定了多个配置文件以后，Hexo 会按顺序将这部分配置文件合并成一个 <code>_multiconfig.yml</code>。如果遇到重复的配置，排在后面的文件的配置会覆盖排在前面的文件的配置。这个原则适用于任意数量、任意深度的 YAML 和 JSON 文件。</p>
-<h4 id="显示草稿"><a href="#显示草稿" class="headerlink" title="显示草稿"></a>显示草稿</h4><p><code>hexo --draft</code> 显示 <code>source/_drafts</code> 文件夹中的草稿文章。</p>
-<h4 id="自定义CWD"><a href="#自定义CWD" class="headerlink" title="自定义CWD"></a>自定义CWD</h4><p><code>hexo -cwd/path/to/cwd</code> 自定义当前工作目录（Current working directory）的路径。</p>
+<p>Intent 过滤器指定接收器所订阅的广播操作。</p>
+</li>
+<li><p>创建 <code>BroadcastReceiver</code> 子类并实现 <code>onReceive(Context, Intent)</code>。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">val</span> TAG = <span class="hljs-string">"MyBroadcastReceiver"</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyBroadcastReceiver</span> : <span class="hljs-type">BroadcastReceiver</span></span>() &#123;
+
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onReceive</span><span class="hljs-params">(context: <span class="hljs-type">Context</span>, intent: <span class="hljs-type">Intent</span>)</span></span> &#123;
+        StringBuilder().apply &#123;
+            append(<span class="hljs-string">"Action: <span class="hljs-subst">$&#123;intent.action&#125;</span>\n"</span>)
+            append(<span class="hljs-string">"URI: <span class="hljs-subst">$&#123;intent.toUri(Intent.URI_INTENT_SCHEME)&#125;</span>\n"</span>)
+            toString().also &#123; log -&gt;
+                Log.d(TAG, log)
+                Toast.makeText(context, log, Toast.LENGTH_LONG).show()
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre></div>
+
+</li>
+</ol>
+<p>如果应用当前未运行，系统可以启动应用并发送广播。</p>
+<p>系统会创建新的 <code>BroadcastReceiver</code> 组件对象来处理它接收到的每个广播。此对象仅在 <code>onReceive(Context, Intent)</code> 期间有效。一旦从此方法返回代码，系统便会认为该组件<strong>不再活跃</strong>。</p>
+<h3 id="上下文注册的接收器"><a href="#上下文注册的接收器" class="headerlink" title="上下文注册的接收器"></a>上下文注册的接收器</h3><ol>
+<li>创建 <code>BroadcastReceiver</code> 的实例。</li>
+<li>创建 <code>IntentFilter</code> 并调用 <code>registerReceiver(BroadcastReceiver, IntentFilter)</code> 来注册接收器。</li>
+<li>要停止广播，可以调用 <code>unregisterReceiver(android.content.BroadcastReceiver)</code>。</li>
+</ol>
+<div class="note note-primary">
+            <p>注意注册和注销接收器的位置。如果使用 Activity Context 在 <code>onCreate()</code> 中注册接收器，则需要在 <code>onDestory()</code> 中注销，以防止接收器从 Activity Context 中泄露出去。如果在 <code>onResume()</code> 中注册接收器，应在 <code>onPause()</code> 中注销，以防止多次注册接收器（此举可以减少不必要的系统开销，在暂停时停止接收广播）。</p>
+          </div>
+
+<h3 id="对进程状态的影响"><a href="#对进程状态的影响" class="headerlink" title="对进程状态的影响"></a>对进程状态的影响</h3><p><code>BroadcastReceiver</code> 的状态会影响其所在进程的状态，因此不应从广播接收器启动长时间运行的后太线程。<code>onReceive()</code> 完成后，系统可以随时终止进程来回收内存，在此过程中，也会终止进程中运行的派生线程。要避免这种情况，可以调用 <a href="https://developer.android.google.cn/reference/android/content/BroadcastReceiver?hl=zh#goAsync()" target="_blank" rel="noopener"><code>goAsync()</code></a> 或使用 <code>JobScheduler</code> 从接收器调度 <code>JobService</code>。</p>
+<ul>
+<li><input disabled="" type="checkbox"> JobScheduler</li>
+<li><input disabled="" type="checkbox"> JobService</li>
+</ul>
+<h2 id="发送广播"><a href="#发送广播" class="headerlink" title="发送广播"></a>发送广播</h2><ul>
+<li><code>sendOrderedBroadcast(Intent, String)</code><br>一次向一个接收器发送广播。当接收器逐个顺序执行时，接收器可以向下传递效果，也可以中止广播。</li>
+<li><code>sendBroadcast(Intent)</code><br>常规广播，会按随机的顺序向所有接收器发送广播。</li>
+<li><code>LocalBroadcastManager.sendBroadcast</code><br>将广播发送给与发送器位于统一应用中的接收器。</li>
+</ul>
+<h2 id="通过权限限制广播"><a href="#通过权限限制广播" class="headerlink" title="通过权限限制广播"></a>通过权限限制广播</h2><h3 id="带权限的发送"><a href="#带权限的发送" class="headerlink" title="带权限的发送"></a>带权限的发送</h3><p>调用方法发送广播时，可以指定权限参数。接收器若要接受此广播，需要通过清单中的标记请求该权限。</p>
+<h3 id="带权限的接收"><a href="#带权限的接收" class="headerlink" title="带权限的接收"></a>带权限的接收</h3><p>如果在注册广播接收器时制定了权限参数，广播方需要在清单中请求该权限。</p>
+<h2 id="安全注意事项和最佳做法"><a href="#安全注意事项和最佳做法" class="headerlink" title="安全注意事项和最佳做法"></a><a href="https://developer.android.google.cn/guide/components/broadcasts?hl=zh#security-and-best-practices" target="_blank" rel="noopener">安全注意事项和最佳做法</a></h2><ul>
+<li>如果不需要向应用以外的组件发送广播，可以使用 <code>LocalBroadcastManager</code>.</li>
+<li>如果有许多应用在清单中注册接收相同的广播，可能会导致系统启动大量应用，为避免此种情况的发生，可以优先使用上下文注册方法。</li>
+</ul>
 
             </article>
             <hr>
@@ -345,7 +289,9 @@ $ hexo generate --config custom.yml,custom2.json,custom3.yml</code></pre></div>
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</a>
+                      <a class="hover-with-bg" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AE%89%E5%8D%93/%E7%BB%84%E4%BB%B6/">组件</a>
                     
                   </div>
                 
@@ -353,7 +299,7 @@ $ hexo generate --config custom.yml,custom2.json,custom3.yml</code></pre></div>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/hexo/">hexo</a>
+                      <a class="hover-with-bg" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>
                     
                   </div>
                 
@@ -366,9 +312,9 @@ $ hexo generate --config custom.yml,custom2.json,custom3.yml</code></pre></div>
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/06/29/fluid%E4%BD%BF%E7%94%A8/">
+                      <a href="/2020/08/01/%E5%90%8E%E5%8F%B0%E5%A4%84%E7%90%86%E6%8C%87%E5%8D%97/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">fluid使用</span>
+                        <span class="hidden-mobile">后台处理指南</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -376,8 +322,8 @@ $ hexo generate --config custom.yml,custom2.json,custom3.yml</code></pre></div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/06/29/%E4%BD%BF%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">
-                        <span class="hidden-mobile">使用hexo搭建博客</span>
+                      <a href="/2020/07/31/AIDL/">
+                        <span class="hidden-mobile">AIDL</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -543,7 +489,7 @@ $ hexo generate --config custom.yml,custom2.json,custom3.yml</code></pre></div>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "hexo命令&nbsp;",
+        "BroadcastReceiver&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

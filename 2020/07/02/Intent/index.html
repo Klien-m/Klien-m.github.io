@@ -213,14 +213,21 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：6 分钟前
+                  本文最后更新于：4 小时前
                 
               </p>
             
             <article class="markdown-body">
-              <p>Keyword: 闹钟, 日历, 相机, 联系人, 文件存储, 地图, 音乐和视频, 新笔记, 电话, 设置发送短信</p>
+              <p><a href="https://developer.android.google.cn/guide/components/intents-filters?hl=zh_cn" target="_blank" rel="noopener"><code>Intent</code></a> 是一个消息传递对象，可以通过多种方式促进组件之间的通信。</p>
 <a id="more"></a>
 
+<p>其基本用例主要包括以下三个：</p>
+<ul>
+<li>启动 Activity</li>
+<li>启动服务</li>
+<li>传递广播</li>
+</ul>
+<p>Keyword: 闹钟, 日历, 相机, 联系人, 文件存储, 地图, 音乐和视频, 新笔记, 电话, 设置发送短信</p>
 <h2 id="Intent和Intent过滤器"><a href="#Intent和Intent过滤器" class="headerlink" title="Intent和Intent过滤器"></a>Intent和Intent过滤器</h2><blockquote>
 <p>要仅设置数据 URI，请调用 <code>setData()</code>。要仅设置 MIME 类型，请调用 <code>setType()</code>。如有必要，可以使用 <code>setDataAndType()</code> 同时显式设置二者。若要同时设置 URI 和 MIME 类型，请勿调用 <code>setData()</code> 和 <code>setType()</code>，因为它们会互相抵消彼此的值。请始终使用 <code>setDataAndType()</code> 同时设置 URI 和 MIME 类型。<br>要接收隐式 Intent，必须将 CATEGORY_DEFAULT 类别包括在 Intent 过滤器中。方法 startActivity() 和 startActivityForResult() 将按照其声明 CATEGORY_DEFAULT 类别的方式处理所有 Intent。如果未在 Intent 过滤器中声明此类别，则隐式 Intent 不会解析为您的 Activity。  </p>
 </blockquote>
@@ -273,7 +280,7 @@
                     
                       <a class="hover-with-bg" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%AE%89%E5%8D%93/%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6/">四大组件</a>
+                      <a class="hover-with-bg" href="/categories/%E5%AE%89%E5%8D%93/%E7%BB%84%E4%BB%B6/">组件</a>
                     
                   </div>
                 

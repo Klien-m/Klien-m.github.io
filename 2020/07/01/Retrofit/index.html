@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      507 字
+      505 字
     </span>
   
 
@@ -213,13 +213,15 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：5 分钟前
+                  本文最后更新于：4 小时前
                 
               </p>
             
             <article class="markdown-body">
-              <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Retrofit 是一个 RESTful 的 HTTP 网络请求框架的封装，网络请求的工作本质上是由 OkHttp 完成，而 Retrofit 仅负责网络请求接口的封装。</p>
-<h4 id="1-添加-Retrofit-库的依赖"><a href="#1-添加-Retrofit-库的依赖" class="headerlink" title="1. 添加 Retrofit 库的依赖"></a>1. 添加 Retrofit 库的依赖</h4><div class="hljs"><pre><code class="hljs java"><span class="hljs-comment">//    将Java版本设置为1.8*或更高版本。不然会报错(java.lang.NoSuchMethodError: No static method metafactory...）</span>
+              <p>Retrofit 是一个 RESTful 的 HTTP 网络请求框架的封装，网络请求的工作本质上是由 OkHttp 完成，而 Retrofit 仅负责网络请求接口的封装。</p>
+<a id="more"></a>
+
+<h3 id="1-添加-Retrofit-库的依赖"><a href="#1-添加-Retrofit-库的依赖" class="headerlink" title="1. 添加 Retrofit 库的依赖"></a>1. 添加 Retrofit 库的依赖</h3><div class="hljs"><pre><code class="hljs java"><span class="hljs-comment">//    将Java版本设置为1.8*或更高版本。不然会报错(java.lang.NoSuchMethodError: No static method metafactory...）</span>
 <span class="hljs-comment">//    在android下添加</span>
 <span class="hljs-comment">//    compileOptions &#123;</span>
 <span class="hljs-comment">//        sourceCompatibility JavaVersion.VERSION_1_8</span>
@@ -227,7 +229,7 @@
 <span class="hljs-comment">//    &#125;</span>
     implementation <span class="hljs-string">'com.squareup.retrofit2:retrofit:2.9.0'</span></code></pre></div>
 
-<h4 id="2-添加-Converters"><a href="#2-添加-Converters" class="headerlink" title="2. 添加 Converters"></a>2. 添加 Converters</h4><div class="hljs"><pre><code class="hljs java">Gson: com.squareup.retrofit2:converter-gson
+<h3 id="2-添加-Converters"><a href="#2-添加-Converters" class="headerlink" title="2. 添加 Converters"></a>2. 添加 Converters</h3><div class="hljs"><pre><code class="hljs java">Gson: com.squareup.retrofit2:converter-gson
 Jackson: com.squareup.retrofit2:converter-jackson
 Moshi: com.squareup.retrofit2:converter-moshi
 Protobuf: com.squareup.retrofit2:converter-protobuf
@@ -236,31 +238,31 @@ Simple XML: com.squareup.retrofit2:converter-simplexml
 JAXB: com.squareup.retrofit2:converter-jaxb
 Scalars (primitives, boxed, and String): com.squareup.retrofit2:converter-scalars</code></pre></div>
 
-<h4 id="3-添加网络权限"><a href="#3-添加网络权限" class="headerlink" title="3. 添加网络权限"></a>3. 添加网络权限</h4><div class="hljs"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.INTERNET"</span>/&gt;</span></code></pre></div>
+<h3 id="3-添加网络权限"><a href="#3-添加网络权限" class="headerlink" title="3. 添加网络权限"></a>3. 添加网络权限</h3><div class="hljs"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">"android.permission.INTERNET"</span>/&gt;</span></code></pre></div>
 
-<h4 id="4-创建装载服务器返回数据的类"><a href="#4-创建装载服务器返回数据的类" class="headerlink" title="4. 创建装载服务器返回数据的类"></a>4. 创建装载服务器返回数据的类</h4><div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ResultData</span> </span>&#123;
+<h3 id="4-创建装载服务器返回数据的类"><a href="#4-创建装载服务器返回数据的类" class="headerlink" title="4. 创建装载服务器返回数据的类"></a>4. 创建装载服务器返回数据的类</h3><div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ResultData</span> </span>&#123;
     ...
     <span class="hljs-comment">// 根据返回数据的格式和数据解析方式（Json、XML等）定义</span>
 &#125;</code></pre></div>
 
-<h4 id="5-创建用于配置网络请求的接口"><a href="#5-创建用于配置网络请求的接口" class="headerlink" title="5. 创建用于配置网络请求的接口"></a>5. 创建用于配置网络请求的接口</h4><p>Retrofit 将 Http 请求抽象成 Java 接口，采用<strong>注解</strong>描述网络请求参数和配置网络请求参数</p>
+<h3 id="5-创建用于配置网络请求的接口"><a href="#5-创建用于配置网络请求的接口" class="headerlink" title="5. 创建用于配置网络请求的接口"></a>5. 创建用于配置网络请求的接口</h3><p>Retrofit 将 Http 请求抽象成 Java 接口，采用<strong>注解</strong>描述网络请求参数和配置网络请求参数</p>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">IGetRequest</span> </span>&#123;
     <span class="hljs-meta">@GET</span>(<span class="hljs-string">"openapi.do?keyfrom=Yanzhikai&amp;key=2032414398&amp;type=data&amp;doctype=json&amp;version=1.1&amp;q=car"</span>)
     <span class="hljs-function">Call&lt;ResultData&gt;  <span class="hljs-title">getCall</span><span class="hljs-params">()</span></span>;
 &#125;</code></pre></div>
 
 <p><strong>注解说明</strong><br>    + 网络请求方法：@GET、@POST、@PUT、@DELETE、@HEAD（常用）<br>    + 网络请求标记：@FormUrlEncoded、@Multipart、@Streaming<br>    + 网络请求参数：@Header &amp; @Headers、@Body、@Field、@FieldMap、@Part、@PartMap、@Query、@QueryMap、@Path、@Url<br>    详细解释见如下<a href="https://www.jianshu.com/p/a3e162261ab6" target="_blank" rel="noopener">博文链接</a></p>
-<h4 id="6-创建-Retrofit-实例"><a href="#6-创建-Retrofit-实例" class="headerlink" title="6. 创建 Retrofit 实例"></a>6. 创建 Retrofit 实例</h4><div class="hljs"><pre><code class="hljs java">Retrofit retrofit = <span class="hljs-keyword">new</span> Retrofit.Builder()
+<h3 id="6-创建-Retrofit-实例"><a href="#6-创建-Retrofit-实例" class="headerlink" title="6. 创建 Retrofit 实例"></a>6. 创建 Retrofit 实例</h3><div class="hljs"><pre><code class="hljs java">Retrofit retrofit = <span class="hljs-keyword">new</span> Retrofit.Builder()
                     .baseUrl(Url)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()</code></pre></div>
 
-<h4 id="7-创建网络请求接口实例"><a href="#7-创建网络请求接口实例" class="headerlink" title="7. 创建网络请求接口实例"></a>7. 创建网络请求接口实例</h4><div class="hljs"><pre><code class="hljs java"><span class="hljs-comment">// 创建网络请求接口的实例</span>
+<h3 id="7-创建网络请求接口实例"><a href="#7-创建网络请求接口实例" class="headerlink" title="7. 创建网络请求接口实例"></a>7. 创建网络请求接口实例</h3><div class="hljs"><pre><code class="hljs java"><span class="hljs-comment">// 创建网络请求接口的实例</span>
 IGetRequest request = retrofit.create(IGetRequest<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>;
 <span class="hljs-comment">// 对发送请求进行封装</span>
 Call&lt;ResultData&gt; call = request.getCall();</code></pre></div>
 
-<h4 id="8-发送网络请求（异步-or-同步），-and-处理"><a href="#8-发送网络请求（异步-or-同步），-and-处理" class="headerlink" title="8. 发送网络请求（异步 or 同步）， and 处理"></a>8. 发送网络请求（异步 or 同步）， and 处理</h4><div class="hljs"><pre><code class="hljs java"><span class="hljs-comment">//发送网络请求(异步)</span>
+<h3 id="8-发送网络请求（异步-or-同步），-and-处理"><a href="#8-发送网络请求（异步-or-同步），-and-处理" class="headerlink" title="8. 发送网络请求（异步 or 同步）， and 处理"></a>8. 发送网络请求（异步 or 同步）， and 处理</h3><div class="hljs"><pre><code class="hljs java"><span class="hljs-comment">//发送网络请求(异步)</span>
 call.enqueue(<span class="hljs-keyword">new</span> Callback&lt;ResultData&gt;() &#123;
     <span class="hljs-comment">//请求成功时回调</span>
     <span class="hljs-meta">@Override</span>

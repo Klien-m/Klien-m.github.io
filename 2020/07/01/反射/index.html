@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      427 字
+      547 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      5
        分钟
     </span>
   
@@ -213,18 +213,21 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 分钟前
+                  本文最后更新于：4 小时前
                 
               </p>
             
             <article class="markdown-body">
-              <h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><h3 id="Java-中的-Class-类"><a href="#Java-中的-Class-类" class="headerlink" title="Java 中的 Class 类"></a>Java 中的 Class 类</h3><p> <code>Class</code> 类的构造方法是私有的，无法在代码中显式的生命一个 <code>Class</code> 对象</p>
+              <p>Java的反射（reflection）机制是指在程序的运行状态中，可以构造任意一个类的对象，可以了解任意一个对象所属的类，可以了解任意一个类的成员变量和方法，可以调用任意一个对象的属性和方法。这种动态获取程序信息以及动态调用对象的功能称为Java语言的反射机制。反射被视为动态语言的关键。</p>
+<a id="more"></a>
+
+<h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><h3 id="Java-中的-Class-类"><a href="#Java-中的-Class-类" class="headerlink" title="Java 中的 Class 类"></a>Java 中的 Class 类</h3><p> <code>Class</code> 类的构造方法是私有的，无法在代码中显式的生命一个 <code>Class</code> 对象</p>
 <h4 id="获得-Class-类的对象"><a href="#获得-Class-类的对象" class="headerlink" title="获得 Class 类的对象"></a>获得 <code>Class</code> 类的对象</h4><ul>
 <li>通过类的静态成员表示，每个类都有一个隐含的静态成员 <code>class</code></li>
 <li>通过类的 <code>getClass()</code> 方法，和上类似</li>
 <li>通过 <code>Class</code> 类的静态方法 <code>forName()</code> 获取 <code>Class</code> 对象（可实现程序运行时类的动态加载）  </li>
 </ul>
-<a id="more"></a>
+<!--more-->
 <h4 id="由-Class-类的对象得到类的对象"><a href="#由-Class-类的对象得到类的对象" class="headerlink" title="由 Class 类的对象得到类的对象"></a>由 <code>Class</code> 类的对象得到类的对象</h4><p><code>newInstance()</code> 方法，此方法调用类的 <strong>无参构造函数</strong></p>
 <h3 id="Java反射机制"><a href="#Java反射机制" class="headerlink" title="Java反射机制"></a>Java反射机制</h3><p><a href="https://juejin.im/post/598ea9116fb9a03c335a99a4#heading-11" target="_blank" rel="noopener">参考自</a></p>
 <blockquote>

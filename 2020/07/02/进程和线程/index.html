@@ -213,12 +213,14 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：8 分钟前
+                  本文最后更新于：4 小时前
                 
               </p>
             
             <article class="markdown-body">
-              <h3 id="如何避免-应用无响应-ANR"><a href="#如何避免-应用无响应-ANR" class="headerlink" title="如何避免 应用无响应(ANR)"></a>如何避免 应用无响应(ANR)</h3><p>为耗时较长的操作创建工作线程的最有效方法是使用 AsyncTask 类。只需扩展 AsyncTask 并实现 doInBackground() 方法即可执行相应操作。要向用户发布进度变化，您可以调用 publishProgress()，它会调用 onProgressUpdate() 回调方法。通过 onProgressUpdate()（在界面线程中运行）的实现，您可以向用户发送通知。例如：</p>
+              <h3 id="如何避免应用无响应-ANR"><a href="#如何避免应用无响应-ANR" class="headerlink" title="如何避免应用无响应(ANR)"></a>如何避免应用无响应(ANR)</h3><a id="more"></a>
+
+<p>为耗时较长的操作创建工作线程的最有效方法是使用 AsyncTask 类。只需扩展 AsyncTask 并实现 doInBackground() 方法即可执行相应操作。要向用户发布进度变化，您可以调用 publishProgress()，它会调用 onProgressUpdate() 回调方法。通过 onProgressUpdate()（在界面线程中运行）的实现，您可以向用户发送通知。例如：</p>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DownloadFilesTask</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AsyncTask</span>&lt;<span class="hljs-title">URL</span>, <span class="hljs-title">Integer</span>, <span class="hljs-title">Long</span>&gt; </span>&#123;
     <span class="hljs-comment">// Do the long-running work in here</span>
     <span class="hljs-function"><span class="hljs-keyword">protected</span> Long <span class="hljs-title">doInBackground</span><span class="hljs-params">(URL... urls)</span> </span>&#123;
