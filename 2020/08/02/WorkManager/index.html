@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/Klien.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="记往昔录今朝只待明时">
+  <meta name="author" content="Klien">
+  <meta name="keywords" content="安卓原生开发、python日常脚本、Developer">
+  <title>WorkManager - Klien-m&#39;s 博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/androidstudio.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Klien-m's 博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/1920-1080/android9.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-08-02 10:50">
+      2020年8月2日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：4 分钟前
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p>使用 WorkManager API 可以轻松地调度即使在应用退出或设备重启时仍应运行的可延迟异步任务。</p>
+<a id="more"></a>
+
+<p><a href="https://developer.android.google.cn/topic/libraries/architecture/workmanager?hl=zh" target="_blank" rel="noopener">文档</a></p>
+<h2 id="将-WorkManager-添加到-Android-项目中"><a href="#将-WorkManager-添加到-Android-项目中" class="headerlink" title="将 WorkManager 添加到 Android 项目中"></a>将 WorkManager 添加到 Android 项目中</h2><p>要将 WorkManager 库导入到 Android 项目中，请将以下依赖项添加到应用的 build.gradle 文件：</p>
+<div class="hljs"><pre><code class="hljs java">dependencies &#123;
+  def work_version = <span class="hljs-string">"2.3.4"</span>
+
+    <span class="hljs-comment">// (Java only)</span>
+    implementation <span class="hljs-string">"androidx.work:work-runtime:$work_version"</span>
+
+    <span class="hljs-comment">// Kotlin + coroutines</span>
+    implementation <span class="hljs-string">"androidx.work:work-runtime-ktx:$work_version"</span>
+
+    <span class="hljs-comment">// optional - RxJava2 support</span>
+    implementation <span class="hljs-string">"androidx.work:work-rxjava2:$work_version"</span>
+
+    <span class="hljs-comment">// optional - GCMNetworkManager support</span>
+    implementation <span class="hljs-string">"androidx.work:work-gcm:$work_version"</span>
+
+    <span class="hljs-comment">// optional - Test helpers</span>
+    androidTestImplementation <span class="hljs-string">"androidx.work:work-testing:$work_version"</span>
+  &#125;</code></pre></div>
+
+<h2 id="创建后台任务"><a href="#创建后台任务" class="headerlink" title="创建后台任务"></a>创建后台任务</h2><p>任务是使用 <code>Worker</code> 类定义的。<code>doWork()</code> 方法在 WorkManager 提供的后台线程上同步运行。</p>
+<p>从 <code>doWork()</code> 返回的 <code>Result</code> 会通知 WorkManager 任务：</p>
+<ul>
+<li>已成功完成：<code>Result.success()</code></li>
+<li>已失败：<code>Result.failure()</code></li>
+<li>需要稍后重试：<code>Result.retry()</code></li>
+</ul>
+<h3 id="配置运行任务的方式和时间"><a href="#配置运行任务的方式和时间" class="headerlink" title="配置运行任务的方式和时间"></a>配置运行任务的方式和时间</h3><p><code>Worker</code> 定义工作单元，<code>WorkRequest</code> 则定义工作的运行方式和时间。对于一次性 <code>WorkRequest</code>，可以使用 <code>OneTimeWorkRequest</code>，对于周期性工作，可以使用 <code>PeriodicWorkRequest</code>。</p>
+<h3 id="工作约束"><a href="#工作约束" class="headerlink" title="工作约束"></a>工作约束</h3><p><code>Constraints</code> 指明工作何时可以运行。具体约束详见<a href="https://developer.android.google.cn/reference/androidx/work/Constraints.Builder?hl=zh" target="_blank" rel="noopener">约束的完整列表</a>。</p>
+<h3 id="初始延迟"><a href="#初始延迟" class="headerlink" title="初始延迟"></a>初始延迟</h3><p><code>setInitialDelay()</code> 初始延迟，加入队列后至少经过多长时间再运行。</p>
+<h3 id="重试和退避政策"><a href="#重试和退避政策" class="headerlink" title="重试和退避政策"></a>重试和退避政策</h3><p>如果想要让 WorkManager 重新尝试执行任务，可以从工作器返回 <code>Result.retry()</code>。</p>
+<p>退避延迟时间指定重试工作前的最短等待时间。退避政策定义了再后续重试过程中，退避延迟时间随时间以怎样的方式增长，默认情况下按 <code>BackoffPolicy.EXPONENTIAL</code> 延长。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> uploadWorkRequest = OneTimeWorkRequestBuilder&lt;UploadWorker&gt;()
+        .setBackoffCriteria(
+                BackoffPolicy.LINEAR,
+                OneTimeWorkRequest.MIN_BACKOFF_MILLIS,
+                TimeUnit.MILLISECONDS)
+        .build()</code></pre></div>
+
+<h4 id="退避政策"><a href="#退避政策" class="headerlink" title="退避政策"></a>退避政策</h4><ul>
+<li><code>BackoffPolicy.EXPONENTIAL</code> 指数方式增长</li>
+<li><code>BackoffPolicy.LINEAR</code> 线性增长</li>
+</ul>
+<h3 id="定义任务的输入-输出"><a href="#定义任务的输入-输出" class="headerlink" title="定义任务的输入/输出"></a>定义任务的输入/输出</h3><p>输入和输出值以键值对的形式存储在 <code>Data</code> 对象中。</p>
+<h4 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h4><div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-comment">// 设置输入数据</span>
+<span class="hljs-keyword">val</span> imageData = workDataOf(Constants.KEY_IMAGE_URI to imageUriString)
+<span class="hljs-comment">// 访问输入参数</span>
+<span class="hljs-keyword">val</span> imageUriInput = getInputData().getString(Constants.KEY_IMAGE_URI)</code></pre></div>
+
+<h4 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h4><p><code>Data</code> 也可用于输出返回值，将其添加到 <code>Result.success()</code> 或 <code>Result.failure()</code> 时的 <code>Result()</code> 中。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UploadWorker</span></span>(appContext: Context, workerParams: WorkerParameters)
+    : Worker(appContext, workerParams) &#123;
+
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">doWork</span><span class="hljs-params">()</span></span>: Result &#123;
+
+            <span class="hljs-comment">// Get the input</span>
+            <span class="hljs-keyword">val</span> imageUriInput = getInputData().getString(Constants.KEY_IMAGE_URI)
+            <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> validate inputs.</span>
+            <span class="hljs-comment">// Do the work</span>
+            <span class="hljs-keyword">val</span> response = uploadFile(imageUriInput)
+
+            <span class="hljs-comment">// Create the output of the work</span>
+            <span class="hljs-keyword">val</span> outputData = workDataOf(Constants.KEY_IMAGE_URL to response.imageUrl)
+
+            <span class="hljs-comment">// Return the output</span>
+            <span class="hljs-keyword">return</span> Result.success(outputData)
+
+    &#125;
+&#125;</code></pre></div>
+
+<h3 id="标记工作"><a href="#标记工作" class="headerlink" title="标记工作"></a>标记工作</h3><p><code>WorkRequest.Builder.addTag(String)</code> 为任意 <code>WorkRequest</code> 对象分配标识字符串，按逻辑对任务进行分组，就可以对使用特定标记的所有任务执行操作。</p>
+<h2 id="工作状态和观察工作"><a href="#工作状态和观察工作" class="headerlink" title="工作状态和观察工作"></a>工作状态和观察工作</h2><h3 id="工作状态"><a href="#工作状态" class="headerlink" title="工作状态"></a>工作状态</h3><ul>
+<li><code>BLOCKED</code> 有尚未完成的前提性工作</li>
+<li><code>ENQUEUED</code> 工作能够在满足 <code>Constraints</code> 和时机条件后立即执行</li>
+<li><code>RUNNING</code> 工作器在活跃运行</li>
+<li>终止 <code>State</code>，只有 <code>OneTimeWorkRequest</code> 可以进入这种 <code>State</code><ul>
+<li><code>SUCCEEDED</code> 工作器返回 <code>Result.success()</code>。</li>
+<li><code>FAILED</code> 工作器返回 <code>Result.failure()</code>。<strong>所有依赖工作也会被标记为 <code>FAILED</code>，并且不会运行</strong>。</li>
+</ul>
+</li>
+<li><code>CANCELLED</code> 明确取消尚未终止的 <code>WorkRequest</code> 时。<strong>所有依赖工作也会被标记为 <code>CANCELLED</code>，并且不会运行。</strong></li>
+</ul>
+<h3 id="观察工作"><a href="#观察工作" class="headerlink" title="观察工作"></a>观察工作<a id="观察工作"></a></h3><p>将工作加入队列后，可以通过 WorkManager 检查其状态，相关信息在 <code>WorkInfo</code> 对象中提供，包括工作的 <code>id</code>、标签、当前 <code>State</code> 和任何输出数据。</p>
+<ul>
+<li><code>WorkManager.getWorkInfoById(UUID)</code> or <code>WorkManager.getWorkInfoByIdLiveData(UUID)</code></li>
+<li><code>WorkManager.getWorkInfosByTag(String)</code> or <code>WorkManager.getWorkInfosByTagLiveData(String)</code></li>
+<li><code>WorkManager.getWorkInfosForUniqueWork(String)</code> or <code>WorkManager.getWorkInfosForUniqueWorkLiveData(String)</code></li>
+</ul>
+<p>利用每个方法的 <code>LiveData</code> 变量，可以通过注册监听器观察 <code>WorkInfo</code> 的变化。</p>
+<div class="hljs"><pre><code class="hljs kotlin">WorkManager.getInstance(myContext).getWorkInfoByIdLiveData(uploadWorkRequest.id)
+        .observe(lifecycleOwner, Observer &#123; workInfo -&gt;
+            <span class="hljs-keyword">if</span> (workInfo != <span class="hljs-literal">null</span> &amp;&amp; workInfo.state == WorkInfo.State.SUCCEEDED) &#123;
+                displayMessage(<span class="hljs-string">"Work finished!"</span>)
+            &#125;
+        &#125;)</code></pre></div>
+
+<h2 id="观察工作器的中间进度"><a href="#观察工作器的中间进度" class="headerlink" title="观察工作器的中间进度"></a>观察工作器的中间进度</h2><p><code>ListenableWorker</code> 支持 <code>setProgressAsync()</code> API，此类 API 可以保留中间进度。</p>
+<div class="note note-warning">
+            <p>只有在运行时才能观察到和更新进度信息。</p>
+          </div>
+
+<h3 id="更新进度"><a href="#更新进度" class="headerlink" title="更新进度"></a>更新进度</h3><p>对于 <code>ListenableWorker</code> 或 <code>Worker</code>，<code>setProgressAsync()</code> 会返回 <code>ListenableFuture&lt;Void&gt;</code>；更新进度是异步过程，因为更新过程包括将进度信息存储在数据库中。在 Kotlin 中，可以使用 <code>CoroutineWorker</code> 对象的 <code>setProgress()</code> 扩展函数来更新进度信息。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProgressWorker</span></span>(context: Context, parameters: WorkerParameters) :
+    CoroutineWorker(context, parameters) &#123;
+
+    <span class="hljs-keyword">companion</span> <span class="hljs-keyword">object</span> &#123;
+        <span class="hljs-keyword">const</span> <span class="hljs-keyword">val</span> Progress = <span class="hljs-string">"Progress"</span>
+        <span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">val</span> delayDuration = <span class="hljs-number">1L</span>
+    &#125;
+
+    <span class="hljs-keyword">override</span> <span class="hljs-keyword">suspend</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">doWork</span><span class="hljs-params">()</span></span>: Result &#123;
+        <span class="hljs-keyword">val</span> firstUpdate = workDataOf(Progress to <span class="hljs-number">0</span>)
+        <span class="hljs-keyword">val</span> lastUpdate = workDataOf(Progress to <span class="hljs-number">100</span>)
+        setProgress(firstUpdate)
+        delay(delayDuration)
+        setProgress(lastUpdate)
+        <span class="hljs-keyword">return</span> Result.success()
+    &#125;
+&#125;</code></pre></div>
+
+<h3 id="观察进度"><a href="#观察进度" class="headerlink" title="观察进度"></a>观察进度</h3><p>使用<a href="#观察工作">观察工作</a>中的 <code>getWorkInfoBy...()</code> 或 <code>getWorkInfoBy...LiveData()</code> 方法，并引用 <code>WorkInfo</code>。</p>
+<div class="hljs"><pre><code class="hljs kotlin">WorkManager.getInstance(applicationContext)
+    <span class="hljs-comment">// requestId is the WorkRequest id</span>
+    .getWorkInfoByIdLiveData(requestId)
+    .observe(observer, Observer &#123; workInfo: WorkInfo? -&gt;
+            <span class="hljs-keyword">if</span> (workInfo != <span class="hljs-literal">null</span>) &#123;
+                <span class="hljs-keyword">val</span> progress = workInfo.progress
+                <span class="hljs-keyword">val</span> value = progress.getInt(Progress, <span class="hljs-number">0</span>)
+                <span class="hljs-comment">// Do something with progress information</span>
+            &#125;
+    &#125;)</code></pre></div>
+
+<h2 id="链接工作"><a href="#链接工作" class="headerlink" title="链接工作"></a>链接工作</h2><ol>
+<li><code>WorkManager.beginWith(OneTimeWorkRequest/List&lt;OneTimeWorkRequest&gt;)</code> 返回 <code>WorkContinuation</code> 实例。</li>
+<li><code>WorkContinuation.then(OneTimeWorkRequest/List&lt;OneTimeWorkRequest&gt;)</code>，每次调用 <code>then()</code> 都会返回一个新的 <code>WorkContinuation</code> 实例。</li>
+<li><code>WorkContinuation.enqueue()</code> 为 <code>WorkContinuation</code> 链排队。</li>
+</ol>
+<div class="note note-primary">
+            <p>如果添加了 <code>OneTimeWorkRequest</code> 的 <code>List</code>，这些请求可能会并行运行。</p>
+          </div>
+
+<div class="hljs"><pre><code class="hljs kotlin">WorkManager.getInstance(myContext)
+    <span class="hljs-comment">// Candidates to run in parallel</span>
+    .beginWith(listOf(filter1, filter2, filter3))
+    <span class="hljs-comment">// Dependent work (only runs after all previous work in chain)</span>
+    .then(compress)
+    .then(upload)
+    <span class="hljs-comment">// Don't forget to enqueue()</span>
+    .enqueue()</code></pre></div>
+
+<h3 id="Input-Merger"><a href="#Input-Merger" class="headerlink" title="Input Merger"></a>Input Merger</h3><p>为了管理来自多个父级 <code>OneTimeWorkRequest</code> 的输入，<code>WorkManager</code> 使用 <code>OneTimeWorkRequestBuilder.setInputMerger()</code>。</p>
+<ul>
+<li><code>OverwritingInputMerger</code> 会尝试将所有输入中的所有键添加到输出中。如果发生冲突，它会覆盖先前设置的键。</li>
+<li><code>ArrayCreatingInputMerger</code> 会尝试合并输入，并在必要时创建数组。</li>
+</ul>
+<h2 id="取消和停止工作"><a href="#取消和停止工作" class="headerlink" title="取消和停止工作"></a><a href="https://developer.android.google.cn/topic/libraries/architecture/workmanager/how-to/cancel-stop-work?hl=zh" target="_blank" rel="noopener">取消和停止工作</a></h2><p><code>WorkManager.cancelWorkById(UUID)</code></p>
+<h2 id="重复性工作"><a href="#重复性工作" class="headerlink" title="重复性工作"></a>重复性工作</h2><p><code>PeriodicWorkRequest</code> 无法链接。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> constraints = Constraints.Builder()
+        .setRequiresCharging(<span class="hljs-literal">true</span>)
+        .build()
+
+<span class="hljs-keyword">val</span> saveRequest =
+PeriodicWorkRequestBuilder&lt;SaveImageToFileWorker&gt;(<span class="hljs-number">1</span>, TimeUnit.HOURS)
+    .setConstraints(constraints)
+    .build()
+
+WorkManager.getInstance(myContext)
+    .enqueue(saveRequest)</code></pre></div>
+
+<h2 id="唯一工作"><a href="#唯一工作" class="headerlink" title="唯一工作"></a>唯一工作</h2><p>调用 <code>WorkManager.enqueueUniqueWork(String, ExistingWorkPolicy, OneTimeWorkRequest)</code> 或 <code>WorkManager.enqueueUniquePeriodicWork(String, ExistingPeriodicWorkPolicy, PeriodicWorkRequest)</code> 创建唯一工作序列。</p>
+<p>第二个参数为冲突解决策略，指定如果已存在具有该唯一名称的未完成工作链，应如何处理。</p>
+<ul>
+<li><code>REPLACE</code> 取消现有工作链，并将其替换为新工作链。</li>
+<li><code>KEEP</code>，保持现有序列并忽略您的新请求。</li>
+<li><code>APPEND</code> 在现有序列的最后一个任务完成后运行新序列的第一个任务。</li>
+</ul>
+<p>创建唯一工作链 <code>WorkManager.beginUniqueWork(String, ExistingWorkPolicy, OneTimeWorkRequest)</code>。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AE%89%E5%8D%93/%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/">后台任务</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BF%9B%E9%98%B6%E7%9F%A5%E8%AF%86/">进阶知识</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/08/02/Android%E4%BD%BF%E7%94%A8Git%E6%97%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E4%BA%8B/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Android使用Git时的一些小事</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/01/%E5%90%8E%E5%8F%B0%E5%A4%84%E7%90%86%E6%8C%87%E5%8D%97/">
+                        <span class="hidden-mobile">后台处理指南</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;
+  目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div> -->
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "WorkManager&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

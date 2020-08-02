@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/Klien.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="记往昔录今朝只待明时">
+  <meta name="author" content="Klien">
+  <meta name="keywords" content="安卓原生开发、python日常脚本、Developer">
+  <title>Service - Klien-m&#39;s 博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/androidstudio.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Klien-m's 博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/1920-1080/android8.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-07-31 18:21">
+      2020年7月31日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      44
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：5 分钟前
+                
+              </p>
+            
+            <article class="markdown-body">
+              <p><a href="https://developer.android.google.cn/guide/components/services?hl=zh#top_of_page" target="_blank" rel="noopener"><code>Service</code></a> 是一种可在后台执行长时间运行操作而不提供界面的组件。服务可由其他应用组件启动，而且即使用户切换到其他应用，服务仍将在后台继续运行。此外，组件可通过<strong>绑定</strong>到服务与之进行交互，甚至是执行<strong>进程间通信(IPC)</strong>。例如，服务可在后台处理网络事务、播放音乐、执行文件 I/O 或与内容提供程序进行交互。</p>
+<a id="more"></a>
+
+<ul>
+<li><a href="#创建启动服务">创建启动服务</a><ul>
+<li><a href="#启动服务">启动服务</a></li>
+<li><a href="#停止服务">停止服务</a></li>
+</ul>
+</li>
+<li><a href="#在前台运行服务">在前台运行服务</a></li>
+<li><a href="#创建后台服务">创建后台服务(IntentService)</a></li>
+<li><a href="#绑定服务">绑定服务</a></li>
+</ul>
+<h2 id="三种不同的服务类型"><a href="#三种不同的服务类型" class="headerlink" title="三种不同的服务类型"></a>三种不同的服务类型</h2><h3 id="前台"><a href="#前台" class="headerlink" title="前台"></a>前台</h3><p>前台服务执行一些用户能注意到的操作。例如，音频应用会使用前台服务来播放音频曲目。前台服务必须显示通知。即使用户停止与应用的交互，前台服务仍会继续运行。</p>
+<h3 id="后台"><a href="#后台" class="headerlink" title="后台"></a>后台</h3><p>后台服务执行用户不会直接注意到的操作。例如，如果应用使用某个服务来压缩其存储空间，则此服务通常是后台服务。</p>
+<div class="note note-danger">
+            <p>注意：如果应用面向 API 级别 26 或更高版本，当应用本身未在前台运行时，系统会对<a href="https://developer.android.google.cn/about/versions/oreo/background?hl=zh" target="_blank" rel="noopener">运行后台服务施加限制</a>。在诸如此类的大多数情况下，应用应改为使用<a href="https://developer.android.google.cn/guide/background?hl=zh" target="_blank" rel="noopener">计划作业</a>。</p>
+          </div>
+
+<h3 id="绑定"><a href="#绑定" class="headerlink" title="绑定"></a>绑定</h3><p>当应用组件通过调用 <code>bindService()</code> 绑定到服务时，服务即处于<em>绑定</em>状态。绑定服务会提供客户端-服务器接口，以便组件与服务进行交互、发送请求、接收结果，甚至是利用进程间通信 (IPC) 跨进程执行这些操作。仅当与另一个应用组件绑定时，绑定服务才会运行。多个组件可同时绑定到该服务，但全部取消绑定后，该服务即会被销毁。</p>
+<div class="note note-danger">
+            <p>注意：服务在其托管进程的主线程中运行，它<strong>既不</strong>创建自己的线程，<strong>也不</strong>在单独的进程中运行（除非另行指定）。如果服务将执行任何 CPU 密集型工作或阻止性操作（例如 MP3 播放或联网），则应通过在服务内创建新线程来完成这项工作。</p>
+          </div>
+
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><p>如果要创建<a href="https://developer.android.google.cn/reference/android/app/Service?hl=zh" target="_blank" rel="noopener">服务</a>，需要先创建 <code>Service</code> 的子类（或使用它的一个现有子类）。以下是需要重写的最重要的回调方法：</p>
+<ul>
+<li><code>onStartCommand()</code><br>当另一个组件请求启动服务时，系统会通过调用 <code>startService()</code> 来调用此方法。执行此方法时，服务即会启动并可在后台<strong>无限期运行</strong>。因此在服务工作完成后，需要通过调用 <code>stopSelf()</code> 或 <code>stopService()</code> 来停止服务。（如果只想提供绑定，则无需实现此方法。）</li>
+<li><code>onBind()</code><br>当另一个组件想要与服务绑定（例如执行 RPC）时，系统会通过调用 <code>bindService()</code> 来调用此方法。在此方法的实现中，必须通过返回 <a href="https://developer.android.google.cn/reference/android/os/IBinder?hl=zh" target="_blank" rel="noopener"><code>IBinder</code></a> 提供一个接口，以供客户端用来与服务进行通信。但是，如果并不希望允许绑定，则应返回 null。</li>
+<li><code>onCreate()</code><br>首次创建服务时，系统会（在调用 <code>onStartCommand()</code> 或 <code>onBind()</code> 之前）调用此方法来执行一次性设置程序。如果服务已在运行，则不会调用此方法。</li>
+<li><code>onDestory()</code><br>当不再使用服务且准备将其销毁时，系统会调用此方法。服务应通过实现此方法来清理任何资源，如线程、注册的侦听器、接收器等。这是服务接收的最后一个调用。</li>
+</ul>
+<h3 id="使用清单文件声明服务"><a href="#使用清单文件声明服务" class="headerlink" title="使用清单文件声明服务"></a>使用清单文件声明服务</h3><p>添加 <code>&lt;service&gt;</code> 元素作为 <code>&lt;application&gt;</code> 元素的子元素。<code>android:name</code> 为其唯一必须的属性，用于指定服务的类名。可通过添加 <code>android:exported</code> 属性并将其设置为 <code>fasle</code>，确保服务仅本应用可适用。<strong>为了避免用户意外停止服务，需添加 <code>android:description</code> 属性，属性值为解释服务的作用及其提供的好处的短句。</strong></p>
+<h2 id="创建启动服务"><a href="#创建启动服务" class="headerlink" title="创建启动服务"></a>创建启动服务<a id="创建启动服务"></a></h2><ul>
+<li><code>Service</code><br>这是适用于所有服务的基类。扩展此类时，必须创建用于执行所有服务工作的新线程，因为服务默认使用应用的主线程，这会降低应用正在运行的任何 Activity 的性能。</li>
+<li><code>IntentService</code><br><code>Service</code> 的子类，使用工作线程逐一处理所有启动请求。如果<strong>不要求</strong>服务同时处理<strong>多个</strong>请求，此类为最佳选择，实现 <code>onHandleIntent()</code>，该方法会接收每个启动请求的 Intent，以便执行后台工作。</li>
+</ul>
+<h3 id="扩展-IntentService-类"><a href="#扩展-IntentService-类" class="headerlink" title="扩展 IntentService 类"></a>扩展 IntentService 类</h3><p>实现 <code>onHandleIntent()</code> 方法即可，若要重写其他回调函数，确保调用超类实现。除 <code>onHandleIntent()</code> 方法外无需调用超类实现的唯一方法就是 <code>onBind()</code>。</p>
+<h3 id="扩展-Service-类"><a href="#扩展-Service-类" class="headerlink" title="扩展 Service 类"></a>扩展 Service 类</h3><p><code>onStartCommand()</code> 方法的返回值必须是以下常量之一：</p>
+<ul>
+<li><code>START_NOT_STICKY</code><br>如果系统在 <code>onStartCommand()</code> 返回后终止服务，则除非有待传递的挂起 Intent，否则系统不会重建服务。这是最安全的选项，可以避免在不必要时以及应用能够轻松重启所有未完成的作业时运行服务。</li>
+<li><code>START_STICKY</code><br>如果系统在 <code>onStartCommand()</code> 返回后终止服务，则其会重建服务并调用 <code>onStartCommand()</code>，但不会重新传递最后一个 Intent。相反，除非有挂起 Intent 要启动服务，否则系统会调用包含空 Intent 的 <code>onStartCommand()</code>。在此情况下，系统会传递这些 Intent。此常量适用于不执行命令、但无限期运行并等待作业的媒体播放器（或类似服务）。</li>
+<li><code>START_REDELIVER_INTENT</code><br>如果系统在 <code>onStartCommand()</code> 返回后终止服务，则其会重建服务，并通过传递给服务的最后一个 Intent 调用 <code>onStartCommand()</code>。所有挂起 Intent 均依次传递。此常量适用于主动执行应立即恢复的作业（例如下载文件）的服务。</li>
+</ul>
+<h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务<a id="启动服务"></a></h3><p>将 <code>Intent</code> 传递给 <code>startService()</code> 或 <code>startForegroundService()</code>，从 Activity 或其他应用组件启动服务。Android 系统会调用服务的 <code>onStartCommand()</code> 方法，如果服务尚未运行，则系统首先会调用 <code>onCreate()</code>，然后调用 <code>onStartCommand()</code>。</p>
+<div class="note note-primary">
+            <p>如果应用面向 API 级别 26 或更高版本，除非应用本身在前台运行，否则系统不会对使用或创建后台服务施加限制。如果应用需要创建前台服务，则需要调用 <code>startForegroundService()</code>，此方法会创建<strong>后台服务</strong>，但它会向系统发出信号，表明服务会<strong>自行提升至前台</strong>。创建服务后，该服务必须在<strong>五秒钟</strong>内调用自己的 [<code>startForeground()</code>][4] 方法。</p>
+          </div>
+
+<p>如果服务未提供绑定，则应用组件与服务间的唯一通信模式便是使用 <code>startService()</code> 传递的 Intent。如果希望服务返回结果，可以为广播创建一个 <code>PendingIntent</code>，将其传递给启动服务的 <code>Intent</code> 中的服务。然后，服务就可以使用广播传递结果。</p>
+<h3 id="停止服务"><a href="#停止服务" class="headerlink" title="停止服务"></a>停止服务<a id="停止服务"></a></h3><p>除非必须回收内存资源，否则系统不会停止或销毁服务。服务必须通过调用 <code>stopSelf()</code> 自行停止运行，或由另一个组件通过调用 <code>stopService()</code> 来停止。</p>
+<p>为了避免在第一个请求结束时停止服务会终止第二个请求的问题，可以使用 <code>stopSelf(int)</code>，传入参数为启动请求的 ID，调用 <code>stopSelf(int)</code> 停止服务时，若 ID 不匹配（已有新的 <code>onStartCommand()</code> 调用），则服务不会停止。</p>
+<h2 id="在前台运行服务"><a href="#在前台运行服务" class="headerlink" title="在前台运行服务"></a>在前台运行服务<a id="在前台运行服务"></a></h2><p>前台服务必须为状态栏提供通知。</p>
+<p>如果应用面向 Android 9（API28）或更高版本并使用前台服务，需要请求 <code>FOREGROUND_SERVICE</code> 权限（普通权限）。</p>
+<p>如要请求让服务在前台运行，需要调用 <a href="https://developer.android.google.cn/reference/android/app/Service?hl=zh#startForeground(int,%20android.app.Notification)" target="_blank" rel="noopener"><code>startForeground()</code></a>。此方法有两个参数：唯一标识通知的整型数和用于状态栏的 Notifition。此通知必须具有 <code>PRIORITY_LOW</code> 或更高的优先级。</p>
+<p>如要从前台移除服务，需要调用 <a href="https://developer.android.google.cn/reference/android/app/Service?hl=zh#stopForeground(boolean)" target="_blank" rel="noopener"><code>stopForeground()</code></a>。此方法参数为布尔值，指示是否需要同时移除状态栏通知，此方法<strong>不会停止服务</strong>。</p>
+<h2 id="创建后台服务-IntentService"><a href="#创建后台服务-IntentService" class="headerlink" title="创建后台服务(IntentService)"></a>创建后台服务(IntentService)<a id="创建后台服务"></a></h2><ul>
+<li>创建 <code>IntentService</code> 子类</li>
+<li>创建所需的回调方法 <code>onHandleIntent()</code></li>
+<li>在清单文件中定义 <code>IntentService</code>。</li>
+</ul>
+<p><code>IntentService</code> 有一些限制：</p>
+<ul>
+<li>无法直接与界面互动。要在界面中显示结果，需要将结果发送到 <code>Activity</code></li>
+<li>工作请求依序执行</li>
+<li>在 <code>IntentService</code> 上运行的操作无法中断</li>
+</ul>
+<h3 id="将工作请求发送到后台服务-JobIntentService"><a href="#将工作请求发送到后台服务-JobIntentService" class="headerlink" title="将工作请求发送到后台服务(JobIntentService)"></a>将工作请求发送到后台服务(JobIntentService)</h3><ul>
+<li><input disabled="" type="checkbox"> JobIntentService</li>
+</ul>
+<h2 id="绑定服务"><a href="#绑定服务" class="headerlink" title="绑定服务"></a>绑定服务<a id="绑定服务"></a></h2><p>实现 <code>onBind()</code> 回调方法返回 <a href="https://developer.android.google.cn/reference/android/os/IBinder?hl=zh" target="_blank" rel="noopener"><code>IBinder</code></a>，收到 <a href="https://developer.android.google.cn/reference/android/os/IBinder?hl=zh" target="_blank" rel="noopener"><code>IBinder</code></a> 后，客户端就可以通过该接口与服务进行交互。完成与服务的交互后，客户端可以通过调用 <code>unbindService()</code> 取消绑定。如果没有绑定到服务的客户端，系统会销毁该服务。</p>
+<p>客户端通过调用 <code>bindService()</code> 绑定服务。调用时，必须提供 <code>ServiceConnection</code>的实现，后者会监控与服务的连接。当创建客户端与服务之间的连接时，Android 系统会调用 <code>ServiceConnection</code> 上的 <code>onServiceConnected()</code>。<code>onServiceConnected()</code> 方法包含 <a href="https://developer.android.google.cn/reference/android/os/IBinder?hl=zh" target="_blank" rel="noopener"><code>IBinder</code></a> 参数，客户端随后使用该参数与绑定服务进行通信。</p>
+<p>只有在第一个客户端绑定服务时，系统才会调用服务的 <code>onBind()</code> 方法来生成 <a href="https://developer.android.google.cn/reference/android/os/IBinder?hl=zh" target="_blank" rel="noopener"><code>IBinder</code></a>。然后，系统会将同一 <a href="https://developer.android.google.cn/reference/android/os/IBinder?hl=zh" target="_blank" rel="noopener"><code>IBinder</code></a> 传递至绑定到相同服务的所有其他客户端，无需再次调用 <code>onBind()</code>。</p>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">var</span> mService: LocalService
+
+<span class="hljs-keyword">val</span> mConnection = <span class="hljs-keyword">object</span> : ServiceConnection &#123;
+    <span class="hljs-comment">// Called when the connection with the service is established</span>
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onServiceConnected</span><span class="hljs-params">(className: <span class="hljs-type">ComponentName</span>, service: <span class="hljs-type">IBinder</span>)</span></span> &#123;
+        <span class="hljs-comment">// Because we have bound to an explicit</span>
+        <span class="hljs-comment">// service that is running in our own process, we can</span>
+        <span class="hljs-comment">// cast its IBinder to a concrete class and directly access it.</span>
+        <span class="hljs-keyword">val</span> binder = service <span class="hljs-keyword">as</span> LocalService.LocalBinder
+        mService = binder.getService()
+        mBound = <span class="hljs-literal">true</span>
+    &#125;
+
+    <span class="hljs-comment">// Called when the connection with the service disconnects unexpectedly</span>
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onServiceDisconnected</span><span class="hljs-params">(className: <span class="hljs-type">ComponentName</span>)</span></span> &#123;
+        Log.e(TAG, <span class="hljs-string">"onServiceDisconnected"</span>)
+        mBound = <span class="hljs-literal">false</span>
+    &#125;
+&#125;</code></pre></div>
+
+<div class="hljs"><pre><code class="hljs kotlin">Intent(<span class="hljs-keyword">this</span>, LocalService::<span class="hljs-class"><span class="hljs-keyword">class</span>.<span class="hljs-title">java</span>).<span class="hljs-title">also</span> </span>&#123; intent -&gt;
+    bindService(intent, connection, Context.BIND_AUTO_CREATE)
+&#125;</code></pre></div>
+
+<h3 id="创建绑定服务"><a href="#创建绑定服务" class="headerlink" title="创建绑定服务"></a>创建绑定服务</h3><h4 id="扩展-Binder-类"><a href="#扩展-Binder-类" class="headerlink" title="扩展 Binder 类"></a>扩展 Binder 类</h4><p>如果服务只是自有应用的后台工作线程，且无需跨进程工作，优先采用此方法。</p>
+<ol>
+<li>在服务中，创建可执行以下某种操作的 Binder 实例：<ul>
+<li>包含客户端可调用的公共方法。</li>
+<li>返回当前的 <code>Service</code> 实例，该实例中包含客户端可调用的公共方法。</li>
+<li>返回由服务承载的其他类的实例，其中包含客户端可调用的公共方法。</li>
+</ul>
+</li>
+<li>在 <code>onBind()</code> 回调方法返回此 <code>Binder</code> 实例。</li>
+<li>在客户端中，从 <code>onServiceConnected()</code> 回调方法接收 <code>Binder</code>，并使用提供的方法调用绑定服务。</li>
+</ol>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LocalService</span> : <span class="hljs-type">Service</span></span>() &#123;
+    <span class="hljs-comment">// Binder given to clients</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">val</span> binder = LocalBinder()
+
+    <span class="hljs-comment">// Random number generator</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">val</span> mGenerator = Random()
+
+    <span class="hljs-comment">/** method for clients  */</span>
+    <span class="hljs-keyword">val</span> randomNumber: <span class="hljs-built_in">Int</span>
+        <span class="hljs-keyword">get</span>() = mGenerator.nextInt(<span class="hljs-number">100</span>)
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * Class used for the client Binder.  Because we know this service always</span>
+<span class="hljs-comment">     * runs in the same process as its clients, we don't need to deal with IPC.</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">inner</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LocalBinder</span> : <span class="hljs-type">Binder</span></span>() &#123;
+        <span class="hljs-comment">// Return this instance of LocalService so clients can call public methods</span>
+        <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">getService</span><span class="hljs-params">()</span></span>: LocalService = <span class="hljs-keyword">this</span><span class="hljs-symbol">@LocalService</span>
+    &#125;
+
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onBind</span><span class="hljs-params">(intent: <span class="hljs-type">Intent</span>)</span></span>: IBinder &#123;
+        <span class="hljs-keyword">return</span> binder
+    &#125;
+&#125;</code></pre></div>
+
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BindingActivity</span> : <span class="hljs-type">Activity</span></span>() &#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">lateinit</span> <span class="hljs-keyword">var</span> mService: LocalService
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> mBound: <span class="hljs-built_in">Boolean</span> = <span class="hljs-literal">false</span>
+
+    <span class="hljs-comment">/** Defines callbacks for service binding, passed to bindService()  */</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">val</span> connection = <span class="hljs-keyword">object</span> : ServiceConnection &#123;
+
+        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onServiceConnected</span><span class="hljs-params">(className: <span class="hljs-type">ComponentName</span>, service: <span class="hljs-type">IBinder</span>)</span></span> &#123;
+            <span class="hljs-comment">// We've bound to LocalService, cast the IBinder and get LocalService instance</span>
+            <span class="hljs-keyword">val</span> binder = service <span class="hljs-keyword">as</span> LocalService.LocalBinder
+            mService = binder.getService()
+            mBound = <span class="hljs-literal">true</span>
+        &#125;
+
+        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onServiceDisconnected</span><span class="hljs-params">(arg0: <span class="hljs-type">ComponentName</span>)</span></span> &#123;
+            mBound = <span class="hljs-literal">false</span>
+        &#125;
+    &#125;
+
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(savedInstanceState: <span class="hljs-type">Bundle</span>?)</span></span> &#123;
+        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState)
+        setContentView(R.layout.main)
+    &#125;
+
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onStart</span><span class="hljs-params">()</span></span> &#123;
+        <span class="hljs-keyword">super</span>.onStart()
+        <span class="hljs-comment">// Bind to LocalService</span>
+        Intent(<span class="hljs-keyword">this</span>, LocalService::<span class="hljs-class"><span class="hljs-keyword">class</span>.<span class="hljs-title">java</span>).<span class="hljs-title">also</span> </span>&#123; intent -&gt;
+            bindService(intent, connection, Context.BIND_AUTO_CREATE)
+        &#125;
+    &#125;
+
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onStop</span><span class="hljs-params">()</span></span> &#123;
+        <span class="hljs-keyword">super</span>.onStop()
+        unbindService(connection)
+        mBound = <span class="hljs-literal">false</span>
+    &#125;
+
+    <span class="hljs-comment">/** Called when a button is clicked (the button in the layout file attaches to</span>
+<span class="hljs-comment">     * this method with the android:onClick attribute)  */</span>
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onButtonClick</span><span class="hljs-params">(v: <span class="hljs-type">View</span>)</span></span> &#123;
+        <span class="hljs-keyword">if</span> (mBound) &#123;
+            <span class="hljs-comment">// Call a method from the LocalService.</span>
+            <span class="hljs-comment">// However, if this call were something that might hang, then this request should</span>
+            <span class="hljs-comment">// occur in a separate thread to avoid slowing down the activity performance.</span>
+            <span class="hljs-keyword">val</span> num: <span class="hljs-built_in">Int</span> = mService.randomNumber
+            Toast.makeText(<span class="hljs-keyword">this</span>, <span class="hljs-string">"number: <span class="hljs-variable">$num</span>"</span>, Toast.LENGTH_SHORT).show()
+        &#125;
+    &#125;
+&#125;</code></pre></div>
+
+<h4 id="使用-Messenger"><a href="#使用-Messenger" class="headerlink" title="使用 Messenger"></a>使用 Messenger</h4><p>如需让接口跨不同进程工作（一次接收一个请求），可以使用 <code>Messenger</code> 为服务创建接口。</p>
+<ol>
+<li>服务实现一个 <code>Handler</code>，由该类为每个客户端调用接收回调。</li>
+<li>服务使用 <code>Handler</code> 来创建 <code>Messenger</code> 对象（对 <code>Handler</code> 的引用）。</li>
+<li><code>Messenger</code> 创建一个 <a href="https://developer.android.google.cn/reference/android/os/IBinder?hl=zh" target="_blank" rel="noopener"><code>IBinder</code></a>，服务通过 <code>onBind()</code> 使其返回客户端。</li>
+<li>客户端使用 <a href="https://developer.android.google.cn/reference/android/os/IBinder?hl=zh" target="_blank" rel="noopener"><code>IBinder</code></a> 将 <code>Messenger</code>（其引用服务的 <code>Handler</code>）实例化，然后使用后者将 <code>Message</code> 对象发送给服务。</li>
+<li>服务在其 <code>Handler</code> 中（具体地讲，是在 <code>handleMessage()</code> 方法中）接收每个 <code>Message</code>。</li>
+</ol>
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-comment">/** Command to the service to display a message  */</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">val</span> MSG_SAY_HELLO = <span class="hljs-number">1</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MessengerService</span> : <span class="hljs-type">Service</span></span>() &#123;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * Target we publish for clients to send messages to IncomingHandler.</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">lateinit</span> <span class="hljs-keyword">var</span> mMessenger: Messenger
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * Handler of incoming messages from clients.</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">internal</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IncomingHandler</span></span>(
+            context: Context,
+            <span class="hljs-keyword">private</span> <span class="hljs-keyword">val</span> applicationContext: Context = context.applicationContext
+    ) : Handler() &#123;
+        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">handleMessage</span><span class="hljs-params">(msg: <span class="hljs-type">Message</span>)</span></span> &#123;
+            <span class="hljs-keyword">when</span> (msg.what) &#123;
+                MSG_SAY_HELLO -&gt;
+                    Toast.makeText(applicationContext, <span class="hljs-string">"hello!"</span>, Toast.LENGTH_SHORT).show()
+                <span class="hljs-keyword">else</span> -&gt; <span class="hljs-keyword">super</span>.handleMessage(msg)
+            &#125;
+        &#125;
+    &#125;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * When binding to the service, we return an interface to our messenger</span>
+<span class="hljs-comment">     * for sending messages to the service.</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onBind</span><span class="hljs-params">(intent: <span class="hljs-type">Intent</span>)</span></span>: IBinder? &#123;
+        Toast.makeText(applicationContext, <span class="hljs-string">"binding"</span>, Toast.LENGTH_SHORT).show()
+        mMessenger = Messenger(IncomingHandler(<span class="hljs-keyword">this</span>))
+        <span class="hljs-keyword">return</span> mMessenger.binder
+    &#125;
+&#125;</code></pre></div>
+
+<div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ActivityMessenger</span> : <span class="hljs-type">Activity</span></span>() &#123;
+    <span class="hljs-comment">/** Messenger for communicating with the service.  */</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> mService: Messenger? = <span class="hljs-literal">null</span>
+
+    <span class="hljs-comment">/** Flag indicating whether we have called bind on the service.  */</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> bound: <span class="hljs-built_in">Boolean</span> = <span class="hljs-literal">false</span>
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * Class for interacting with the main interface of the service.</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">val</span> mConnection = <span class="hljs-keyword">object</span> : ServiceConnection &#123;
+
+        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onServiceConnected</span><span class="hljs-params">(className: <span class="hljs-type">ComponentName</span>, service: <span class="hljs-type">IBinder</span>)</span></span> &#123;
+            <span class="hljs-comment">// This is called when the connection with the service has been</span>
+            <span class="hljs-comment">// established, giving us the object we can use to</span>
+            <span class="hljs-comment">// interact with the service.  We are communicating with the</span>
+            <span class="hljs-comment">// service using a Messenger, so here we get a client-side</span>
+            <span class="hljs-comment">// representation of that from the raw IBinder object.</span>
+            mService = Messenger(service)
+            bound = <span class="hljs-literal">true</span>
+        &#125;
+
+        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onServiceDisconnected</span><span class="hljs-params">(className: <span class="hljs-type">ComponentName</span>)</span></span> &#123;
+            <span class="hljs-comment">// This is called when the connection with the service has been</span>
+            <span class="hljs-comment">// unexpectedly disconnected -- that is, its process crashed.</span>
+            mService = <span class="hljs-literal">null</span>
+            bound = <span class="hljs-literal">false</span>
+        &#125;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">sayHello</span><span class="hljs-params">(v: <span class="hljs-type">View</span>)</span></span> &#123;
+        <span class="hljs-keyword">if</span> (!bound) <span class="hljs-keyword">return</span>
+        <span class="hljs-comment">// Create and send a message to the service, using a supported 'what' value</span>
+        <span class="hljs-keyword">val</span> msg: Message = Message.obtain(<span class="hljs-literal">null</span>, MSG_SAY_HELLO, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>)
+        <span class="hljs-keyword">try</span> &#123;
+            mService?.send(msg)
+        &#125; <span class="hljs-keyword">catch</span> (e: RemoteException) &#123;
+            e.printStackTrace()
+        &#125;
+
+    &#125;
+
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(savedInstanceState: <span class="hljs-type">Bundle</span>?)</span></span> &#123;
+        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState)
+        setContentView(R.layout.main)
+    &#125;
+
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onStart</span><span class="hljs-params">()</span></span> &#123;
+        <span class="hljs-keyword">super</span>.onStart()
+        <span class="hljs-comment">// Bind to the service</span>
+        Intent(<span class="hljs-keyword">this</span>, MessengerService::<span class="hljs-class"><span class="hljs-keyword">class</span>.<span class="hljs-title">java</span>).<span class="hljs-title">also</span> </span>&#123; intent -&gt;
+            bindService(intent, mConnection, Context.BIND_AUTO_CREATE)
+        &#125;
+    &#125;
+
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onStop</span><span class="hljs-params">()</span></span> &#123;
+        <span class="hljs-keyword">super</span>.onStop()
+        <span class="hljs-comment">// Unbind from the service</span>
+        <span class="hljs-keyword">if</span> (bound) &#123;
+            unbindService(mConnection)
+            bound = <span class="hljs-literal">false</span>
+        &#125;
+    &#125;
+&#125;</code></pre></div>
+
+<h4 id="使用-AIDL"><a href="#使用-AIDL" class="headerlink" title="使用 AIDL"></a>使用 AIDL</h4><p>如果想让服务同时处理多个请求，可以使用 AIDL。</p>
+<h3 id="管理绑定服务的生命周期"><a href="#管理绑定服务的生命周期" class="headerlink" title="管理绑定服务的生命周期"></a>管理绑定服务的生命周期</h3><p><img src="/img/%E6%8F%92%E5%9B%BE/service_binding_tree_lifecycle.png" srcset="/img/loading.gif" alt="绑定服务的生命周期"></p>
+<h2 id="管理服务的生命周期"><a href="#管理服务的生命周期" class="headerlink" title="管理服务的生命周期"></a>管理服务的生命周期</h2><ul>
+<li><code>startService()</code> -&gt; <code>stopSelf()</code> or <code>stopService()</code></li>
+<li><code>bindService()</code> -&gt; <code>unbindService()</code><br><img src="/img/%E6%8F%92%E5%9B%BE/service_lifecycle.png" srcset="/img/loading.gif" alt="服务生命周期"></li>
+</ul>
+<h2 id="报告工作状态"><a href="#报告工作状态" class="headerlink" title="报告工作状态"></a>报告工作状态</h2><ul>
+<li><input disabled="" type="checkbox"> <code>LocalBroadcastManager</code></li>
+<li><input disabled="" type="checkbox"> <code>BroadCastReceiver</code></li>
+</ul>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AE%89%E5%8D%93/%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6/">四大组件</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/31/AIDL/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">AIDL</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/31/GitBook%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8(%E7%AE%80)/">
+                        <span class="hidden-mobile">GitBook使用入门(简)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;
+  目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div> -->
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Service&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

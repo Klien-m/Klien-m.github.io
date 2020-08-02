@@ -213,7 +213,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 分钟前
+                  本文最后更新于：16 分钟前
                 
               </p>
             
@@ -222,19 +222,18 @@
 <a id="more"></a>
 
 <ul>
-<li><a href="#导包">导入包</a></li>
 <li><a href="#创建层次结构">创建层次结构(XML &amp; 代码)</a></li>
 <li><a href="#查找偏好设置">查找偏好设置</a></li>
 <li><a href="#读取偏好设置值">读取偏好设置值</a></li>
 <li><a href="#偏好设置操作">偏好设置操作(Intent &amp; onPreferenceClickListener)</a></li>
 <li><a href="#监听偏好设置值的更改">监听偏好设置值的更改</a></li>
 <li><a href="#偏好设置数据存储">偏好设置数据存储</a><ul>
-<li><a href="#PreferenceDataStore">自定义数据存储</a></li>
+<li><a href="#使用自定义数据存储">自定义数据存储</a></li>
 </ul>
 </li>
 <li><a href="#偏好设置组件">偏好设置组件</a></li>
 </ul>
-<h2 id="设置使用入门（概览）"><a href="#设置使用入门（概览）" class="headerlink" title="设置使用入门（概览）"></a>设置使用入门（概览）<a id="导包"></a></h2><div class="hljs"><pre><code class="hljs java">implementation <span class="hljs-string">'androidx.preference:preference:1.1.1'</span></code></pre></div>
+<h2 id="设置使用入门（概览）"><a href="#设置使用入门（概览）" class="headerlink" title="设置使用入门（概览）"></a>设置使用入门（概览）</h2><div class="hljs"><pre><code class="hljs java">implementation <span class="hljs-string">'androidx.preference:preference:1.1.1'</span></code></pre></div>
 
 <h3 id="创建层次结构"><a href="#创建层次结构" class="headerlink" title="创建层次结构"></a>创建层次结构<a id="创建层次结构"></a></h3><h4 id="将层次结构定义为-XML-资源"><a href="#将层次结构定义为-XML-资源" class="headerlink" title="将层次结构定义为 XML 资源"></a>将层次结构定义为 XML 资源</h4><div class="hljs"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">PreferenceScreen</span></span>
 <span class="hljs-tag">    <span class="hljs-attr">xmlns:app</span>=<span class="hljs-string">"http://schemas.android.com/apk/res-auto"</span>&gt;</span>
@@ -374,7 +373,7 @@ activityPreference.setIntent(intent)</code></pre></div>
             <p>使用 <code>SharedPreferences</code> 保存 <code>Preference</code> 的值时，所用键与为 <code>Preference</code> 设置的键相同。</p>
           </div>
 
-<h4 id="PreferenceDataStore"><a href="#PreferenceDataStore" class="headerlink" title="PreferenceDataStore"></a><a href="#PreferenceDataStore">PreferenceDataStore</a></h4><p>如果应用具有特定于设备的配置选项，设备上的每个用户都会有单独的设置，此时 <code>SharedPreferences</code> 就不是太理想的解决方案。</p>
+<h4 id="PreferenceDataStore"><a href="#PreferenceDataStore" class="headerlink" title="PreferenceDataStore"></a><a href="#使用自定义数据存储">PreferenceDataStore</a></h4><p>如果应用具有特定于设备的配置选项，设备上的每个用户都会有单独的设置，此时 <code>SharedPreferences</code> 就不是太理想的解决方案。</p>
 <h3 id="读取偏好设置值"><a href="#读取偏好设置值" class="headerlink" title="读取偏好设置值"></a>读取偏好设置值<a id="读取偏好设置值"></a></h3><p>要检索正在使用的 <code>SharedPreferences</code> 对象，可以调用 <a href="https://developer.android.google.cn/reference/androidx/preference/PreferenceManager?hl=zh#getDefaultSharedPreferences(android.content.Context)" target="_blank" rel="noopener"><code>PreferenceManager.getDefaultSharedPreferences()</code></a>。</p>
 <h3 id="监听偏好设置值的更改"><a href="#监听偏好设置值的更改" class="headerlink" title="监听偏好设置值的更改"></a>监听偏好设置值的更改<a id="监听偏好设置值的更改"></a></h3><p>要监听 <code>Preference</code> 值得更改，可以在以下两个接口中选择一个：</p>
 <ul>
@@ -416,7 +415,7 @@ activityPreference.setIntent(intent)</code></pre></div>
 </tbody></table>
 <h4 id="OnSharedPreferenceChangeListener"><a href="#OnSharedPreferenceChangeListener" class="headerlink" title="OnSharedPreferenceChangeListener"></a><a href="https://developer.android.google.cn/guide/topics/ui/settings/use-saved-values?hl=zh#onsharedpreferencechangelistener" target="_blank" rel="noopener">OnSharedPreferenceChangeListener</a></h4><p>使用此接口时，需要通过 <code>registerOnSharedPreferenceChangedListener()</code> 注册监听器。</p>
 <p>为正确管理 <code>Activity</code> 或 <code>Fragment</code> 的生命周期，需要在 <code>onResume()</code> 和 <code>onPause()</code> 回调中注册和取消注册此监听器。</p>
-<h3 id="使用自定义数据存储"><a href="#使用自定义数据存储" class="headerlink" title="使用自定义数据存储"></a>使用自定义数据存储<a id="PreferenceDataStore"></a></h3><h4 id="实现数据存储"><a href="#实现数据存储" class="headerlink" title="实现数据存储"></a>实现数据存储</h4><p>创建一个扩展 <a href="https://developer.android.google.cn/reference/androidx/preference/PreferenceDataStore?hl=zh" target="_blank" rel="noopener"><code>PreferenceDataStore</code></a> 的类，以下示例创建了一个处理 <code>String</code> 值得数据存储：</p>
+<h3 id="使用自定义数据存储"><a href="#使用自定义数据存储" class="headerlink" title="使用自定义数据存储"></a>使用自定义数据存储<a id="使用自定义数据存储"></a></h3><h4 id="实现数据存储"><a href="#实现数据存储" class="headerlink" title="实现数据存储"></a>实现数据存储</h4><p>创建一个扩展 <a href="https://developer.android.google.cn/reference/androidx/preference/PreferenceDataStore?hl=zh" target="_blank" rel="noopener"><code>PreferenceDataStore</code></a> 的类，以下示例创建了一个处理 <code>String</code> 值得数据存储：</p>
 <div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DataStore</span> : <span class="hljs-type">PreferenceDataStore</span></span>() &#123;
     <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">putString</span><span class="hljs-params">(key: <span class="hljs-type">String</span>, value: <span class="hljs-type">String</span>?)</span></span> &#123;
         <span class="hljs-comment">// Save the value somewhere</span>
@@ -538,6 +537,8 @@ preferenceManager.preferenceDataStore = dataStore</code></pre></div>
                     
                       <a class="hover-with-bg" href="/categories/%E5%AE%89%E5%8D%93/">安卓</a>
                     
+                      <a class="hover-with-bg" href="/categories/%E5%AE%89%E5%8D%93/%E5%85%B6%E4%BB%96/">其他</a>
+                    
                   </div>
                 
                 
@@ -556,6 +557,12 @@ preferenceManager.preferenceDataStore = dataStore</code></pre></div>
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
+                    
+                      <a href="/2020/07/30/Android-Studio-%E6%8F%92%E4%BB%B6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Android Studio 插件</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </div>
                   <div class="post-next col-6">
