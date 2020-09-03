@@ -213,7 +213,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：7 小时前
+                  本文最后更新于：1 个月前
                 
               </p>
             
@@ -249,10 +249,11 @@
 
 <span class="hljs-tag">&lt;/<span class="hljs-name">PreferenceScreen</span>&gt;</span></code></pre></div>
 
-<div class="note note-danger">
-            <p>注意：</p><ul><li>根标签必须为 <code>&lt;PreferenceScreen&gt;</code>，XML 资源必须放置于 res/xml/ 目录。</li><li>构建层次结构时，每个 <code>Preference</code> 都应配有唯一的密钥 <code>app:key</code>。</li></ul>
-          </div>
-
+<p>注意：</p>
+<ul>
+<li>根标签必须为 <code>&lt;PreferenceScreen&gt;</code>，XML 资源必须放置于 res/xml/ 目录。</li>
+<li>构建层次结构时，每个 <code>Preference</code> 都应配有唯一的密钥 <code>app:key</code>。</li>
+</ul>
 <h4 id="通过代码构建层次结构"><a href="#通过代码构建层次结构" class="headerlink" title="通过代码构建层次结构"></a><a href="#在代码中构建层次结构">通过代码构建层次结构</a></h4><h3 id="扩充层次结构"><a href="#扩充层次结构" class="headerlink" title="扩充层次结构"></a>扩充层次结构</h3><p>若要从 XML 属性中扩充层次结构，则需要先创建一个 <code>PreferenceFragmentCompat</code>，替换 <code>onCreatePreferences()</code>，然后提供 XML 资源进行扩充，如以下示例所示：</p>
 <div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SettingsFragment</span> : <span class="hljs-type">PreferenceFragmentCompat</span></span>() &#123;
     <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onCreatePreferences</span><span class="hljs-params">(savedInstanceState: <span class="hljs-type">Bundle</span>?, rootKey: <span class="hljs-type">String</span>?)</span></span> &#123;
@@ -369,10 +370,7 @@ activityPreference.setIntent(intent)</code></pre></div>
 </ul>
 <h4 id="onPreferenceClickListener"><a href="#onPreferenceClickListener" class="headerlink" title="onPreferenceClickListener"></a>onPreferenceClickListener</h4><h2 id="使用已保存的值"><a href="#使用已保存的值" class="headerlink" title="使用已保存的值"></a>使用已保存的值</h2><p>如何存储和使用由 Preference 库保存的 <code>Preference</code> 值。</p>
 <h3 id="偏好设置数据存储"><a href="#偏好设置数据存储" class="headerlink" title="偏好设置数据存储"></a>偏好设置数据存储<a id="偏好设置数据存储"></a></h3><h4 id="SharedPreferences"><a href="#SharedPreferences" class="headerlink" title="SharedPreferences"></a>SharedPreferences</h4><p>默认情况下，<code>Preference</code> 使用 <code>SharedPreferences</code> 保存值。<br>对于在应用会话运行期间保存的文件，可通过 <code>SharedPreferences</code> API 读取和写入简单的键值对。<br>Preference 库使用不公开的 <code>SharedPreferences</code> 实例。</p>
-<div class="note note-info">
-            <p>使用 <code>SharedPreferences</code> 保存 <code>Preference</code> 的值时，所用键与为 <code>Preference</code> 设置的键相同。</p>
-          </div>
-
+<p><strong>使用 <code>SharedPreferences</code> 保存 <code>Preference</code> 的值时，所用键与为 <code>Preference</code> 设置的键相同。</strong></p>
 <h4 id="PreferenceDataStore"><a href="#PreferenceDataStore" class="headerlink" title="PreferenceDataStore"></a><a href="#使用自定义数据存储">PreferenceDataStore</a></h4><p>如果应用具有特定于设备的配置选项，设备上的每个用户都会有单独的设置，此时 <code>SharedPreferences</code> 就不是太理想的解决方案。</p>
 <h3 id="读取偏好设置值"><a href="#读取偏好设置值" class="headerlink" title="读取偏好设置值"></a>读取偏好设置值<a id="读取偏好设置值"></a></h3><p>要检索正在使用的 <code>SharedPreferences</code> 对象，可以调用 <a href="https://developer.android.google.cn/reference/androidx/preference/PreferenceManager?hl=zh#getDefaultSharedPreferences(android.content.Context)" target="_blank" rel="noopener"><code>PreferenceManager.getDefaultSharedPreferences()</code></a>。</p>
 <h3 id="监听偏好设置值的更改"><a href="#监听偏好设置值的更改" class="headerlink" title="监听偏好设置值的更改"></a>监听偏好设置值的更改<a id="监听偏好设置值的更改"></a></h3><p>要监听 <code>Preference</code> 值得更改，可以在以下两个接口中选择一个：</p>
@@ -426,10 +424,7 @@ activityPreference.setIntent(intent)</code></pre></div>
     &#125;
 &#125;</code></pre></div>
 
-<div class="note note-warning">
-            <p>由于包含数据存储的 <code>Fragment</code> 或 <code>Activity</code> 可能会在保留值的过程中被销毁，因此应该序列化数据，以免丢失用户更改的任何值。</p>
-          </div>
-
+<p><strong>由于包含数据存储的 <code>Fragment</code> 或 <code>Activity</code> 可能会在保留值的过程中被销毁，因此应该序列化数据，以免丢失用户更改的任何值。</strong></p>
 <h4 id="启用数据存储"><a href="#启用数据存储" class="headerlink" title="启用数据存储"></a>启用数据存储</h4><p>实现数据存储后，必须在 <code>onCreatePreferences()</code> 中设置新的数据存储，以便 <code>Preference</code> 对象使用数据存储来保留值，而不是使用默认的 <code>SharedPreferences</code>。可以为每个 <code>Preference</code> 或整个层次结构启用数据存储。</p>
 <ul>
 <li><p>为特定 <code>Preference</code> 启用自定义数据存储，需要对特定 <code>Preference</code> 调用 <code>setPreferenceDataStore()</code>：</p>
@@ -443,10 +438,7 @@ preferenceManager.preferenceDataStore = dataStore</code></pre></div>
 </li>
 </ul>
 <p>为特定 <code>Preference</code> 设置的数据存储会替换针对相应层次结构设置的任何数据存储。在大多数情况下，应为<strong>整个层次结构</strong>设置数据存储。</p>
-<div class="note note-info">
-            <p>注意：如果在某个 Preference 附加到层次结构之后为该 Preference 设置数据存储，则 Preference 的初始值将<strong>不再</strong>传播。</p>
-          </div>
-
+<p><strong>注意：如果在某个 Preference 附加到层次结构之后为该 Preference 设置数据存储，则 Preference 的初始值将</strong>不再<strong>传播。</strong></p>
 <h2 id="在代码中构建层次结构"><a href="#在代码中构建层次结构" class="headerlink" title="在代码中构建层次结构"></a>在代码中构建层次结构<a id="在代码中构建层次结构"></a></h2><p>可以在 <code>onCreatePreferences()</code> 中以编程方式创建层次结构：</p>
 <div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onCreatePreferences</span><span class="hljs-params">(savedInstanceState: <span class="hljs-type">Bundle</span>?, rootKey: <span class="hljs-type">String</span>?)</span></span> &#123;
     <span class="hljs-keyword">val</span> context = preferenceManager.context

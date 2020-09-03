@@ -213,7 +213,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：6 小时前
+                  本文最后更新于：1 个月前
                 
               </p>
             
@@ -319,10 +319,7 @@
         &#125;)</code></pre></div>
 
 <h2 id="观察工作器的中间进度"><a href="#观察工作器的中间进度" class="headerlink" title="观察工作器的中间进度"></a>观察工作器的中间进度</h2><p><code>ListenableWorker</code> 支持 <code>setProgressAsync()</code> API，此类 API 可以保留中间进度。</p>
-<div class="note note-warning">
-            <p>只有在运行时才能观察到和更新进度信息。</p>
-          </div>
-
+<p><strong>只有在运行时才能观察到和更新进度信息。</strong></p>
 <h3 id="更新进度"><a href="#更新进度" class="headerlink" title="更新进度"></a>更新进度</h3><p>对于 <code>ListenableWorker</code> 或 <code>Worker</code>，<code>setProgressAsync()</code> 会返回 <code>ListenableFuture&lt;Void&gt;</code>；更新进度是异步过程，因为更新过程包括将进度信息存储在数据库中。在 Kotlin 中，可以使用 <code>CoroutineWorker</code> 对象的 <code>setProgress()</code> 扩展函数来更新进度信息。</p>
 <div class="hljs"><pre><code class="hljs kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProgressWorker</span></span>(context: Context, parameters: WorkerParameters) :
     CoroutineWorker(context, parameters) &#123;
@@ -359,10 +356,7 @@
 <li><code>WorkContinuation.then(OneTimeWorkRequest/List&lt;OneTimeWorkRequest&gt;)</code>，每次调用 <code>then()</code> 都会返回一个新的 <code>WorkContinuation</code> 实例。</li>
 <li><code>WorkContinuation.enqueue()</code> 为 <code>WorkContinuation</code> 链排队。</li>
 </ol>
-<div class="note note-primary">
-            <p>如果添加了 <code>OneTimeWorkRequest</code> 的 <code>List</code>，这些请求可能会并行运行。</p>
-          </div>
-
+<p><strong>如果添加了 <code>OneTimeWorkRequest</code> 的 <code>List</code>，这些请求可能会并行运行。</strong></p>
 <div class="hljs"><pre><code class="hljs kotlin">WorkManager.getInstance(myContext)
     <span class="hljs-comment">// Candidates to run in parallel</span>
     .beginWith(listOf(filter1, filter2, filter3))

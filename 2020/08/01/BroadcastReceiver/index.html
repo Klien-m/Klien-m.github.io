@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      985 字
+      983 字
     </span>
   
 
@@ -213,7 +213,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 小时前
+                  本文最后更新于：1 个月前
                 
               </p>
             
@@ -260,15 +260,8 @@
 <li>创建 <code>IntentFilter</code> 并调用 <code>registerReceiver(BroadcastReceiver, IntentFilter)</code> 来注册接收器。</li>
 <li>要停止广播，可以调用 <code>unregisterReceiver(android.content.BroadcastReceiver)</code>。</li>
 </ol>
-<div class="note note-primary">
-            <p>注意注册和注销接收器的位置。如果使用 Activity Context 在 <code>onCreate()</code> 中注册接收器，则需要在 <code>onDestory()</code> 中注销，以防止接收器从 Activity Context 中泄露出去。如果在 <code>onResume()</code> 中注册接收器，应在 <code>onPause()</code> 中注销，以防止多次注册接收器（此举可以减少不必要的系统开销，在暂停时停止接收广播）。</p>
-          </div>
-
+<p><strong>注意注册和注销接收器的位置。如果使用 Activity Context 在 <code>onCreate()</code> 中注册接收器，则需要在 <code>onDestory()</code> 中注销，以防止接收器从 Activity Context 中泄露出去。如果在 <code>onResume()</code> 中注册接收器，应在 <code>onPause()</code> 中注销，以防止多次注册接收器（此举可以减少不必要的系统开销，在暂停时停止接收广播）。</strong></p>
 <h3 id="对进程状态的影响"><a href="#对进程状态的影响" class="headerlink" title="对进程状态的影响"></a>对进程状态的影响</h3><p><code>BroadcastReceiver</code> 的状态会影响其所在进程的状态，因此不应从广播接收器启动长时间运行的后太线程。<code>onReceive()</code> 完成后，系统可以随时终止进程来回收内存，在此过程中，也会终止进程中运行的派生线程。要避免这种情况，可以调用 <a href="https://developer.android.google.cn/reference/android/content/BroadcastReceiver?hl=zh#goAsync()" target="_blank" rel="noopener"><code>goAsync()</code></a> 或使用 <code>JobScheduler</code> 从接收器调度 <code>JobService</code>。</p>
-<ul>
-<li><input disabled="" type="checkbox"> JobScheduler</li>
-<li><input disabled="" type="checkbox"> JobService</li>
-</ul>
 <h2 id="发送广播"><a href="#发送广播" class="headerlink" title="发送广播"></a>发送广播</h2><ul>
 <li><code>sendOrderedBroadcast(Intent, String)</code><br>一次向一个接收器发送广播。当接收器逐个顺序执行时，接收器可以向下传递效果，也可以中止广播。</li>
 <li><code>sendBroadcast(Intent)</code><br>常规广播，会按随机的顺序向所有接收器发送广播。</li>

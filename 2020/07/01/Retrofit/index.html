@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      505 字
+      1.2k 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      15
        分钟
     </span>
   
@@ -213,7 +213,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：4 小时前
+                  本文最后更新于：1 个月前
                 
               </p>
             
@@ -247,12 +247,94 @@ Scalars (primitives, boxed, and String): com.squareup.retrofit2:converter-scalar
 
 <h3 id="5-创建用于配置网络请求的接口"><a href="#5-创建用于配置网络请求的接口" class="headerlink" title="5. 创建用于配置网络请求的接口"></a>5. 创建用于配置网络请求的接口</h3><p>Retrofit 将 Http 请求抽象成 Java 接口，采用<strong>注解</strong>描述网络请求参数和配置网络请求参数</p>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">IGetRequest</span> </span>&#123;
-    <span class="hljs-meta">@GET</span>(<span class="hljs-string">"openapi.do?keyfrom=Yanzhikai&amp;key=2032414398&amp;type=data&amp;doctype=json&amp;version=1.1&amp;q=car"</span>)
-    <span class="hljs-function">Call&lt;ResultData&gt;  <span class="hljs-title">getCall</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-meta">@GET</span>(<span class="hljs-string">"getIpInfo.php?ip=59.108.54.37"</span>)
+    <span class="hljs-function">Call&lt;ResultData&gt; <span class="hljs-title">getCall</span><span class="hljs-params">()</span></span>;
 &#125;</code></pre></div>
 
-<p><strong>注解说明</strong><br>    + 网络请求方法：@GET、@POST、@PUT、@DELETE、@HEAD（常用）<br>    + 网络请求标记：@FormUrlEncoded、@Multipart、@Streaming<br>    + 网络请求参数：@Header &amp; @Headers、@Body、@Field、@FieldMap、@Part、@PartMap、@Query、@QueryMap、@Path、@Url<br>    详细解释见如下<a href="https://www.jianshu.com/p/a3e162261ab6" target="_blank" rel="noopener">博文链接</a></p>
-<h3 id="6-创建-Retrofit-实例"><a href="#6-创建-Retrofit-实例" class="headerlink" title="6. 创建 Retrofit 实例"></a>6. 创建 Retrofit 实例</h3><div class="hljs"><pre><code class="hljs java">Retrofit retrofit = <span class="hljs-keyword">new</span> Retrofit.Builder()
+<h4 id="请求方法注解"><a href="#请求方法注解" class="headerlink" title="请求方法注解"></a>请求方法注解</h4><ul>
+<li>@GET</li>
+<li>@POST</li>
+<li>@PUT</li>
+<li>@DELETE</li>
+<li>@HEAD（常用）</li>
+</ul>
+<h4 id="标记类注解"><a href="#标记类注解" class="headerlink" title="标记类注解"></a>标记类注解</h4><ul>
+<li>@FormUrlEncoded 表单请求</li>
+<li>@Multipart 注解表示允许多个 @Part</li>
+<li>@Streaming 代表响应的数据以流的形式返回，如果不适用它，则默认会把全部数据加载到内存，所以下载大文件时需要加上这个注解。</li>
+</ul>
+<h4 id="参数类注解"><a href="#参数类注解" class="headerlink" title="参数类注解"></a>参数类注解</h4><h5 id="GET-请求访问网络"><a href="#GET-请求访问网络" class="headerlink" title="GET 请求访问网络"></a>GET 请求访问网络</h5><ul>
+<li><p>@Path 动态配置 URL 地址</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">IGetRequest</span> </span>&#123;
+    <span class="hljs-meta">@GET</span>(<span class="hljs-string">"&#123;path&#125;/getIpInfo.php?ip=59.108.54.37"</span>)
+    <span class="hljs-function">Call&lt;ResultData&gt; <span class="hljs-title">getCall</span><span class="hljs-params">(@Path(<span class="hljs-string">"path"</span>)</span> String path)</span>;
+&#125;</code></pre></div>
+
+<p>在 GET 注解中包含了 <code>{path}</code>，它对应着 @Path 注解中的 <code>&quot;path&quot;</code>，用来替换 GET 注解中的 <code>{path}</code> 的正是需要传入的 <code>String path</code> 的值。</p>
+</li>
+<li><p>@Query 动态指定查询条件</p>
+</li>
+<li><p>@QueryMap 动态指定查询条件组</p>
+</li>
+</ul>
+<h5 id="POST-请求访问网络"><a href="#POST-请求访问网络" class="headerlink" title="POST 请求访问网络"></a>POST 请求访问网络</h5><ul>
+<li><p>@Field 传输数据类型为键值对</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">IGetRequest</span> </span>&#123;
+    <span class="hljs-meta">@FormUrlEncoded</span>
+    <span class="hljs-meta">@POST</span>(<span class="hljs-string">"getIpInfo.php"</span>)
+    <span class="hljs-function">Call&lt;IpModel&gt; <span class="hljs-title">getIpMsg</span><span class="hljs-params">(@Field(<span class="hljs-string">"ip"</span>)</span> String first)</span>;
+&#125;</code></pre></div>
+
+<p>首先用 <code>@FormUrlEncoded</code> 注解来标明这是一个表单请求，然后在 <code>getIpMsg</code> 方法中使用 <code>@Field</code> 注解来标示所对应的 String 类型数据的键，从而组成一组键值对进行传递。</p>
+</li>
+<li><p>@Body 传输数据类型 JSON 字符串</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">IGetRequest</span> </span>&#123;
+    <span class="hljs-meta">@POST</span>(<span class="hljs-string">"getIpInfo.php"</span>)
+    <span class="hljs-function">Call&lt;IpModel&gt; <span class="hljs-title">getIpMsg</span><span class="hljs-params">(@Body Ip ip)</span></span>;
+&#125;</code></pre></div>
+
+<p>用 <code>@Body</code> 这个注解标识参数对象即可，Retrofit 会将 Ip 对象转换为字符串。</p>
+</li>
+<li><p>@Part 单个文件上传</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">UploadFileForPart</span> </span>&#123;
+    <span class="hljs-meta">@Multipart</span>
+    <span class="hljs-meta">@POST</span>(<span class="hljs-string">"user/photo"</span>)
+    <span class="hljs-function">Call&lt;User&gt; <span class="hljs-title">updateUser</span><span class="hljs-params">(@Part MultipartBody.Part photo, @Part(<span class="hljs-string">"description"</span>)</span> RequestBody description)</span>;
+&#125;</code></pre></div>
+
+<p><code>@Multipart</code> 注解表示允许多个 <code>@Part</code>。<code>updateUser</code> 方法的第一个参数是准备上传的图片文件，另一个参数是 RequestBody 类型，用来传递简单的键值对。</p>
+</li>
+<li><p>@PartMap 多个文件上传</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">UploadFileForPart</span> </span>&#123;
+    <span class="hljs-meta">@Multipart</span>
+    <span class="hljs-meta">@POST</span>(<span class="hljs-string">"user/photo"</span>)
+    <span class="hljs-function">Call&lt;User&gt; <span class="hljs-title">updateUser</span><span class="hljs-params">(@PartMap Map&lt;String, RequestBody&gt; photos, @Part(<span class="hljs-string">"description"</span>)</span> RequestBody description)</span>;
+&#125;</code></pre></div>
+
+<p>其它和单文件上传类似，只是使用 Map 封装了上传的文件。</p>
+</li>
+</ul>
+<h5 id="Header-消息报头"><a href="#Header-消息报头" class="headerlink" title="Header 消息报头"></a>Header 消息报头</h5><p>在 HTTP 请求中，为了防止攻击和过滤掉不安全的访问，或者添加特殊加密的访问，通常会在消息报头中携带一些特殊的消息头处理。Retrofit 提供了 @Header 来添加消息报头。添加消息报头有两种方式：一种是静态的，另一种是动态的。</p>
+<h6 id="静态方式"><a href="#静态方式" class="headerlink" title="静态方式"></a>静态方式</h6><div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">SomeService</span> </span>&#123;
+    <span class="hljs-meta">@GET</span>(<span class="hljs-string">"some/endpoint"</span>)
+    <span class="hljs-meta">@Headers</span>(<span class="hljs-string">"Accept-Encoding: application/json"</span>)
+    <span class="hljs-function">Call&lt;ResponseBody&gt; <span class="hljs-title">getCarType</span><span class="hljs-params">()</span></span>;
+&#125;</code></pre></div>
+
+<p>使用 <code>@Headers</code> 注解添加消息报头。如果想要添加多个消息报头，可以使用 {} 包含起来：</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-meta">@Headers</span>(&#123;
+    <span class="hljs-string">"Accept-Encoding: application/json"</span>,
+    <span class="hljs-string">"User-Agent: MoonRetrofit"</span>
+&#125;)</code></pre></div>
+
+<h6 id="动态方式"><a href="#动态方式" class="headerlink" title="动态方式"></a>动态方式</h6><div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">SomeService</span> </span>&#123;
+    <span class="hljs-meta">@GET</span>(<span class="hljs-string">"some/endpoint"</span>)
+    <span class="hljs-function">Call&lt;ResponseBody&gt; <span class="hljs-title">getCarType</span><span class="hljs-params">(@Header(<span class="hljs-string">"Location"</span>)</span> String location)</span>;
+&#125;</code></pre></div>
+
+<p>详细解释见如下<a href="https://www.jianshu.com/p/a3e162261ab6" target="_blank" rel="noopener">博文链接</a></p>
+<h3 id="6-创建-Retrofit-实例"><a href="#6-创建-Retrofit-实例" class="headerlink" title="6. 创建 Retrofit 实例"></a>6. 创建 Retrofit 实例</h3><p>Retrofit 是通过建造者模式构建出来的。请求 URL 是拼接而成的，它是由 baseUrl 传入的 <code>URL</code> 加上请求网络接口的 <code>@GET(&quot;getIpInfo.php?ip=59.108.54.37&quot;)</code> 中的 URL 拼接而成的。</p>
+<div class="hljs"><pre><code class="hljs java">Retrofit retrofit = <span class="hljs-keyword">new</span> Retrofit.Builder()
                     .baseUrl(Url)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()</code></pre></div>
@@ -280,6 +362,7 @@ call.enqueue(<span class="hljs-keyword">new</span> Callback&lt;ResultData&gt;() 
 <span class="hljs-comment">// 发送网络请求（同步）</span>
 Response&lt;ResultData&gt; response = call.execute();</code></pre></div>
 
+<h3 id="9-中断网络请求"><a href="#9-中断网络请求" class="headerlink" title="9. 中断网络请求"></a>9. 中断网络请求</h3><p><code>call.cancel()</code></p>
 
             </article>
             <hr>
@@ -299,7 +382,7 @@ Response&lt;ResultData&gt; response = call.execute();</code></pre></div>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%BC%80%E6%BA%90%E5%BA%93/">开源库</a>
+                      <a class="hover-with-bg" href="/tags/%E7%BD%91%E7%BB%9C%E6%A1%86%E6%9E%B6/">网络框架</a>
                     
                   </div>
                 

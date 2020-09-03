@@ -213,7 +213,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：7 小时前
+                  本文最后更新于：1 个月前
                 
               </p>
             
@@ -226,10 +226,7 @@
 <li>创建一个 Handler 对象，重写 <code>handleMessage()</code> 方法</li>
 <li>在需要消息通信的地方，通过 Handler 的 <code>sendMessage()</code> 方法发送信息。</li>
 </ul>
-<div class="note note-warning">
-            <p>注意：在启动 App 时，系统使用 <code>Looper.prepare()</code> 为主线程创建了 Handler 的对象，因此在子线程中使用 Handler 时，需要在创建 Handler 对象前手动调用 <code>Looper.prepare()</code>，并在创建 Handler 对象后调用 <code>Looper.loop()</code>。</p>
-          </div>
-
+<p><strong>注意：在启动 App 时，系统使用 <code>Looper.prepare()</code> 为主线程创建了 Handler 的对象，因此在子线程中使用 Handler 时，需要在创建 Handler 对象前手动调用 <code>Looper.prepare()</code>，并在创建 Handler 对象后调用 <code>Looper.loop()</code>。</strong></p>
 <h2 id="2-Handler-机制原理"><a href="#2-Handler-机制原理" class="headerlink" title="2. Handler 机制原理"></a>2. Handler 机制原理</h2><p>Handler 机制，主要涉及如下四个类：</p>
 <ol>
 <li>Message</li>

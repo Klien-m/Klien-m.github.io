@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      463 字
+      460 字
     </span>
   
 
@@ -213,7 +213,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：6 小时前
+                  本文最后更新于：1 个月前
                 
               </p>
             
@@ -226,10 +226,10 @@
 <li><strong>工作是否依赖系统条件？</strong></li>
 <li><strong>作业是否需要在确切的时间运行？</strong></li>
 </ul>
-<h2 id="WorkManager"><a href="#WorkManager" class="headerlink" title="WorkManager"></a>WorkManager</h2><p>对于可延迟的工作以及预计即使设备或应用重启也会运行的工作，可以使用 [<code>WorkManager</code>][1]。WorkManager 是一个 Android 库，可在满足工作的条件（例如网络可用性和电源）时妥善运行可延迟的后台工作。</p>
+<h2 id="WorkManager"><a href="#WorkManager" class="headerlink" title="WorkManager"></a>WorkManager</h2><p>对于可延迟的工作以及预计即使设备或应用重启也会运行的工作，可以使用 <a href="https://developer.android.google.cn/topic/libraries/architecture/workmanager?hl=zh" target="_blank" rel="noopener"><code>WorkManager</code></a>。WorkManager 是一个 Android 库，可在满足工作的条件（例如网络可用性和电源）时妥善运行可延迟的后台工作。</p>
 <h2 id="前台任务"><a href="#前台任务" class="headerlink" title="前台任务"></a>前台任务</h2><p>对于需要立即运行并且必须执行完毕的由用户发起的工作，可以使用前台服务。使用前台服务可告知系统应用正在执行重要任务，不应被终止。前台服务通过通知栏中的不可关闭通知向用户显示。</p>
-<h2 id="AlarmManager"><a href="#AlarmManager" class="headerlink" title="AlarmManager"></a>AlarmManager</h2><p>如果需要在确切的时间运行某项工作，可以使用 [<code>AlarmManager</code>][2]。<code>AlarmManager</code> 会在指定的时间启动应用（如有必要），以便运行该作业。如果作业不需要在确切的时间运行，<code>WorkManager</code> 是更好的选择。</p>
-<h2 id="DownloadManager"><a href="#DownloadManager" class="headerlink" title="DownloadManager"></a>DownloadManager</h2><p>如果应用执行长时间的 HTTP 下载，可以使用 [DownloadManager][3]。内容下载管理器会在后台执行下载操作，它负责处理 HTTP 互动，在下载失败或连接发生更改以及系统重新启动后重新尝试下载。</p>
+<h2 id="AlarmManager"><a href="#AlarmManager" class="headerlink" title="AlarmManager"></a>AlarmManager</h2><p>如果需要在确切的时间运行某项工作，可以使用 <a href="https://developer.android.google.cn/reference/android/app/AlarmManager?hl=zh" target="_blank" rel="noopener"><code>AlarmManager</code></a>。<code>AlarmManager</code> 会在指定的时间启动应用（如有必要），以便运行该作业。如果作业不需要在确切的时间运行，<code>WorkManager</code> 是更好的选择。</p>
+<h2 id="DownloadManager"><a href="#DownloadManager" class="headerlink" title="DownloadManager"></a>DownloadManager</h2><p>如果应用执行长时间的 HTTP 下载，可以使用 <a href="https://developer.android.google.cn/reference/android/app/DownloadManager?hl=zh" target="_blank" rel="noopener">DownloadManager</a>。内容下载管理器会在后台执行下载操作，它负责处理 HTTP 互动，在下载失败或连接发生更改以及系统重新启动后重新尝试下载。</p>
 
             </article>
             <hr>

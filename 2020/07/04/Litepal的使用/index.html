@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      743 字
+      553 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      8
        分钟
     </span>
   
@@ -213,7 +213,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：4 小时前
+                  本文最后更新于：1 个月前
                 
               </p>
             
@@ -295,12 +295,16 @@
     <span class="hljs-tag">&lt;/<span class="hljs-name">application</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">manifest</span>&gt;</span></code></pre></div>
 
-<p>没有关系，这时只需要修改一下 MyApplication 的继承结构，让它不要直接继承 Application 类，而是继承 LitePalApplication 类，就可以使用一切都能正常工作了，代码如下所示：</p>
-<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyApplication</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">LitePalApplication</span> </span>&#123;
-    ...
+<p>没有关系，这时只需要在自定义的 Application 中添加一句 <code>Litepal.initialize(context)</code>：</p>
+<div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyApplication</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Application</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">super</span>.onCreate();
+        LitePal.initialize(<span class="hljs-keyword">this</span>);
+    &#125;
 &#125;</code></pre></div>
 
-<p>但是，有些程序可能会遇到一些更加极端的情况，比如说 MyApplication 需要继承另外一个 AnotherApplication ，并且这个 AnotherApplication 还是在 jar 包当中的，不能修改它的代码。这种情况应该算是比较少见了，但是如果遇到了的话也不用急，仍然是有解释方案的。可以把 LitePal 的源码下载下来，然后把 src 目录下的所有代码直接拷贝到项目的 src 目录下面，接着打开LitePalApplication 类，将它的继承结构改成继承自 AnotherApplication，再让 MyApplication 继承自 LitePalApplication，这样所有的 Application 就都可以在一起正常工作了。</p>
+
 
             </article>
             <hr>

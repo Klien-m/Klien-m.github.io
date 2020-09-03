@@ -163,7 +163,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      234 字
+      599 字
     </span>
   
 
@@ -173,7 +173,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      7
        分钟
     </span>
   
@@ -213,14 +213,24 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：4 小时前
+                  本文最后更新于：1 个月前
                 
               </p>
             
             <article class="markdown-body">
-              <h3 id="如何避免应用无响应-ANR"><a href="#如何避免应用无响应-ANR" class="headerlink" title="如何避免应用无响应(ANR)"></a>如何避免应用无响应(ANR)</h3><a id="more"></a>
+              <p>当应用组件启动且该应用未运行任何其他组件时，Android 系统会使用单个执行线程为应用启动新的 Linux 进程。默认情况下，同一应用的所有组件会在相同的进程和线程（称为“主”线程）中运行。如果某个应用组件启动且该应用已存在进程（因为存在该应用的其他组件），则该组件会在此进程内启动并使用相同的执行线程。但是，可以安排应用中的其他组件在单独的进程中运行，并为任何进程创建额外的线程。</p>
+<a id="more"></a>
 
-<p>为耗时较长的操作创建工作线程的最有效方法是使用 AsyncTask 类。只需扩展 AsyncTask 并实现 doInBackground() 方法即可执行相应操作。要向用户发布进度变化，您可以调用 publishProgress()，它会调用 onProgressUpdate() 回调方法。通过 onProgressUpdate()（在界面线程中运行）的实现，您可以向用户发送通知。例如：</p>
+<h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>各类组件元素（<code>&lt;activity&gt;</code>, <code>&lt;service&gt;</code>, <code>&lt;receiver&gt;</code>, <code>&lt;povider&gt;</code>）的清单文件条目均支持 <code>android:process</code> 属性，该属性可指定该组件应在哪个进程中运行。</p>
+<p><code>&lt;application&gt;</code> 元素也支持 <code>android:process</code> 属性，用来设置适用于所有组件的默认值。</p>
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><h4 id="工作线程"><a href="#工作线程" class="headerlink" title="工作线程"></a>工作线程</h4><p>从其他线程访问界面线程的方法：</p>
+<ul>
+<li><code>Activity.runOnUiThread(Runnable)</code></li>
+<li><code>View.post(Runnable)</code></li>
+<li><code>View.postDealyed(Runnable, long)</code></li>
+</ul>
+<p>上述方法会增加后期维护难度，如果要通过工作线程处理更复杂的交互，可以考虑在工作线程中使用 <code>Handler</code> 处理来自界面线程的消息。当然最后的解决方案或许是扩展 <code>AsyncTask</code> 类，此类可简化与界面进行交互所需执行的工作线程任务。</p>
+<h3 id="如何避免应用无响应-ANR"><a href="#如何避免应用无响应-ANR" class="headerlink" title="如何避免应用无响应(ANR)"></a>如何避免应用无响应(ANR)</h3><p>为耗时较长的操作创建工作线程的最有效方法是使用 AsyncTask 类。只需扩展 AsyncTask 并实现 doInBackground() 方法即可执行相应操作。要向用户发布进度变化，可以调用 publishProgress()，它会调用 onProgressUpdate() 回调方法。通过 onProgressUpdate()（在界面线程中运行）的实现，您可以向用户发送通知。例如：</p>
 <div class="hljs"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DownloadFilesTask</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AsyncTask</span>&lt;<span class="hljs-title">URL</span>, <span class="hljs-title">Integer</span>, <span class="hljs-title">Long</span>&gt; </span>&#123;
     <span class="hljs-comment">// Do the long-running work in here</span>
     <span class="hljs-function"><span class="hljs-keyword">protected</span> Long <span class="hljs-title">doInBackground</span><span class="hljs-params">(URL... urls)</span> </span>&#123;
